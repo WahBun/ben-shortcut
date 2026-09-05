@@ -7,7 +7,7 @@
     <title>Options Strategy Trainer v2</title>
     <meta
       name="description"
-      content="极简期权策略训练器：先判断 PA 市场背景，再选择交易目标。"
+      content="极简期权策略训练器：先判断 context，再选择 objective。"
     />
     <script>
       (() => {
@@ -19,7 +19,7 @@
         }
       })();
     </script>
-    <link rel="stylesheet" href="styles.css?v=ost-v28" />
+    <link rel="stylesheet" href="styles.css?v=ost-v30" />
   </head>
   <body>
     <div class="shell">
@@ -34,23 +34,23 @@
           </span>
           <span>
             <strong>Options Strategy Trainer</strong>
-            <small>极简版 v2</small>
+            <small>v2</small>
           </span>
         </a>
 
         <div class="top-actions">
           <nav class="tabs" aria-label="主要页面">
             <button class="tab is-active" type="button" data-view="terms">
-              基础术语 <span>（Terms）</span>
+              Terms
             </button>
             <button class="tab" type="button" data-view="guide">
-              决策向导 <span>（Guide）</span>
+              Guide
             </button>
             <button class="tab" type="button" data-view="library">
-              策略库 <span>（Library）</span>
+              Library
             </button>
             <button class="tab" type="button" data-view="cases">
-              案例训练 <span>（Cases）</span>
+              Cases
             </button>
           </nav>
 
@@ -80,19 +80,19 @@
         <section class="view is-active" id="terms" aria-labelledby="terms-title">
           <div class="page-heading">
             <p class="kicker">Options Terms</p>
-            <h1 id="terms-title">先把术语变成交易语言</h1>
+            <h1 id="terms-title">Terms First</h1>
             <p>先知道每个词在交易里负责回答什么问题</p>
           </div>
 
           <section class="term-primer" aria-label="术语快速入口">
             <div>
-              <p class="kicker">Beginner map</p>
-              <h2>先抓三件事：方向、时间、波动率</h2>
+              <p class="kicker">Beginner Map</p>
+              <h2>Direction / Time / Volatility</h2>
             </div>
             <div class="term-map">
-              <span>方向：Delta</span>
-              <span>速度：Gamma / Theta</span>
-              <span>贵不贵：IV / Vega</span>
+              <span>Direction: Delta</span>
+              <span>Speed: Gamma / Theta</span>
+              <span>Volatility: IV / Vega</span>
             </div>
           </section>
 
@@ -101,20 +101,20 @@
 
         <section class="view" id="guide" aria-labelledby="guide-title">
           <div class="intro">
-            <p class="kicker">PA Decision</p>
-            <h1 id="guide-title">先判断市场背景，再选择交易目标</h1>
+            <p class="kicker">Decision</p>
+            <h1 id="guide-title">Context First, Objective Second</h1>
             <p>
-              PA Context 先完成方向和环境判断；你只需要补上这笔交易想解决什么问题。
+              Context 先完成方向和环境判断；你只需要补上这笔交易想解决什么问题。
             </p>
           </div>
 
           <section class="context-panel" aria-labelledby="context-title">
             <div class="context-heading">
               <div>
-                <p class="kicker">PA Context</p>
-                <h2 id="context-title">从市场背景开始判断</h2>
+                <p class="kicker">Context</p>
+                <h2 id="context-title">Market Context</h2>
               </div>
-              <p>先分 Strong Bull/Bear Trend、Weak Bull/Bear Trend、TR，再看目标。</p>
+              <p>先分 Strong Bull/Bear Trend、Weak Bull/Bear Trend、TR，再看 objective。</p>
             </div>
             <div class="pa-context-grid" id="pa-context-grid"></div>
           </section>
@@ -124,20 +124,20 @@
               <div class="step is-muted" data-step="objective">
                 <div class="step-heading">
                   <span>Step 2</span>
-                  <h2>交易目标 <em>（Objective）</em></h2>
+                  <h2>Objective</h2>
                 </div>
                 <div class="choice-grid objective-grid" role="radiogroup" aria-label="交易目标">
-              <button class="choice" type="button" data-field="objective" data-value="directional" disabled>
-                    方向交易 <span>（Directional）</span>
+                  <button class="choice" type="button" data-field="objective" data-value="directional" disabled>
+                    Directional <span>Price move</span>
                   </button>
                   <button class="choice" type="button" data-field="objective" data-value="income" disabled>
-                    收取权利金 <span>（Income）</span>
+                    Income <span>Premium decay</span>
                   </button>
                   <button class="choice" type="button" data-field="objective" data-value="own" disabled>
-                    愿意接货 <span>（Willing to own stock）</span>
+                    Own Stock <span>Assignment ok</span>
                   </button>
                   <button class="choice" type="button" data-field="objective" data-value="hedge" disabled>
-                    保护持仓 <span>（Hedge）</span>
+                    Hedge <span>Protect position</span>
                   </button>
                 </div>
               </div>
@@ -145,15 +145,15 @@
 
             <aside class="result-shell" aria-live="polite">
               <div class="result-empty" id="result-empty">
-                <p class="kicker">策略建议（Recommendation）</p>
-                <h2>先选 PA 背景，再选交易目标。</h2>
+                <p class="kicker">Recommendation</p>
+                <h2>Pick Context, Then Objective</h2>
                 <p>结果会只保留主推荐、关键理由和风险标签。</p>
               </div>
 
               <div class="result is-hidden" id="result">
                 <div class="result-topline">
                   <p class="kicker" id="result-context">Recommendation</p>
-                  <button class="reset-button" type="button" id="reset-button">重选</button>
+                  <button class="reset-button" type="button" id="reset-button">Reset</button>
                 </div>
 
                 <article class="strategy-result" id="main-result"></article>
@@ -167,7 +167,7 @@
         <section class="view" id="library" aria-labelledby="library-title">
           <div class="page-heading">
             <p class="kicker">Strategy Library</p>
-            <h1 id="library-title">策略库</h1>
+            <h1 id="library-title">Strategy Library</h1>
             <p>这里保留常用结构，和首页的决策向导分开。</p>
           </div>
           <div class="library-grid" id="library-grid"></div>
@@ -176,7 +176,7 @@
         <section class="view" id="cases" aria-labelledby="cases-title">
           <div class="page-heading">
             <p class="kicker">Case Trainer</p>
-            <h1 id="cases-title">案例训练</h1>
+            <h1 id="cases-title">Case Trainer</h1>
             <p>每个场景只练一个判断：方向、IV、目标是否匹配。</p>
           </div>
           <div class="case-list" id="case-list"></div>
@@ -184,7 +184,7 @@
       </main>
     </div>
 
-    <script src="app.js?v=ost-v28" defer></script>
+    <script src="app.js?v=ost-v30" defer></script>
     <script>
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
