@@ -505,6 +505,10 @@ h3 {
   opacity: 0.46;
 }
 
+.step[data-step="objective"] {
+  scroll-margin-top: 24px;
+}
+
 .result-shell {
   position: sticky;
   top: 20px;
@@ -850,6 +854,7 @@ summary {
   color: var(--muted);
   font-size: 0.86rem;
   font-weight: 560;
+  line-height: 1.45;
 }
 
 .term-card p {

@@ -310,25 +310,25 @@ const termSections = [
     terms: [
       {
         name: "Delta",
-        english: "方向暴露",
+        english: "Direction exposure / 方向暴露",
         meaning: "标的涨跌时，期权价格大概跟着动多少。Delta + 偏看涨，Delta - 偏看跌。",
         use: "先用它判断这笔交易到底在押上涨、下跌，还是中性。"
       },
       {
         name: "Gamma",
-        english: "Delta 的变化速度",
+        english: "Delta sensitivity / 加速度",
         meaning: "价格越接近关键行权价，Delta 变化可能越快。",
         use: "Gamma + 喜欢大波动；Gamma - 怕突然急涨急跌。"
       },
       {
         name: "Theta",
-        english: "时间损耗",
+        english: "Time decay / 时间损耗",
         meaning: "期权时间价值每天流失的方向。Theta - 是付时间成本，Theta + 是收时间价值。",
         use: "买方通常怕横盘拖时间；卖方通常希望时间安静流走。"
       },
       {
         name: "Vega",
-        english: "波动率敏感度",
+        english: "Volatility sensitivity / 波动率敏感度",
         meaning: "IV 上升或下降时，期权价格受影响的程度。",
         use: "Vega + 喜欢 IV 上升；Vega - 喜欢 IV 回落。"
       }
@@ -340,25 +340,25 @@ const termSections = [
     terms: [
       {
         name: "IV",
-        english: "Implied Volatility",
+        english: "Implied Volatility / 隐含波动率",
         meaning: "市场从期权价格里反推出的未来波动预期。",
         use: "IV 高时，买期权更贵；卖权利金更有收入，但风险也更需要控制。"
       },
       {
         name: "IV Rank",
-        english: "IVR",
+        english: "IVR / 隐含波动率排名",
         meaning: "把当前 IV 放到过去一段时间的区间里比较。",
         use: "IVR 高说明现在期权相对贵，IVR 低说明现在相对便宜。"
       },
       {
         name: "IV Crush",
-        english: "波动率塌缩",
+        english: "Volatility crush / 波动率塌缩",
         meaning: "事件落地后，IV 快速下降，期权突然变便宜。",
         use: "财报后常见；方向看对但 IV 掉太多，买方也可能不赚钱。"
       },
       {
         name: "DTE",
-        english: "Days to Expiration",
+        english: "Days to Expiration / 到期天数",
         meaning: "距离到期还有多少天。",
         use: "DTE 越短，Theta 和 Gamma 的体感越强，容错通常越低。"
       }
@@ -370,25 +370,25 @@ const termSections = [
     terms: [
       {
         name: "Strike",
-        english: "行权价",
+        english: "Strike Price / 行权价",
         meaning: "合约约定买入或卖出股票的价格。",
         use: "选 Strike，本质是在选你的目标价、保护线或风险边界。"
       },
       {
         name: "ATM",
-        english: "At The Money",
+        english: "At the Money / 平值",
         meaning: "行权价接近当前股价。",
         use: "反应灵敏，常用作方向价差、跨式或日历价差的中心。"
       },
       {
         name: "ITM",
-        english: "In The Money",
+        english: "In the Money / 实值",
         meaning: "已经有内在价值的期权。",
         use: "更像股票，Delta 更高，但成本也通常更高。"
       },
       {
         name: "OTM",
-        english: "Out of The Money",
+        english: "Out of the Money / 虚值",
         meaning: "暂时没有内在价值的期权。",
         use: "更便宜，但需要价格真的走到那里，才会变得有力。"
       }
@@ -400,37 +400,37 @@ const termSections = [
     terms: [
       {
         name: "Premium",
-        english: "权利金",
+        english: "Option premium / 权利金",
         meaning: "买期权付出去的钱，或卖期权先收到的钱。",
         use: "它决定最大成本、收入缓冲，也决定盈亏平衡点。"
       },
       {
         name: "Debit",
-        english: "净支出",
+        english: "Net debit / 净支出",
         meaning: "开仓时整体要付钱。",
         use: "常见于 Long Call、Long Put、Debit Spread，最大亏损多是净支出。"
       },
       {
         name: "Credit",
-        english: "净收入",
+        english: "Net credit / 净收入",
         meaning: "开仓时整体先收钱。",
         use: "常见于 CSP、Covered Call、Credit Spread，核心是守住风险边界。"
       },
       {
         name: "Spread",
-        english: "价差",
+        english: "Spread / 价差",
         meaning: "同时买一条腿、卖一条腿，把收益和风险都框起来。",
         use: "Spread 宽度就是两个行权价的距离，是很多价差策略的盈亏上限基础。"
       },
       {
         name: "Breakeven",
-        english: "盈亏平衡点",
+        english: "Break-even point / 盈亏平衡点",
         meaning: "到期时不赚不亏的大致价格线。",
         use: "方向看对还不够，价格要越过 Breakeven 才是真正赚钱。"
       },
       {
         name: "Assignment",
-        english: "被指派",
+        english: "Assignment / 被指派",
         meaning: "你卖出的期权被买方行权，可能被要求买入或卖出正股。",
         use: "卖 Put 前先问自己愿不愿意接货；卖 Call 前先问自己愿不愿意卖股。"
       }
@@ -805,7 +805,7 @@ function renderTerms() {
               .map(
                 (term) => `
                   <article class="term-card">
-                    <h3>${term.name}</h3>
+                    <h3>${term.name} <span>${term.english}</span></h3>
                     <p>${term.meaning}</p>
                     <p class="term-use"><strong>How</strong><span>${term.use}</span></p>
                   </article>
@@ -916,6 +916,18 @@ function syncPaContextSelections() {
   });
 }
 
+function scrollObjectiveIntoView() {
+  const objectiveStep = document.querySelector('[data-step="objective"]');
+  if (!objectiveStep) return;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  requestAnimationFrame(() => {
+    objectiveStep.scrollIntoView({
+      behavior: reduceMotion ? "auto" : "smooth",
+      block: "start"
+    });
+  });
+}
+
 function applyPaContext(id) {
   const context = findPaContext(id);
   if (!context) return;
@@ -932,6 +944,7 @@ function applyPaContext(id) {
   } else {
     setEmptyResult("Context Selected", "再选一个 objective，就会显示对应策略。");
   }
+  scrollObjectiveIntoView();
 }
 
 function selectChoice(button) {
