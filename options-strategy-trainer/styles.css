@@ -280,6 +280,7 @@ h3 {
 }
 
 .context-panel {
+  scroll-margin-top: 24px;
   margin-bottom: 28px;
   padding: 22px;
   border: 1px solid var(--line);
@@ -512,6 +513,7 @@ h3 {
 .result-shell {
   position: sticky;
   top: 20px;
+  scroll-margin-top: 24px;
   min-height: 380px;
   padding: 26px;
 }

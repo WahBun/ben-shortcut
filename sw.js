@@ -1,5 +1,5 @@
-const CACHE_NAME = "pulse-rc-github-pages-v32";
-const OPTION_TRAINER_VERSION = "ost-v32";
+const CACHE_NAME = "pulse-rc-github-pages-v33";
+const OPTION_TRAINER_VERSION = "ost-v33";
 const APP_SHELL = [
   "./",
   "./index.html",

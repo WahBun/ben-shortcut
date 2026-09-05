@@ -928,6 +928,30 @@ function scrollObjectiveIntoView() {
   });
 }
 
+function scrollContextIntoView() {
+  const contextPanel = document.querySelector(".context-panel");
+  if (!contextPanel) return;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  requestAnimationFrame(() => {
+    contextPanel.scrollIntoView({
+      behavior: reduceMotion ? "auto" : "smooth",
+      block: "start"
+    });
+  });
+}
+
+function scrollRecommendationIntoView() {
+  const resultShell = document.querySelector(".result-shell");
+  if (!resultShell) return;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  requestAnimationFrame(() => {
+    resultShell.scrollIntoView({
+      behavior: reduceMotion ? "auto" : "smooth",
+      block: "start"
+    });
+  });
+}
+
 function applyPaContext(id) {
   const context = findPaContext(id);
   if (!context) return;
@@ -958,6 +982,7 @@ function selectChoice(button) {
 
   if (field === "objective") {
     renderRecommendation();
+    scrollRecommendationIntoView();
   }
 }
 
@@ -977,6 +1002,7 @@ function resetGuide() {
   syncPaContextSelections();
   lockStep("objective");
   setEmptyResult("Pick Context, Then Objective", "结果会只保留主推荐、关键理由和风险标签。");
+  scrollContextIntoView();
 }
 
 function switchView(viewId) {
