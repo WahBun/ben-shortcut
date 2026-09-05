@@ -368,10 +368,27 @@ h3 {
 }
 
 .context-kind {
-  color: var(--teal);
   font-size: 0.76rem;
   font-weight: 760;
   text-transform: uppercase;
+}
+
+.tone-bull .context-kind,
+.tone-bull .context-title,
+.context-result .tone-bull {
+  color: var(--teal);
+}
+
+.tone-bear .context-kind,
+.tone-bear .context-title,
+.context-result .tone-bear {
+  color: var(--red);
+}
+
+.tone-range .context-kind,
+.tone-range .context-title,
+.context-result .tone-range {
+  color: var(--amber);
 }
 
 .context-title {
@@ -543,12 +560,17 @@ h3 {
 
 .context-result p {
   margin-bottom: 4px;
-  color: var(--ink);
   font-weight: 680;
 }
 
 .context-result span {
+  display: block;
+  margin-bottom: 4px;
   color: var(--muted);
+}
+
+.context-result span:last-child {
+  margin-bottom: 0;
 }
 
 .field-block {

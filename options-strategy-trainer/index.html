@@ -7,7 +7,7 @@
     <title>Options Strategy Trainer v2</title>
     <meta
       name="description"
-      content="极简期权策略训练器：先理解术语，再用 PA 背景、方向、IV、目标选择策略。"
+      content="极简期权策略训练器：先判断 PA 市场背景，再选择交易目标。"
     />
     <script>
       (() => {
@@ -19,7 +19,7 @@
         }
       })();
     </script>
-    <link rel="stylesheet" href="styles.css?v=ost-v26" />
+    <link rel="stylesheet" href="styles.css?v=ost-v27" />
   </head>
   <body>
     <div class="shell">
@@ -101,10 +101,10 @@
 
         <section class="view" id="guide" aria-labelledby="guide-title">
           <div class="intro">
-            <p class="kicker">三步决策</p>
-            <h1 id="guide-title">先判断市场，再选择结构。</h1>
+            <p class="kicker">PA Decision</p>
+            <h1 id="guide-title">先判断市场背景，再选择交易目标</h1>
             <p>
-              可以先从 PA 背景进入，也可以继续用方向、IV 和交易目标三步判断。
+              PA Context 先完成方向和环境判断；你只需要补上这笔交易想解决什么问题。
             </p>
           </div>
 
@@ -114,52 +114,16 @@
                 <p class="kicker">PA Context</p>
                 <h2 id="context-title">从市场背景开始判断</h2>
               </div>
-              <p>先分 Strong Trend、Weak Trend、TR，再看 IV 和交易目标。</p>
+              <p>先分 Strong Bull/Bear Trend、Weak Bull/Bear Trend、TR，再看目标。</p>
             </div>
             <div class="pa-context-grid" id="pa-context-grid"></div>
           </section>
 
           <div class="workspace">
-            <section class="wizard" aria-label="策略决策向导">
-              <div class="step" data-step="direction">
-                <div class="step-heading">
-                  <span>Step 1</span>
-                  <h2>方向观点 <em>(Direction)</em></h2>
-                </div>
-                <div class="choice-grid" role="radiogroup" aria-label="方向观点">
-                  <button class="choice" type="button" data-field="direction" data-value="bullish">
-                    看涨 <span>Bullish</span>
-                  </button>
-                  <button class="choice" type="button" data-field="direction" data-value="bearish">
-                    看跌 <span>Bearish</span>
-                  </button>
-                  <button class="choice" type="button" data-field="direction" data-value="neutral">
-                    中性 <span>Neutral</span>
-                  </button>
-                </div>
-              </div>
-
-              <div class="step is-muted" data-step="iv">
-                <div class="step-heading">
-                  <span>Step 2</span>
-                  <h2>隐含波动率 <em>(IV)</em></h2>
-                </div>
-                <div class="choice-grid" role="radiogroup" aria-label="隐含波动率">
-                  <button class="choice" type="button" data-field="iv" data-value="low" disabled>
-                    低 <span>Low</span>
-                  </button>
-                  <button class="choice" type="button" data-field="iv" data-value="normal" disabled>
-                    正常 <span>Normal</span>
-                  </button>
-                  <button class="choice" type="button" data-field="iv" data-value="high" disabled>
-                    高 <span>High</span>
-                  </button>
-                </div>
-              </div>
-
+            <section class="wizard objective-wizard" aria-label="交易目标选择">
               <div class="step is-muted" data-step="objective">
                 <div class="step-heading">
-                  <span>Step 3</span>
+                  <span>Step 2</span>
                   <h2>交易目标 <em>(Objective)</em></h2>
                 </div>
                 <div class="choice-grid objective-grid" role="radiogroup" aria-label="交易目标">
@@ -182,8 +146,8 @@
             <aside class="result-shell" aria-live="polite">
               <div class="result-empty" id="result-empty">
                 <p class="kicker">Recommendation</p>
-                <h2>完成三步后显示结果。</h2>
-                <p>这里会只保留主推荐、关键理由和风险标签。</p>
+                <h2>先选 PA 背景，再选交易目标。</h2>
+                <p>结果会只保留主推荐、关键理由和风险标签。</p>
               </div>
 
               <div class="result is-hidden" id="result">
@@ -220,7 +184,7 @@
       </main>
     </div>
 
-    <script src="app.js?v=ost-v26" defer></script>
+    <script src="app.js?v=ost-v27" defer></script>
     <script>
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
