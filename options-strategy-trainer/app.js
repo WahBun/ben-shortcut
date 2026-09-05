@@ -55,7 +55,7 @@ const strategies = {
     why: "适合强看涨且 IV 偏低时，用有限权利金换取向上凸性。",
     avoid: "IV 已经很高、只小幅看涨，或时间不站在你这边时，不适合裸买 Call。",
     greeks: { Delta: "+", Gamma: "+", Theta: "-", Vega: "+" },
-    risk: "有限风险 (Defined risk)",
+    risk: "有限风险（Defined risk）",
     notes: ["最大亏损是权利金。", "需要方向和时间都配合。", "低 IV 环境更友好。"],
     payoff: "M18 62 L56 62 L92 24"
   },
@@ -73,7 +73,7 @@ const strategies = {
     why: "适合看涨但不想为高 IV 付太多权利金，用卖出上方 Call 降低成本。",
     avoid: "如果你预期会大幅突破上方行权价，价差会限制最大收益。",
     greeks: { Delta: "+", Gamma: "+/0", Theta: "-/0", Vega: "+/0" },
-    risk: "有限风险 (Defined risk)",
+    risk: "有限风险（Defined risk）",
     notes: ["上涨空间被封顶。", "比单买 Call 更抗 IV 回落。", "适合有明确目标价。"],
     payoff: "M18 62 L44 62 L76 30 L96 30"
   },
@@ -91,7 +91,7 @@ const strategies = {
     why: "适合温和看涨或不看跌，尤其在 IV 偏高时用时间价值换取胜率。",
     avoid: "如果你认为标的可能快速跌破卖出 Put，信用价差会很难管理。",
     greeks: { Delta: "+", Gamma: "-", Theta: "+", Vega: "-" },
-    risk: "有限风险 (Defined risk)",
+    risk: "有限风险（Defined risk）",
     notes: ["最大亏损由价差宽度减去权利金决定。", "更像是在卖一个不会跌破的观点。", "高 IV 时权利金更充足。"],
     payoff: "M18 28 L42 58 L96 58"
   },
@@ -109,7 +109,7 @@ const strategies = {
     why: "适合看涨或愿意更低价格买入正股，IV 偏高时能收取更厚权利金。",
     avoid: "如果你不愿意接货，或标的基本面可能快速恶化，不该用这个结构。",
     greeks: { Delta: "+", Gamma: "-", Theta: "+", Vega: "-" },
-    risk: "接货风险 (Assignment risk)",
+    risk: "接货风险（Assignment risk）",
     notes: ["需要预留足够现金。", "下跌时可能以行权价买入股票。", "更适合你本来就想拥有的标的。"],
     payoff: "M18 25 L48 58 L96 58"
   },
@@ -127,7 +127,7 @@ const strategies = {
     why: "适合强看跌且 IV 偏低时，用有限权利金表达下跌观点。",
     avoid: "IV 高或只是温和看跌时，权利金成本可能吞掉判断优势。",
     greeks: { Delta: "-", Gamma: "+", Theta: "-", Vega: "+" },
-    risk: "有限风险 (Defined risk)",
+    risk: "有限风险（Defined risk）",
     notes: ["最大亏损是权利金。", "方向、速度和时间都重要。", "也可作为短期保护。"],
     payoff: "M18 24 L54 62 L94 62"
   },
@@ -145,7 +145,7 @@ const strategies = {
     why: "适合看跌但希望控制成本，卖出更低行权价 Put 抵消一部分 IV 和时间成本。",
     avoid: "如果你预期会暴跌，价差会限制下方收益。",
     greeks: { Delta: "-", Gamma: "+/0", Theta: "-/0", Vega: "+/0" },
-    risk: "有限风险 (Defined risk)",
+    risk: "有限风险（Defined risk）",
     notes: ["收益和亏损都被限定。", "适合有明确下跌目标。", "比单买 Put 更抗高 IV。"],
     payoff: "M18 30 L46 30 L78 62 L96 62"
   },
@@ -163,7 +163,7 @@ const strategies = {
     why: "适合温和看跌或不看涨，IV 偏高时通过卖出上方 Call 收取权利金。",
     avoid: "如果标的可能快速突破卖出 Call，亏损会放大到价差上限。",
     greeks: { Delta: "-", Gamma: "-", Theta: "+", Vega: "-" },
-    risk: "有限风险 (Defined risk)",
+    risk: "有限风险（Defined risk）",
     notes: ["最大亏损由价差宽度减去权利金决定。", "更适合阻力位清晰的场景。", "需要提前设置止损或调整规则。"],
     payoff: "M18 58 L70 58 L96 28"
   },
@@ -181,7 +181,7 @@ const strategies = {
     why: "适合已有正股但担心下跌，用 Put 给仓位加一个明确的下方保护。",
     avoid: "如果 IV 很高且只是轻微担心，保险费可能过贵。",
     greeks: { Delta: "+/0", Gamma: "+", Theta: "-", Vega: "+" },
-    risk: "保险成本 (Premium risk)",
+    risk: "保险成本（Premium risk）",
     notes: ["保护越近，成本越高。", "不改变你持有正股的上行空间。", "适合事件前或趋势破位前。"],
     payoff: "M18 58 L38 58 L92 24"
   },
@@ -199,7 +199,7 @@ const strategies = {
     why: "适合已有正股、想保护下跌，同时愿意卖出上方收益来降低保险成本。",
     avoid: "如果你不愿意牺牲大涨空间，就不适合卖出上方 Call。",
     greeks: { Delta: "+/0", Gamma: "0", Theta: "+/0", Vega: "-/0" },
-    risk: "有限区间 (Capped range)",
+    risk: "有限区间（Capped range）",
     notes: ["下方有保护，上方收益被封顶。", "常用于保护已有利润。", "Call 收入可抵消 Put 成本。"],
     payoff: "M18 56 L40 56 L78 30 L96 30"
   },
@@ -217,7 +217,7 @@ const strategies = {
     why: "适合已有正股、温和看涨或横盘，用卖出 Call 增加收入。",
     avoid: "如果你不愿意在行权价卖出股票，或预期会急涨，不适合备兑。",
     greeks: { Delta: "+", Gamma: "-", Theta: "+", Vega: "-" },
-    risk: "上行封顶 (Capped upside)",
+    risk: "上行封顶（Capped upside）",
     notes: ["需要持有正股。", "收取权利金但牺牲部分上行。", "IV 高时收入更好。"],
     payoff: "M18 62 L72 30 L96 30"
   },
@@ -235,7 +235,7 @@ const strategies = {
     why: "适合中性观点且 IV 偏高，卖出上下两侧区间来收取时间价值。",
     avoid: "如果你预期会出现单边大波动，铁鹰容易被突破。",
     greeks: { Delta: "0", Gamma: "-", Theta: "+", Vega: "-" },
-    risk: "有限风险 (Defined risk)",
+    risk: "有限风险（Defined risk）",
     notes: ["核心是判断价格会留在区间内。", "风险有限但需要管理突破。", "高 IV 收入更有吸引力。"],
     payoff: "M18 28 L36 58 L76 58 L94 28"
   },
@@ -253,7 +253,7 @@ const strategies = {
     why: "适合中性或温和方向、近月 IV 较高而远月相对合理时，利用时间结构。",
     avoid: "如果价格可能迅速远离中心行权价，日历价差会失去优势。",
     greeks: { Delta: "0/+", Gamma: "-", Theta: "+", Vega: "+" },
-    risk: "有限风险 (Defined risk)",
+    risk: "有限风险（Defined risk）",
     notes: ["更依赖价格停留在附近。", "受期限结构影响明显。", "需要关注近月到期后的处理。"],
     payoff: "M18 62 C38 28 72 28 94 62"
   },
@@ -271,7 +271,7 @@ const strategies = {
     why: "适合 IV 偏低但预期会出现大波动，方向不确定也可以表达波动观点。",
     avoid: "如果 IV 已经很高或预期只是小幅震荡，时间损耗会很重。",
     greeks: { Delta: "0", Gamma: "+", Theta: "-", Vega: "+" },
-    risk: "有限风险 (Defined risk)",
+    risk: "有限风险（Defined risk）",
     notes: ["需要足够大的波动来覆盖权利金。", "方向不重要，幅度很重要。", "事件后 IV 回落是主要风险。"],
     payoff: "M18 24 L56 62 L94 24"
   }
@@ -279,20 +279,20 @@ const strategies = {
 
 const labels = {
   direction: {
-    bullish: "看涨 (Bullish)",
-    bearish: "看跌 (Bearish)",
-    neutral: "中性 (Neutral)"
+    bullish: "看涨（Bullish）",
+    bearish: "看跌（Bearish）",
+    neutral: "中性（Neutral）"
   },
   iv: {
-    low: "低 IV (Low IV)",
-    normal: "正常 IV (Normal IV)",
-    high: "高 IV (High IV)"
+    low: "低 IV（Low IV）",
+    normal: "正常 IV（Normal IV）",
+    high: "高 IV（High IV）"
   },
   objective: {
-    directional: "方向交易 (Directional)",
-    income: "收取权利金 (Income)",
-    own: "愿意接货 (Willing to own stock)",
-    hedge: "保护持仓 (Hedge)"
+    directional: "方向交易（Directional）",
+    income: "收取权利金（Income）",
+    own: "愿意接货（Willing to own stock）",
+    hedge: "保护持仓（Hedge）"
   }
 };
 
@@ -677,6 +677,15 @@ function pick(main, alternatives) {
   return { main, alternatives: alternatives.slice(0, 2) };
 }
 
+function zhEn(chinese, english) {
+  return `${chinese}（${english}）`;
+}
+
+function strategyLabel(key) {
+  const strategy = strategies[key];
+  return zhEn(strategy.name, strategy.english);
+}
+
 function findPaContext(id) {
   return paContexts.find((item) => item.id === id);
 }
@@ -713,21 +722,19 @@ function strategyCard(key, options = {}) {
   const contextBlock = options.context
     ? `
       <div class="field-block context-result">
-        <h3>PA Context</h3>
-        <p class="tone-${options.context.tone}">${options.context.title}</p>
-        <span>${options.context.english}</span>
+        <h3>市场背景（PA Context）</h3>
+        <p class="pa-result-title tone-${options.context.tone}">${zhEn(options.context.title, options.context.english)}</p>
         <span>${options.context.note}</span>
       </div>
     `
     : "";
   return `
     <div class="strategy-name">
-      <strong>${strategy.name}</strong>
-      <span>${strategy.english}</span>
+      <strong>${zhEn(strategy.name, strategy.english)}</strong>
     </div>
     ${contextBlock}
     <div class="field-block structure-block">
-      <h3>结构 (Legs)</h3>
+      <h3>结构（Legs）</h3>
       <p>${strategy.structure}</p>
     </div>
     <div class="money-grid">
@@ -741,17 +748,17 @@ function strategyCard(key, options = {}) {
       </div>
     </div>
     <div class="field-block expiration-block">
-      <h3>到期盈亏 (Expiration P/L)</h3>
+      <h3>到期盈亏（Expiration P/L）</h3>
       <ul class="expiration-list">
         ${strategy.expiration.map((line) => `<li>${line}</li>`).join("")}
       </ul>
     </div>
     <div class="field-block">
-      <h3>Why</h3>
+      <h3>为什么（Why）</h3>
       <p>${strategy.why}</p>
     </div>
     <div class="field-block">
-      <h3>When not to use</h3>
+      <h3>不适合（When not to use）</h3>
       <p>${strategy.avoid}</p>
     </div>
     <div class="${tagClass}">
@@ -831,13 +838,12 @@ function renderPaContexts() {
               .map(
                 (context) => `
                   <button class="pa-context-card tone-${context.tone}" type="button" data-pa-context="${context.id}">
-                    <span class="context-kind">${context.english}</span>
-                    <span class="context-title">${context.title}</span>
+                    <span class="context-title">${zhEn(context.title, context.english)}</span>
                     <span class="context-read">${context.read}</span>
                     <span class="context-badges">
                       <span>${labels.direction[context.direction]}</span>
                       <span>${labels.iv[context.iv]}</span>
-                      <span>${strategies[context.main].english}</span>
+                      <span>${strategyLabel(context.main)}</span>
                     </span>
                   </button>
                 `
@@ -855,12 +861,12 @@ function renderRecommendation() {
   if (!paContext || !state.objective) return;
 
   const result = recommendFromPaContext(paContext, state.objective);
-  const context = `PA：${paContext.title} / ${labels.objective[state.objective]}`;
+  const context = `PA：${zhEn(paContext.title, paContext.english)} / ${labels.objective[state.objective]}`;
 
   document.querySelector("#result-context").textContent = context;
   document.querySelector("#main-result").innerHTML = strategyCard(result.main, { context: paContext });
   document.querySelector("#alternatives").innerHTML = `
-    <p class="kicker">Alternatives</p>
+    <p class="kicker">备选（Alternatives）</p>
     ${result.alternatives
       .map(
         (key) => `
@@ -980,11 +986,10 @@ function renderLibrary() {
       const item = strategies[key];
       return `
         <article class="library-card">
-          <h2>${item.name}</h2>
-          <p>${item.english}</p>
+          <h2>${zhEn(item.name, item.english)}</h2>
           <p class="structure-line">${item.structure}</p>
           <p class="library-context"><strong>常见 PA：</strong>${paMatchesForStrategy(key)
-            .map((context) => context.title)
+            .map((context) => zhEn(context.title, context.english))
             .join(" / ") || "根据方向和 IV 再判断"}</p>
           <div class="library-money">
             <p><strong>赚：</strong>${item.profit}</p>
@@ -1024,7 +1029,7 @@ function renderCases() {
                 .map(
                   (key) => `
                     <button class="case-option" type="button" data-answer="${key}">
-                      ${strategies[key].name}
+                      ${strategyLabel(key)}
                     </button>
                   `
                 )
@@ -1055,7 +1060,7 @@ function answerCase(button) {
   if (!isRight) button.classList.add("is-wrong");
 
   card.querySelector(".case-answer").innerHTML = `
-    <strong>${isRight ? "判断正确" : "更优答案"}：${strategies[item.answer].name}</strong>
+    <strong>${isRight ? "判断正确" : "更优答案"}：${strategyLabel(item.answer)}</strong>
     <span>${item.reason}</span>
   `;
 }
