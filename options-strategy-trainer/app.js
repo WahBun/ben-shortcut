@@ -687,9 +687,52 @@ function findPaContext(id) {
 }
 
 function paMatchesForStrategy(key) {
-  return paContexts
-    .filter((context) => context.main === key || context.alternatives.includes(key))
-    .slice(0, 2);
+  return paContexts.filter((context) => context.main === key || context.alternatives.includes(key));
+}
+
+function compactLibraryContexts(contexts) {
+  const byId = new Map(contexts.map((context) => [context.id, context]));
+  const usedIds = new Set();
+  const tags = [];
+  const combos = [
+    {
+      ids: ["trend-strong-up", "trend-weak-up"],
+      label: "Strong/Weak Bull Trend",
+      tone: "bull"
+    },
+    {
+      ids: ["trend-strong-down", "trend-weak-down"],
+      label: "Strong/Weak Bear Trend",
+      tone: "bear"
+    }
+  ];
+
+  combos.forEach((combo) => {
+    if (combo.ids.every((id) => byId.has(id))) {
+      combo.ids.forEach((id) => usedIds.add(id));
+      tags.push({ label: combo.label, tone: combo.tone });
+    }
+  });
+
+  contexts.forEach((context) => {
+    if (usedIds.has(context.id)) return;
+    tags.push({
+      label: context.english.replace("Trading Range", "TR"),
+      tone: context.tone
+    });
+  });
+
+  return tags.slice(0, 3);
+}
+
+function libraryContextTags(key) {
+  const tags = compactLibraryContexts(paMatchesForStrategy(key));
+  if (!tags.length) {
+    return `<span class="library-context-chip tone-neutral">Depends on Cycle</span>`;
+  }
+  return tags
+    .map((tag) => `<span class="library-context-chip tone-${tag.tone}">${tag.label}</span>`)
+    .join("");
 }
 
 function recommendFromPaContext(context, objective) {
@@ -1023,9 +1066,9 @@ function renderLibrary() {
         <article class="library-card">
           <h2>${item.english}</h2>
           <p class="structure-line">${item.structure}</p>
-          <p class="library-context"><strong>Context: </strong>${paMatchesForStrategy(key)
-            .map((context) => context.english)
-            .join(" / ") || "Depends on direction and IV"}</p>
+          <div class="library-context-list" aria-label="Market cycle">
+            ${libraryContextTags(key)}
+          </div>
           <div class="library-money">
             <p><strong>赚：</strong>${item.profit}</p>
             <p><strong>亏：</strong>${item.loss}</p>
