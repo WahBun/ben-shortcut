@@ -305,6 +305,24 @@ const state = {
 
 const termSections = [
   {
+    title: "Basics",
+    intro: "Call 和 Put 是所有期权结构的两块积木：一个管买入权，一个管卖出权。",
+    terms: [
+      {
+        name: "Call",
+        english: "Right to buy / 买入权",
+        meaning: "Call 买方有权按行权价买入标的；买 Call 偏看涨，卖 Call 是把上方一部分收益卖给别人。",
+        use: "做 Long Call、Bull Call Spread、Covered Call 前，先问自己是在买上涨权，还是在卖上方空间。"
+      },
+      {
+        name: "Put",
+        english: "Right to sell / 卖出权",
+        meaning: "Put 买方有权按行权价卖出标的；买 Put 偏看跌或做保险，卖 Put 是愿意在某个价位接货。",
+        use: "做 Long Put、Protective Put、CSP、Bull Put Spread 前，先确认你是在买下跌保护，还是在卖接货承诺。"
+      }
+    ]
+  },
+  {
     title: "Greeks",
     intro: "它们不是玄学，是仓位的体感：涨跌、加速、时间、波动率。",
     terms: [
