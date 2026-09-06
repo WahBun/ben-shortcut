@@ -351,6 +351,30 @@ const termSections = [
     ]
   },
   {
+    title: "Dealer Flow",
+    intro: "这部分用来理解价格为什么有时被压住，有时又会被对冲需求推着加速。",
+    terms: [
+      {
+        name: "Dealer Gamma",
+        english: "Dealer hedging pressure / 做市商对冲压力",
+        meaning: "Dealer 通常站在客户订单的另一边，需要不断对冲自己的 Delta；Dealer Gamma 说的是价格变动时，他们的对冲方向会怎么变。",
+        use: "把它当背景变量看：它解释市场弹性，不适合单独当买卖信号。"
+      },
+      {
+        name: "Positive Dealer Gamma",
+        english: "Long gamma dealer book / 正 Gamma 库存",
+        meaning: "当 Dealer 偏 Long Gamma，价格上涨时他们往往卖出对冲，价格下跌时往往买入对冲。",
+        use: "这种环境容易压低 realized volatility，走势更容易来回磨、回归均值。"
+      },
+      {
+        name: "Gamma Squeeze",
+        english: "Forced hedging loop / 被动对冲放大",
+        meaning: "如果 Dealer 偏 Short Gamma，价格快速冲向大量 Call 行权价时，他们可能被迫买入标的对冲。",
+        use: "上涨带来更多买入对冲，买入又推高价格，形成短线加速；但一旦价格停住或到期结构变化，挤压也会退潮。"
+      }
+    ]
+  },
+  {
     title: "Volatility",
     intro: "IV 不是方向预测，它更像市场给未来波动开的价格。",
     terms: [
