@@ -1248,7 +1248,7 @@ function greekTags(greeks) {
 
 function payoffLabelTone(line, fallbackTone, previousTone = "") {
   if (line === "BE") return "be";
-  if (/^(净支出|净权利金|Spread - .+)$/.test(line) && ["loss", "profit"].includes(previousTone)) {
+  if (/权利金|净支出|Spread|价差/.test(line) && ["loss", "profit"].includes(previousTone)) {
     return previousTone;
   }
   if (/最大亏损|亏损|跌破|涨破|离开/.test(line)) return "loss";
@@ -1280,11 +1280,12 @@ function payoffSvg(key, strategy) {
     .join("");
   const guides = diagram.markers
     .filter((marker) => marker.guide)
-    .map(
-      (marker) => `
-        <line class="marker-guide" x1="${marker.x}" y1="${Math.min(marker.y, zeroY)}" x2="${marker.x}" y2="${Math.max(marker.y, zeroY)}" />
-      `
-    )
+    .map((marker) => {
+      const guideTone = marker.y < zeroY ? "profit" : marker.y > zeroY ? "loss" : "neutral";
+      return `
+        <line class="marker-guide marker-guide-${guideTone}" x1="${marker.x}" y1="${Math.min(marker.y, zeroY)}" x2="${marker.x}" y2="${Math.max(marker.y, zeroY)}" />
+      `;
+    })
     .join("");
   const markers = diagram.markers
     .map((marker) => (marker.dot === false ? "" : `<circle class="payoff-marker marker-${marker.type}" cx="${marker.x}" cy="${marker.y}" r="5" />`))

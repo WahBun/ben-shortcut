@@ -16,6 +16,7 @@
   --active-ink: #10211c;
   --tag-bg: #18242a;
   --payoff-bg: #111b20;
+  --payoff-curve: #a4b6b2;
   --axis: #53666c;
   --choice-hover: 0 10px 24px rgba(0, 0, 0, 0.2);
   --choice-ring: 0 0 0 3px rgba(105, 208, 181, 0.18);
@@ -43,6 +44,7 @@
   --active-ink: #ffffff;
   --tag-bg: #f8faf9;
   --payoff-bg: #fbfcfc;
+  --payoff-curve: #52636a;
   --axis: #c6d0d4;
   --choice-hover: 0 10px 24px rgba(33, 45, 52, 0.08);
   --choice-ring: 0 0 0 3px rgba(31, 122, 104, 0.12);
@@ -711,7 +713,7 @@ summary {
 
 .detail-grid {
   display: grid;
-  grid-template-columns: minmax(260px, 340px) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 340px);
   gap: 18px;
   margin-top: 14px;
   align-items: start;
@@ -743,11 +745,21 @@ summary {
   stroke: var(--axis);
   stroke-dasharray: 4 6;
   stroke-width: 1.3;
-  opacity: 0.65;
+  opacity: 0.72;
+}
+
+.payoff .marker-guide-profit {
+  stroke: var(--teal);
+  opacity: 0.86;
+}
+
+.payoff .marker-guide-loss {
+  stroke: var(--red);
+  opacity: 0.86;
 }
 
 .payoff .curve {
-  stroke: var(--teal);
+  stroke: var(--payoff-curve);
   stroke-width: 7;
 }
 
@@ -842,6 +854,7 @@ summary {
 
 .notes {
   margin: 0;
+  max-width: 340px;
   padding-left: 18px;
 }
 
