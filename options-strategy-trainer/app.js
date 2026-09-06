@@ -68,7 +68,7 @@ const strategies = {
       "到期价 ≥ 卖出 Call 行权价：最大盈利 = Spread 宽度 - 净支出的权利金。",
       "中间区间：价格越靠近卖出 Call，利润越接近上限。"
     ],
-    why: "适合看涨但不想为高 IV 付太多权利金，用卖出上方 Call 降低成本。",
+    why: "适合看涨但不想为高 IV 付太多权利金；也适合 TR 下沿 FBO + Low IV 时，用更便宜的 debit 押价格回到区间内。",
     avoid: "如果你预期会大幅突破上方行权价，价差会限制最大收益。",
     greeks: { Delta: "+", Gamma: "+/0", Theta: "-/0", Vega: "+/0" },
     risk: "Defined risk",
@@ -86,7 +86,7 @@ const strategies = {
       "到期价 ≤ 买入 Put 行权价：最大亏损 = Spread 宽度 - 净权利金。",
       "中间区间：盈亏 = 净权利金 - 卖出 Put 的内在价值。"
     ],
-    why: "适合温和看涨或不看跌，尤其在 IV 偏高时用时间价值换取胜率。",
+    why: "适合温和看涨或不看跌；TR 下沿 FBO + High IV 时，也可以卖下方 Put spread，用丰厚权利金押支撑守住。",
     avoid: "如果你认为标的可能快速跌破卖出 Put，信用价差会很难管理。",
     greeks: { Delta: "+", Gamma: "-", Theta: "+", Vega: "-" },
     risk: "Defined risk",
@@ -140,7 +140,7 @@ const strategies = {
       "到期价 ≤ 卖出 Put 行权价：最大盈利 = Spread 宽度 - 净支出的权利金。",
       "中间区间：价格越靠近卖出 Put，利润越接近上限。"
     ],
-    why: "适合看跌但希望控制成本，卖出更低行权价 Put 抵消一部分 IV 和时间成本。",
+    why: "适合看跌但希望控制成本；也适合 TR 上沿 FBO + Low IV 时，用更便宜的 debit 押价格回到区间内。",
     avoid: "如果你预期会暴跌，价差会限制下方收益。",
     greeks: { Delta: "-", Gamma: "+/0", Theta: "-/0", Vega: "+/0" },
     risk: "Defined risk",
@@ -158,7 +158,7 @@ const strategies = {
       "到期价 ≥ 买入 Call 行权价：最大亏损 = Spread 宽度 - 净权利金。",
       "中间区间：盈亏 = 净权利金 - 卖出 Call 的内在价值。"
     ],
-    why: "适合温和看跌或不看涨，IV 偏高时通过卖出上方 Call 收取权利金。",
+    why: "适合温和看跌或不看涨；TR 上沿 FBO + High IV 时，也可以卖上方 Call spread，用丰厚权利金押压力守住。",
     avoid: "如果标的可能快速突破卖出 Call，亏损会放大到价差上限。",
     greeks: { Delta: "-", Gamma: "-", Theta: "+", Vega: "-" },
     risk: "Defined risk",
@@ -587,6 +587,34 @@ const cases = [
     reason: "低 IV + 大波动预期是 Long Vol 的场景，买入跨式更贴近这个观点。"
   },
   {
+    title: "TR 下沿 FBO，Low IV",
+    prompt: "价格假跌破 TR 下沿后收回区间，IV 仍便宜，你想押至少回到区间内。",
+    answer: "bullCallSpread",
+    options: ["bullCallSpread", "bullPutSpread", "longStraddle"],
+    reason: "Low IV 时 debit 更便宜；Bull Call Debit Spread 能用有限成本押下沿 FBO 后的回归。"
+  },
+  {
+    title: "TR 上沿 FBO，Low IV",
+    prompt: "价格假突破 TR 上沿后重新回落，IV 仍便宜，你想押价格回到区间内。",
+    answer: "bearPutSpread",
+    options: ["longPut", "bearPutSpread", "bearCallSpread"],
+    reason: "Bear Put Debit Spread 和 Bull Call Debit Spread 是对称逻辑：Low IV 下用较便宜权利金押回区间。"
+  },
+  {
+    title: "TR 下沿 FBO，High IV",
+    prompt: "价格假跌破 TR 下沿后收回，IV 很高，你更想做 seller 收权利金。",
+    answer: "bullPutSpread",
+    options: ["bullPutSpread", "bullCallSpread", "cashSecuredPut"],
+    reason: "High IV 时权利金更丰厚；Bull Put Credit Spread 是卖一个“支撑守住、别再跌破”的观点。"
+  },
+  {
+    title: "TR 上沿 FBO，High IV",
+    prompt: "价格假突破 TR 上沿后回落，IV 很高，你判断压力大概率守住。",
+    answer: "bearCallSpread",
+    options: ["bearPutSpread", "bearCallSpread", "longStraddle"],
+    reason: "High IV 下更适合用 Bear Call Credit Spread 收上方 Call 权利金，押压力守住。"
+  },
+  {
     title: "TR，中部磨，但远月可能动",
     prompt: "短期大概率还在中心附近消耗，但后面可能有新的方向或事件。",
     answer: "calendar",
@@ -689,6 +717,36 @@ const paContexts = [
     note: "TR 里低 IV 时，重点不是押方向，而是押波动被低估。"
   },
   {
+    id: "tr-fbo-low-lower",
+    group: "TR",
+    subtype: "Lower-edge FBO Low IV",
+    tone: "range",
+    english: "TR Lower-edge FBO / Low IV",
+    title: "TR 下沿 FBO + 低 IV",
+    read: "价格假跌破下沿后重新收回，IV 仍便宜，你想押价格回到区间内。",
+    direction: "bullish",
+    iv: "low",
+    objective: "directional",
+    main: "bullCallSpread",
+    alternatives: ["longCall", "bullPutSpread"],
+    note: "Low IV 时 debit 更便宜；用 Bull Call Spread 押回区间，同时限制成本。"
+  },
+  {
+    id: "tr-fbo-low-upper",
+    group: "TR",
+    subtype: "Upper-edge FBO Low IV",
+    tone: "range",
+    english: "TR Upper-edge FBO / Low IV",
+    title: "TR 上沿 FBO + 低 IV",
+    read: "价格假突破上沿后重新回落，IV 仍便宜，你想押价格回到区间内。",
+    direction: "bearish",
+    iv: "low",
+    objective: "directional",
+    main: "bearPutSpread",
+    alternatives: ["longPut", "bearCallSpread"],
+    note: "Low IV 时 debit 更便宜；用 Bear Put Spread 押回区间，同时限制成本。"
+  },
+  {
     id: "tr-high",
     group: "TR",
     subtype: "High IV",
@@ -702,6 +760,36 @@ const paContexts = [
     main: "ironCondor",
     alternatives: ["calendar", "coveredCall"],
     note: "TR 里高 IV 时，更像卖区间；核心风险是边界被突破。"
+  },
+  {
+    id: "tr-fbo-high-lower",
+    group: "TR",
+    subtype: "Lower-edge FBO High IV",
+    tone: "range",
+    english: "TR Lower-edge FBO / High IV",
+    title: "TR 下沿 FBO + 高 IV",
+    read: "价格假跌破下沿后收回，IV 偏贵，你想做 seller 收更厚权利金。",
+    direction: "bullish",
+    iv: "high",
+    objective: "income",
+    main: "bullPutSpread",
+    alternatives: ["cashSecuredPut", "bullCallSpread"],
+    note: "High IV 时 credit 更有肉；用 Bull Put Spread 押支撑守住，同时限定风险。"
+  },
+  {
+    id: "tr-fbo-high-upper",
+    group: "TR",
+    subtype: "Upper-edge FBO High IV",
+    tone: "range",
+    english: "TR Upper-edge FBO / High IV",
+    title: "TR 上沿 FBO + 高 IV",
+    read: "价格假突破上沿后回落，IV 偏贵，你想做 seller 收更厚权利金。",
+    direction: "bearish",
+    iv: "high",
+    objective: "income",
+    main: "bearCallSpread",
+    alternatives: ["bearPutSpread", "ironCondor"],
+    note: "High IV 时 credit 更有肉；用 Bear Call Spread 押压力守住，同时限定风险。"
   },
   {
     id: "tr-calendar",
@@ -734,7 +822,15 @@ const paContextGroups = [
   {
     title: "TR",
     subtitle: "Trading Range",
-    contextIds: ["tr-high", "tr-calendar", "tr-low"]
+    contextIds: [
+      "tr-high",
+      "tr-calendar",
+      "tr-low",
+      "tr-fbo-low-lower",
+      "tr-fbo-low-upper",
+      "tr-fbo-high-lower",
+      "tr-fbo-high-upper"
+    ]
   }
 ];
 
@@ -838,8 +934,27 @@ function compactLibraryContexts(contexts) {
   return tags.slice(0, 3);
 }
 
+const libraryContextOverrides = {
+  bullCallSpread: [
+    { label: "Strong/Weak Bull Trend", tone: "bull" },
+    { label: "TR Low IV / Lower-edge FBO", tone: "range" }
+  ],
+  bearPutSpread: [
+    { label: "Strong/Weak Bear Trend", tone: "bear" },
+    { label: "TR Low IV / Upper-edge FBO", tone: "range" }
+  ],
+  bullPutSpread: [
+    { label: "Strong/Weak Bull Trend", tone: "bull" },
+    { label: "TR High IV / Lower-edge FBO", tone: "range" }
+  ],
+  bearCallSpread: [
+    { label: "Strong/Weak Bear Trend", tone: "bear" },
+    { label: "TR High IV / Upper-edge FBO", tone: "range" }
+  ]
+};
+
 function libraryContextTags(key) {
-  const tags = compactLibraryContexts(paMatchesForStrategy(key));
+  const tags = libraryContextOverrides[key] || compactLibraryContexts(paMatchesForStrategy(key));
   if (!tags.length) {
     return `<span class="library-context-chip tone-neutral">Depends on Cycle</span>`;
   }
@@ -854,8 +969,20 @@ function recommendFromPaContext(context, objective) {
   if (context.id === "tr-low" && objective === "directional") {
     return pick("longStraddle", ["calendar", "bullCallSpread"]);
   }
+  if (context.id === "tr-fbo-low-lower" && objective === "directional") {
+    return pick("bullCallSpread", ["longCall", "bullPutSpread"]);
+  }
+  if (context.id === "tr-fbo-low-upper" && objective === "directional") {
+    return pick("bearPutSpread", ["longPut", "bearCallSpread"]);
+  }
   if (context.id === "tr-high" && objective === "income") {
     return pick("ironCondor", ["calendar", "coveredCall"]);
+  }
+  if (context.id === "tr-fbo-high-lower" && objective === "income") {
+    return pick("bullPutSpread", ["cashSecuredPut", "bullCallSpread"]);
+  }
+  if (context.id === "tr-fbo-high-upper" && objective === "income") {
+    return pick("bearCallSpread", ["bearPutSpread", "ironCondor"]);
   }
   if (context.id === "tr-calendar" && objective === "directional") {
     return pick("calendar", ["longStraddle", "ironCondor"]);
