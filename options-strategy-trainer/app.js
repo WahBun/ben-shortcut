@@ -1294,3 +1294,8 @@ renderTerms();
 if (["terms", "guide", "library", "cases"].includes(startingView)) {
   switchView(startingView);
 }
+
+window.addEventListener("hashchange", () => {
+  const nextView = window.location.hash.replace("#", "");
+  if (["terms", "guide", "library", "cases"].includes(nextView)) switchView(nextView);
+});
