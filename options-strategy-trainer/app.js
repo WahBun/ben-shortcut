@@ -503,137 +503,200 @@ const libraryOrder = [
 
 const cases = [
   {
-    title: "Strong Bull Trend，IV 不贵",
-    prompt: "连续 HH/HL，突破后接受良好，你想直接表达上涨速度。",
+    title: "早盘一路抬高，不给深回调",
+    prompt: "你看见买盘一直愿意在更高的位置接，回踩很浅，IV 还没明显升温。",
     answer: "longCall",
     options: ["longCall", "bullPutSpread", "ironCondor"],
-    reason: "强趋势 + 低 IV 时，Long Call 能最直接吃到方向、速度和 Gamma。"
+    reason: "这题核心是速度。IV 还不贵时，Long Call 比卖 Put 更能吃到向上的加速。"
   },
   {
-    title: "强看涨，但 IV Rank 已经 72",
-    prompt: "你认为未来一个月会涨到目标价附近，但不需要暴涨。",
+    title: "已经涨了一段，但目标还没到",
+    prompt: "你仍然看涨，但 Call 已经不便宜；你的目标是到前高附近，不是押无限拉升。",
     answer: "bullCallSpread",
     options: ["longCall", "bullCallSpread", "cashSecuredPut"],
-    reason: "高 IV 下单买 Call 成本高；价差能保留方向，同时卖出一部分贵的波动率。"
+    reason: "目标价明确时，用上方 Call 换回一部分成本，会比裸买 Call 更贴近这个判断。"
   },
   {
-    title: "Weak Bull Trend，靠近支撑",
-    prompt: "趋势还偏多，但推进变慢，你认为支撑大概率守得住。",
+    title: "趋势偏多，但每次推进都变慢",
+    prompt: "价格还在支撑上方，可是追涨的感觉不好；你更愿意押支撑别破。",
     answer: "bullPutSpread",
     options: ["bullPutSpread", "longCall", "longStraddle"],
-    reason: "弱多不一定要追涨；Bull Put Credit Spread 更像卖一个“别跌破支撑”的观点。"
+    reason: "这里不是赌大涨，而是赌下方守住。Bull Put Credit Spread 赚的是时间和支撑。"
   },
   {
-    title: "愿意更低价格买入正股",
-    prompt: "你喜欢这家公司，但只想在当前价格下方接货。",
+    title: "想买，但不想按现价追",
+    prompt: "你愿意持有这家公司，只是觉得现在的位置不够舒服。",
     answer: "cashSecuredPut",
     options: ["cashSecuredPut", "longCall", "ironCondor"],
-    reason: "目标不是追涨，而是用卖 Put 把接货价和权利金放在一起考虑。"
+    reason: "CSP 的重点是接货计划：没跌到就收权利金，跌到就按你愿意的位置买。"
   },
   {
-    title: "已有正股，愿意上方卖出",
-    prompt: "你不急着走，但如果涨到目标价，被行权卖掉也能接受。",
+    title: "手里有股，上方有满意卖点",
+    prompt: "你不急着卖，但如果价格冲到目标区，被拿走仓位也可以接受。",
     answer: "coveredCall",
     options: ["coveredCall", "protectivePut", "longStraddle"],
-    reason: "Covered Call 适合已有正股、温和看涨或横盘，用卖 Call 增加收入。"
+    reason: "Covered Call 适合把上方一段空间换成现金流，前提是你真的接受被行权卖出。"
   },
   {
-    title: "已有正股，想保护利润",
-    prompt: "你想给下方买保险，但也愿意卖掉一部分上方空间来降低成本。",
-    answer: "collar",
-    options: ["protectivePut", "collar", "bearCallSpread"],
-    reason: "Collar = 持有正股 + 买 Put 保护 + 卖 Call 降低保险成本，上下都被框住。"
-  },
-  {
-    title: "已有正股，担心财报下跌",
-    prompt: "你想保住仓位，但短期事件风险很高，也不想卖掉上方空间。",
+    title: "浮盈不错，怕一个消息砸下来",
+    prompt: "你想继续拿着正股，但短期有事件风险，不想用卖 Call 封住上方。",
     answer: "protectivePut",
     options: ["coveredCall", "protectivePut", "bullPutSpread"],
-    reason: "Protective Put 是直接买保险；如果愿意牺牲上方空间，再考虑 Collar。"
+    reason: "Protective Put 是最直接的保险。贵不贵是另一个问题，但保护逻辑最干净。"
   },
   {
-    title: "Strong Bear Trend，IV 不贵",
-    prompt: "连续 LH/LL，反抽很弱，你想直接表达下跌速度。",
+    title: "想保护利润，但保险费刺眼",
+    prompt: "正股还想留，Put 太贵；你愿意牺牲一部分上方空间来换便宜保险。",
+    answer: "collar",
+    options: ["protectivePut", "collar", "coveredCall"],
+    reason: "Collar 是把保护和让利打包：下方有保险，上方也被封顶。"
+  },
+  {
+    title: "反弹越来越弱，卖盘主动",
+    prompt: "价格不断被压回去，反抽没力，IV 仍然正常偏低。",
     answer: "longPut",
     options: ["longPut", "ironCondor", "cashSecuredPut"],
-    reason: "强空 + 低 IV 时，Long Put 能直接吃到下跌方向和速度。"
+    reason: "当下跌速度本身就是观点时，低 IV 的 Long Put 最直接。"
   },
   {
-    title: "看跌但不想支付太贵保护费",
-    prompt: "IV 偏高，观点是跌到某个支撑位附近，不是崩盘。",
+    title: "看回前低，但不想买太贵 Put",
+    prompt: "你判断还有一段下行，但目标大概就是前低附近，IV 已经不便宜。",
     answer: "bearPutSpread",
     options: ["longPut", "bearPutSpread", "bearCallSpread"],
-    reason: "熊市 Put 价差限制收益，但能显著降低高 IV 下的成本。"
+    reason: "有限目标配有限收益结构。Bear Put Spread 用卖低行权价 Put 把入场成本压低。"
   },
   {
-    title: "Weak Bear Trend，压力清晰",
-    prompt: "下跌变慢，但价格仍在压力位下方，你更想交易“别突破”。",
+    title: "上方压力清楚，但没到崩盘程度",
+    prompt: "你偏空，可价格更像慢慢被压住，而不是马上瀑布。",
     answer: "bearCallSpread",
     options: ["bearCallSpread", "longCall", "cashSecuredPut"],
-    reason: "Bear Call Credit Spread 更适合温和看跌或不看涨，赚的是上方压力守住。"
+    reason: "这种题重点是“别站回压力上方”。Bear Call Credit Spread 比追空更稳一点。"
   },
   {
-    title: "TR，高 IV，想收时间价值",
-    prompt: "你认为价格大概率留在一个清晰区间里。",
+    title: "区间很清楚，IV 给得很肥",
+    prompt: "价格在上下沿之间来回磨，市场却给了很高的波动率定价。",
     answer: "ironCondor",
     options: ["ironCondor", "longStraddle", "protectivePut"],
-    reason: "中性 + 高 IV 更适合短波动结构；关键风险是区间被突破。"
+    reason: "如果你判断边界暂时都守得住，高 IV 下卖两边比买波动更合理。"
   },
   {
-    title: "TR，低 IV，等离开区间",
-    prompt: "价格在区间里压得很紧，方向不确定，但你觉得波动快放大。",
+    title: "盘了很久，期权却很便宜",
+    prompt: "价格越收越窄，你不知道往哪边走，但感觉快要选择方向了。",
     answer: "longStraddle",
     options: ["longStraddle", "ironCondor", "calendar"],
-    reason: "低 IV + 大波动预期是 Long Vol 的场景，买入跨式更贴近这个观点。"
+    reason: "你买的不是方向，而是后面可能放大的波动。Low IV 让这个押注没那么贵。"
   },
   {
-    title: "TR 下沿 FBO，Low IV",
-    prompt: "价格假跌破 TR 下沿后收回区间，IV 仍便宜，你想押至少回到区间内。",
-    answer: "bullCallSpread",
-    options: ["bullCallSpread", "bullPutSpread", "longStraddle"],
-    reason: "Low IV 时 debit 更便宜；Bull Call Debit Spread 能用有限成本押下沿 FBO 后的回归。"
-  },
-  {
-    title: "TR 上沿 FBO，Low IV",
-    prompt: "价格假突破 TR 上沿后重新回落，IV 仍便宜，你想押价格回到区间内。",
-    answer: "bearPutSpread",
-    options: ["longPut", "bearPutSpread", "bearCallSpread"],
-    reason: "Bear Put Debit Spread 和 Bull Call Debit Spread 是对称逻辑：Low IV 下用较便宜权利金押回区间。"
-  },
-  {
-    title: "TR 下沿 FBO，High IV",
-    prompt: "价格假跌破 TR 下沿后收回，IV 很高，你更想做 seller 收权利金。",
-    answer: "bullPutSpread",
-    options: ["bullPutSpread", "bullCallSpread", "cashSecuredPut"],
-    reason: "High IV 时权利金更丰厚；Bull Put Credit Spread 是卖一个“支撑守住、别再跌破”的观点。"
-  },
-  {
-    title: "TR 上沿 FBO，High IV",
-    prompt: "价格假突破 TR 上沿后回落，IV 很高，你判断压力大概率守住。",
-    answer: "bearCallSpread",
-    options: ["bearPutSpread", "bearCallSpread", "longStraddle"],
-    reason: "High IV 下更适合用 Bear Call Credit Spread 收上方 Call 权利金，押压力守住。"
-  },
-  {
-    title: "TR，中部磨，但远月可能动",
-    prompt: "短期大概率还在中心附近消耗，但后面可能有新的方向或事件。",
+    title: "这周可能磨，下个月可能有戏",
+    prompt: "短线看不出方向，近月时间价值掉得快，但远月还可能等到新催化。",
     answer: "calendar",
     options: ["calendar", "longCall", "bearCallSpread"],
-    reason: "Calendar 交易的是现在的时间 vs 未来的时间，核心不只是方向。"
+    reason: "Calendar 更像交易不同到期日之间的时间和 IV 差，不是简单看涨或看跌。"
   },
   {
-    title: "不看跌，但不想接货",
-    prompt: "你认为价格不太可能跌破支撑，但如果真跌破，你不想买入正股。",
+    title: "跌破下沿后马上收回",
+    prompt: "你看到一次下破失败，价格重新站回区间，Call 的价格还没被抢贵。",
+    answer: "bullCallSpread",
+    options: ["bullCallSpread", "bullPutSpread", "longStraddle"],
+    reason: "低 IV 时可以用 debit 思路押回区间；上方卖 Call 是为了让这笔试错更轻。"
+  },
+  {
+    title: "下沿收回，但你本来就想买股",
+    prompt: "这次假跌破让你更想在下方挂接货计划，IV 也给了不错权利金。",
+    answer: "cashSecuredPut",
+    options: ["cashSecuredPut", "bullCallSpread", "longStraddle"],
+    reason: "如果接货本来就在计划内，CSP 比硬追更符合你的目标。"
+  },
+  {
+    title: "下沿收回，但不想真的接货",
+    prompt: "你觉得下方大概率守住，也想收高 IV 的权利金，但账户不想扛正股。",
     answer: "bullPutSpread",
-    options: ["cashSecuredPut", "bullPutSpread", "coveredCall"],
-    reason: "不愿意接货时，Defined Risk 的 Bull Put Spread 比 CSP 更合适。"
+    options: ["cashSecuredPut", "bullPutSpread", "longCall"],
+    reason: "Bull Put Spread 把卖 Put 的想法变成 Defined Risk，适合“不跌破就好”的判断。"
   },
   {
-    title: "高 IV，但预期只是轻微下跌",
-    prompt: "你不认为会崩盘，只觉得价格短期很难突破上方压力。",
+    title: "冲上沿失败，Put 还便宜",
+    prompt: "价格假突破后跌回区间，你想押回落到中部，但不想裸买太多 premium。",
+    answer: "bearPutSpread",
+    options: ["bearPutSpread", "bearCallSpread", "ironCondor"],
+    reason: "低 IV 下的 Bear Put Spread 可以押下行，同时用更低行权价 Put 抵掉部分成本。"
+  },
+  {
+    title: "冲上沿失败，Call 权利金很厚",
+    prompt: "上方压力刚被验证，IV 偏贵；你不需要它大跌，只需要别重新突破。",
+    answer: "bearCallSpread",
+    options: ["bearPutSpread", "bearCallSpread", "longStraddle"],
+    reason: "这更像卖上方压力。Bear Call Spread 赚的是价格留在卖出 Call 下方。"
+  },
+  {
+    title: "关键位附近像被钉住",
+    prompt: "几次突破和跌破都很快被拉回，盘口像是在压波动，IV 也不低。",
+    answer: "ironCondor",
+    options: ["ironCondor", "longStraddle", "longCall"],
+    reason: "Positive Dealer Gamma 常见的是波动被压住；如果你也认同区间，卖区间更顺。"
+  },
+  {
+    title: "突破后突然越涨越急",
+    prompt: "价格穿过关键位后开始加速，回调给得很少，追涨资金明显变多。",
+    answer: "longCall",
+    options: ["longCall", "coveredCall", "ironCondor"],
+    reason: "这种题怕的是低估 Gamma。Long Call 能更直接参与向上加速。"
+  },
+  {
+    title: "支撑破了之后越跌越快",
+    prompt: "原本横盘很久，一跌破关键位就连续触发止损，反抽也很弱。",
+    answer: "longPut",
+    options: ["longPut", "cashSecuredPut", "ironCondor"],
+    reason: "当市场进入加速段时，不要把它当普通区间处理；Long Put 更贴近速度风险。"
+  },
+  {
+    title: "高 IV，但只是轻微偏空",
+    prompt: "你不想赌大跌，只觉得价格短期很难重新站上压力。",
     answer: "bearCallSpread",
     options: ["longPut", "bearCallSpread", "longStraddle"],
-    reason: "轻微看跌 + 高 IV 更适合卖上方 Call 价差，而不是花大钱追 Put。"
+    reason: "轻微偏空时，卖上方 Call 价差比买 Put 更符合“别涨上去”的观点。"
+  },
+  {
+    title: "涨太快后想继续拿股",
+    prompt: "你有正股，短线涨幅已经很大；你想收点权利金，但还能接受上方卖飞。",
+    answer: "coveredCall",
+    options: ["coveredCall", "longCall", "bearPutSpread"],
+    reason: "这不是新开多头，而是管理已有仓位。Covered Call 用上方空间换现金流。"
+  },
+  {
+    title: "想赌事件后大动，但 IV 没涨起来",
+    prompt: "公司快有关键消息，市场定价却还很平，你也判断方向很难提前猜。",
+    answer: "longStraddle",
+    options: ["longStraddle", "ironCondor", "coveredCall"],
+    reason: "当事件可能带来大幅波动，而 IV 还没反映出来，Long Vol 才有学习价值。"
+  },
+  {
+    title: "近月 IV 很高，远月没那么夸张",
+    prompt: "短期消息快落地，你觉得近月会被 IV crush，但远月还保留后续想象。",
+    answer: "calendar",
+    options: ["calendar", "longPut", "bullPutSpread"],
+    reason: "Calendar 的核心是近月和远月的差异，不是单纯押涨跌。"
+  },
+  {
+    title: "支撑附近 IV 很高，但你仓位太小",
+    prompt: "你想收 Put 权利金，可一旦被指派，买入正股会占用太多资金。",
+    answer: "bullPutSpread",
+    options: ["cashSecuredPut", "bullPutSpread", "coveredCall"],
+    reason: "资金和风险承受力不够时，把 CSP 改成 Defined Risk 的 put spread 更合理。"
+  },
+  {
+    title: "上沿失败，但目标只看到区间中部",
+    prompt: "你偏空，不过只是看回中轴；Put 不算贵，但你不想为崩盘付费。",
+    answer: "bearPutSpread",
+    options: ["longPut", "bearPutSpread", "bearCallSpread"],
+    reason: "有限下跌目标更适合价差。它牺牲远端暴利，换来更低成本。"
+  },
+  {
+    title: "方向没把握，但你想先学观察",
+    prompt: "价格在区间中部，IV 正常，没有明显边界优势，也没有强催化。",
+    answer: "calendar",
+    options: ["calendar", "longCall", "cashSecuredPut"],
+    reason: "这种题不适合硬押方向。Calendar 至少提醒你观察时间结构，而不是只盯涨跌。"
   }
 ];
 
@@ -717,34 +780,42 @@ const paContexts = [
     note: "TR 里低 IV 时，重点不是押方向，而是押波动被低估。"
   },
   {
-    id: "tr-fbo-low-lower",
+    id: "tr-fbo-lower",
     group: "TR",
-    subtype: "Lower-edge FBO Low IV",
+    subtype: "Lower-edge FBO",
     tone: "range",
-    english: "TR Lower-edge FBO / Low IV",
-    title: "TR 下沿 FBO + 低 IV",
-    read: "价格假跌破下沿后重新收回，IV 仍便宜，你想押价格回到区间内。",
+    english: "TR Lower-edge FBO",
+    title: "TR 下沿 FBO",
+    readLines: [
+      "价格假跌破下沿后重新收回，核心是押价格至少回到区间内。",
+      "Low IV 用 Bull Call Debit Spread；High IV 用 Bull Put Credit Spread。"
+    ],
+    badges: ["Bullish", "Low(High) IV", "Bull Call Debit(Put Credit) Spread"],
     direction: "bullish",
-    iv: "low",
+    iv: "normal",
     objective: "directional",
     main: "bullCallSpread",
     alternatives: ["longCall", "bullPutSpread"],
-    note: "Low IV 时 debit 更便宜；用 Bull Call Spread 押回区间，同时限制成本。"
+    note: "TR 下沿 FBO 的大前提是价格重新收回区间；Low IV 用 debit 付更便宜权利金，High IV 用 credit 收更厚权利金。"
   },
   {
-    id: "tr-fbo-low-upper",
+    id: "tr-fbo-upper",
     group: "TR",
-    subtype: "Upper-edge FBO Low IV",
+    subtype: "Upper-edge FBO",
     tone: "range",
-    english: "TR Upper-edge FBO / Low IV",
-    title: "TR 上沿 FBO + 低 IV",
-    read: "价格假突破上沿后重新回落，IV 仍便宜，你想押价格回到区间内。",
+    english: "TR Upper-edge FBO",
+    title: "TR 上沿 FBO",
+    readLines: [
+      "价格假突破上沿后重新回落，核心是押价格至少回到区间内。",
+      "Low IV 用 Bear Put Debit Spread；High IV 用 Bear Call Credit Spread。"
+    ],
+    badges: ["Bearish", "Low(High) IV", "Bear Put Debit(Bear Call Credit) Spread"],
     direction: "bearish",
-    iv: "low",
+    iv: "normal",
     objective: "directional",
     main: "bearPutSpread",
     alternatives: ["longPut", "bearCallSpread"],
-    note: "Low IV 时 debit 更便宜；用 Bear Put Spread 押回区间，同时限制成本。"
+    note: "TR 上沿 FBO 的大前提是价格重新回到区间；Low IV 用 debit 付更便宜权利金，High IV 用 credit 收更厚权利金。"
   },
   {
     id: "tr-high",
@@ -760,36 +831,6 @@ const paContexts = [
     main: "ironCondor",
     alternatives: ["calendar", "coveredCall"],
     note: "TR 里高 IV 时，更像卖区间；核心风险是边界被突破。"
-  },
-  {
-    id: "tr-fbo-high-lower",
-    group: "TR",
-    subtype: "Lower-edge FBO High IV",
-    tone: "range",
-    english: "TR Lower-edge FBO / High IV",
-    title: "TR 下沿 FBO + 高 IV",
-    read: "价格假跌破下沿后收回，IV 偏贵，你想做 seller 收更厚权利金。",
-    direction: "bullish",
-    iv: "high",
-    objective: "income",
-    main: "bullPutSpread",
-    alternatives: ["cashSecuredPut", "bullCallSpread"],
-    note: "High IV 时 credit 更有肉；用 Bull Put Spread 押支撑守住，同时限定风险。"
-  },
-  {
-    id: "tr-fbo-high-upper",
-    group: "TR",
-    subtype: "Upper-edge FBO High IV",
-    tone: "range",
-    english: "TR Upper-edge FBO / High IV",
-    title: "TR 上沿 FBO + 高 IV",
-    read: "价格假突破上沿后回落，IV 偏贵，你想做 seller 收更厚权利金。",
-    direction: "bearish",
-    iv: "high",
-    objective: "income",
-    main: "bearCallSpread",
-    alternatives: ["bearPutSpread", "ironCondor"],
-    note: "High IV 时 credit 更有肉；用 Bear Call Spread 押压力守住，同时限定风险。"
   },
   {
     id: "tr-calendar",
@@ -826,10 +867,8 @@ const paContextGroups = [
       "tr-high",
       "tr-calendar",
       "tr-low",
-      "tr-fbo-low-lower",
-      "tr-fbo-low-upper",
-      "tr-fbo-high-lower",
-      "tr-fbo-high-upper"
+      "tr-fbo-lower",
+      "tr-fbo-upper"
     ]
   }
 ];
@@ -969,20 +1008,16 @@ function recommendFromPaContext(context, objective) {
   if (context.id === "tr-low" && objective === "directional") {
     return pick("longStraddle", ["calendar", "bullCallSpread"]);
   }
-  if (context.id === "tr-fbo-low-lower" && objective === "directional") {
-    return pick("bullCallSpread", ["longCall", "bullPutSpread"]);
-  }
-  if (context.id === "tr-fbo-low-upper" && objective === "directional") {
-    return pick("bearPutSpread", ["longPut", "bearCallSpread"]);
+  if (context.id === "tr-fbo-lower") {
+    if (objective === "directional") return pick("bullCallSpread", ["longCall", "bullPutSpread"]);
+    if (objective === "income") return pick("bullPutSpread", ["cashSecuredPut", "bullCallSpread"]);
   }
   if (context.id === "tr-high" && objective === "income") {
     return pick("ironCondor", ["calendar", "coveredCall"]);
   }
-  if (context.id === "tr-fbo-high-lower" && objective === "income") {
-    return pick("bullPutSpread", ["cashSecuredPut", "bullCallSpread"]);
-  }
-  if (context.id === "tr-fbo-high-upper" && objective === "income") {
-    return pick("bearCallSpread", ["bearPutSpread", "ironCondor"]);
+  if (context.id === "tr-fbo-upper") {
+    if (objective === "directional") return pick("bearPutSpread", ["longPut", "bearCallSpread"]);
+    if (objective === "income") return pick("bearCallSpread", ["bearPutSpread", "ironCondor"]);
   }
   if (context.id === "tr-calendar" && objective === "directional") {
     return pick("calendar", ["longStraddle", "ironCondor"]);
@@ -1114,19 +1149,23 @@ function renderPaContexts() {
           </div>
           <div class="pa-context-group-list">
             ${contexts
-              .map(
-                (context) => `
+              .map((context) => {
+                const reads = context.readLines || [context.read];
+                const badges = context.badges || [
+                  labels.direction[context.direction],
+                  labels.iv[context.iv],
+                  strategyLabel(context.main)
+                ];
+                return `
                   <button class="pa-context-card tone-${context.tone}" type="button" data-pa-context="${context.id}">
                     <span class="context-title">${context.english}</span>
-                    <span class="context-read">${context.read}</span>
+                    ${reads.map((line) => `<span class="context-read">${line}</span>`).join("")}
                     <span class="context-badges">
-                      <span>${labels.direction[context.direction]}</span>
-                      <span>${labels.iv[context.iv]}</span>
-                      <span>${strategyLabel(context.main)}</span>
+                      ${badges.map((badge) => `<span>${badge}</span>`).join("")}
                     </span>
                   </button>
-                `
-              )
+                `;
+              })
               .join("")}
           </div>
         </section>
