@@ -808,22 +808,34 @@ summary {
 }
 
 .term-map {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  gap: 8px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
 }
 
 .term-map span {
-  display: inline-flex;
-  min-height: 34px;
-  align-items: center;
-  padding: 6px 11px;
+  display: grid;
+  min-height: 92px;
+  align-content: start;
+  gap: 7px;
+  padding: 13px;
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: 8px;
   background: var(--tag-bg);
   color: var(--ink);
-  white-space: nowrap;
+}
+
+.term-map strong {
+  color: var(--ink);
+  font-size: 0.98rem;
+  line-height: 1.25;
+}
+
+.term-map small {
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 560;
+  line-height: 1.45;
 }
 
 .terms-grid {
@@ -1123,7 +1135,7 @@ summary {
   }
 
   .term-map {
-    justify-content: flex-start;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .term-card-grid {
@@ -1235,7 +1247,8 @@ summary {
   .library-grid,
   .money-grid,
   .term-card-grid,
-  .pa-context-grid {
+  .pa-context-grid,
+  .term-map {
     grid-template-columns: 1fr;
   }
 

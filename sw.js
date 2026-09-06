@@ -1,8 +1,8 @@
-const CACHE_NAME = "pulse-rc-github-pages-v55";
+const CACHE_NAME = "pulse-rc-github-pages-v56";
 const HUB_VERSION = "hub-v4";
 const PULSE_VERSION = "pulse-v1";
 const PROP_FIRM_VERSION = "pf-v1";
-const OPTION_TRAINER_VERSION = "ost-v53";
+const OPTION_TRAINER_VERSION = "ost-v54";
 const APP_SHELL = [
   "./",
   "./index.html",
