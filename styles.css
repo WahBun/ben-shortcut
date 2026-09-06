@@ -134,12 +134,12 @@ h1 {
   stroke-width: 2;
 }
 
-.sun-icon,
-:root[data-theme="light"] .moon-icon {
+.theme-icon .sun-icon,
+:root[data-theme="light"] .theme-icon .moon-icon {
   display: none;
 }
 
-:root[data-theme="light"] .sun-icon {
+:root[data-theme="light"] .theme-icon .sun-icon {
   display: block;
 }
 
