@@ -276,30 +276,36 @@ const payoffDiagrams = {
   bullCallSpread: {
     title: "Bull Call Debit Spread 到期盈亏",
     path: "M48 162 L116 162 L202 72 L282 72",
+    priceLabel: { y: 134 },
     markers: [
       { type: "loss", x: 72, y: 162, label: ["最大亏损", "净支出"], tx: 62, ty: 136, anchor: "start" },
       { type: "strike", x: 116, y: 162, label: "买入较低 Call", tx: 116, ty: 190, guide: true },
       { type: "be", x: 158, y: 118, label: "BE", tx: 158, ty: 106 },
-      { type: "profit", x: 202, y: 72, label: ["卖出较高 Call", "最大盈利", "Spread - 净支出"], tx: 282, ty: 84, anchor: "end", guide: true }
+      { type: "profit", x: 202, y: 72, label: ["最大盈利", "Spread - 净支出"], tx: 282, ty: 90, anchor: "end", guide: true },
+      { type: "action", x: 202, y: 72, label: "卖出较高 Call", tx: 282, ty: 58, anchor: "end", dot: false }
     ]
   },
   bullPutSpread: {
     title: "Bull Put Credit Spread 到期盈亏",
     path: "M48 162 L116 162 L202 72 L282 72",
+    priceLabel: { y: 134 },
     markers: [
       { type: "loss", x: 74, y: 162, label: ["最大亏损", "Spread - 净权利金"], tx: 62, ty: 136, anchor: "start" },
       { type: "guard", x: 116, y: 162, label: "买入更低 Put", tx: 116, ty: 190, guide: true },
       { type: "be", x: 158, y: 118, label: "BE", tx: 158, ty: 106 },
-      { type: "profit", x: 202, y: 72, label: ["卖出较高 Put", "最大盈利", "净权利金"], tx: 282, ty: 84, anchor: "end", guide: true }
+      { type: "profit", x: 202, y: 72, label: ["最大盈利", "净权利金"], tx: 282, ty: 90, anchor: "end", guide: true },
+      { type: "action", x: 202, y: 72, label: "卖出较高 Put", tx: 282, ty: 58, anchor: "end", dot: false }
     ]
   },
   cashSecuredPut: {
     title: "Cash-Secured Put 到期盈亏",
     path: "M48 174 L202 72 L282 72",
+    priceLabel: { y: 134 },
     markers: [
       { type: "loss", x: 78, y: 154, label: "被指派后继续下跌仍亏", tx: 62, ty: 146, anchor: "start" },
       { type: "be", x: 132, y: 118, label: "BE", tx: 132, ty: 106 },
-      { type: "profit", x: 202, y: 72, label: ["卖出 Put", "保留权利金"], tx: 282, ty: 88, anchor: "end", guide: true }
+      { type: "profit", x: 202, y: 72, label: "保留权利金", tx: 282, ty: 96, anchor: "end", guide: true },
+      { type: "action", x: 202, y: 72, label: "卖出 Put", tx: 282, ty: 58, anchor: "end", dot: false }
     ]
   },
   longPut: {
@@ -319,7 +325,8 @@ const payoffDiagrams = {
       { type: "profit", x: 74, y: 72, label: ["最大盈利", "Spread - 净支出"], tx: 62, ty: 90, anchor: "start" },
       { type: "guard", x: 116, y: 72, label: "卖出较低 Put", tx: 116, ty: 48, guide: true },
       { type: "be", x: 158, y: 118, label: "BE", tx: 158, ty: 106 },
-      { type: "strike", x: 202, y: 162, label: ["买入较高 Put", "最大亏损", "净支出"], tx: 282, ty: 128, anchor: "end", guide: true }
+      { type: "strike", x: 202, y: 162, label: ["最大亏损", "净支出"], tx: 282, ty: 136, anchor: "end", guide: true },
+      { type: "action", x: 202, y: 162, label: "买入较高 Put", tx: 282, ty: 190, anchor: "end", dot: false }
     ]
   },
   bearCallSpread: {
@@ -329,7 +336,8 @@ const payoffDiagrams = {
       { type: "profit", x: 74, y: 72, label: ["最大盈利", "净权利金"], tx: 62, ty: 90, anchor: "start" },
       { type: "profit", x: 116, y: 72, label: "卖出较低 Call", tx: 116, ty: 48, guide: true },
       { type: "be", x: 158, y: 118, label: "BE", tx: 158, ty: 106 },
-      { type: "guard", x: 202, y: 162, label: ["买入更高 Call", "最大亏损", "Spread - 净权利金"], tx: 282, ty: 128, anchor: "end", guide: true }
+      { type: "guard", x: 202, y: 162, label: ["最大亏损", "Spread - 净权利金"], tx: 282, ty: 136, anchor: "end", guide: true },
+      { type: "action", x: 202, y: 162, label: "买入更高 Call", tx: 282, ty: 190, anchor: "end", dot: false }
     ]
   },
   protectivePut: {
@@ -344,19 +352,23 @@ const payoffDiagrams = {
   collar: {
     title: "Collar 到期盈亏",
     path: "M48 162 L116 162 L202 72 L282 72",
+    priceLabel: { y: 134 },
     markers: [
       { type: "guard", x: 116, y: 162, label: ["买入 OTM Put", "下方保护"], tx: 116, ty: 180, guide: true },
       { type: "be", x: 158, y: 118, label: "BE", tx: 158, ty: 106 },
-      { type: "profit", x: 202, y: 72, label: ["卖出 OTM Call", "上方收益被封顶"], tx: 282, ty: 88, anchor: "end", guide: true }
+      { type: "profit", x: 202, y: 72, label: "上方收益被封顶", tx: 282, ty: 96, anchor: "end", guide: true },
+      { type: "action", x: 202, y: 72, label: "卖出 OTM Call", tx: 282, ty: 58, anchor: "end", dot: false }
     ]
   },
   coveredCall: {
     title: "Covered Call 到期盈亏",
     path: "M48 174 L202 72 L282 72",
+    priceLabel: { y: 134 },
     markers: [
       { type: "loss", x: 78, y: 154, label: "最大风险仍来自正股下跌", tx: 62, ty: 146, anchor: "start" },
       { type: "be", x: 132, y: 118, label: "BE", tx: 132, ty: 106 },
-      { type: "profit", x: 202, y: 72, label: ["卖出 OTM Call", "上方收益被封顶"], tx: 282, ty: 88, anchor: "end", guide: true }
+      { type: "profit", x: 202, y: 72, label: "上方收益被封顶", tx: 282, ty: 96, anchor: "end", guide: true },
+      { type: "action", x: 202, y: 72, label: "卖出 OTM Call", tx: 282, ty: 58, anchor: "end", dot: false }
     ]
   },
   ironCondor: {
@@ -1248,6 +1260,7 @@ function payoffLabelTone(line, fallbackTone, previousTone = "") {
 function payoffSvg(key, strategy) {
   const diagram = payoffDiagrams[key];
   const zeroY = 118;
+  const priceLabel = { x: 286, y: 110, anchor: "end", ...(diagram.priceLabel || {}) };
   const labels = diagram.markers
     .map((marker) => {
       const lines = Array.isArray(marker.label) ? marker.label : [marker.label];
@@ -1274,7 +1287,7 @@ function payoffSvg(key, strategy) {
     )
     .join("");
   const markers = diagram.markers
-    .map((marker) => `<circle class="payoff-marker marker-${marker.type}" cx="${marker.x}" cy="${marker.y}" r="5" />`)
+    .map((marker) => (marker.dot === false ? "" : `<circle class="payoff-marker marker-${marker.type}" cx="${marker.x}" cy="${marker.y}" r="5" />`))
     .join("");
 
   return `
@@ -1284,7 +1297,7 @@ function payoffSvg(key, strategy) {
       <line class="axis" x1="48" y1="34" x2="48" y2="176" />
       <text class="axis-label" x="39" y="43" text-anchor="end">+ 盈利</text>
       <text class="axis-label" x="39" y="178" text-anchor="end">- 亏损</text>
-      <text class="axis-label price-label" x="286" y="110" text-anchor="end">标的价格</text>
+      <text class="axis-label price-label" x="${priceLabel.x}" y="${priceLabel.y}" text-anchor="${priceLabel.anchor}">标的价格</text>
       ${guides}
       <path class="curve" d="${diagram.path}" />
       ${markers}
