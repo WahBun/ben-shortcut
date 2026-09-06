@@ -95,20 +95,24 @@ button:disabled {
 }
 
 .topbar {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas: "brand actions toggle";
   align-items: center;
-  justify-content: space-between;
-  gap: 24px;
+  gap: 12px;
   padding: 10px 0 34px;
 }
 
 .top-actions {
+  grid-area: actions;
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: flex-end;
+  min-width: 0;
 }
 
 .brand {
+  grid-area: brand;
   display: inline-flex;
   align-items: center;
   gap: 12px;
@@ -182,6 +186,7 @@ button:disabled {
 }
 
 .theme-toggle {
+  grid-area: toggle;
   display: inline-flex;
   width: 48px;
   min-width: 48px;
@@ -1079,13 +1084,16 @@ summary {
   }
 
   .topbar {
-    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "brand toggle"
+      "actions actions";
+    align-items: start;
+    gap: 14px 10px;
   }
 
   .top-actions {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: start;
+    width: 100%;
   }
 
   .tabs {
@@ -1126,7 +1134,7 @@ summary {
   }
 
   .top-actions {
-    grid-template-columns: 1fr;
+    display: block;
   }
 
   .tab {
