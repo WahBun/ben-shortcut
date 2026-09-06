@@ -863,6 +863,18 @@ summary {
   box-shadow: var(--shadow);
 }
 
+.term-card-alert {
+  border-color: rgba(238, 154, 144, 0.44);
+  background:
+    linear-gradient(180deg, rgba(238, 154, 144, 0.14), rgba(238, 154, 144, 0.04) 52%),
+    var(--panel);
+}
+
+.term-card-alert h3,
+.term-card-alert .term-use strong {
+  color: var(--red);
+}
+
 .term-card h3 {
   margin-bottom: 12px;
   font-size: 1.05rem;

@@ -362,6 +362,7 @@ const termSections = [
       },
       {
         name: "Gamma Regime",
+        tone: "alert",
         english: "Amplifier, not predictor / 放大或抑制机制",
         meaning: "Gamma regime 不是方向预测器。-Gamma 不代表一定涨，也可能加速跌；+Gamma 不代表一定横盘，只是更容易压制波动。",
         use: "新闻、流动性、0DTE flow、OI（Open Interest）分布变化，都可能迅速改变效果；要和 Context、IV、关键 strike 一起看。"
@@ -959,7 +960,7 @@ function renderTerms() {
             ${section.terms
               .map(
                 (term) => `
-                  <article class="term-card">
+                  <article class="term-card${term.tone ? ` term-card-${term.tone}` : ""}">
                     <h3>${term.name} <span>${term.english}</span></h3>
                     <p>${term.meaning}</p>
                     <p class="term-use"><strong>How</strong><span>${term.use}</span></p>
