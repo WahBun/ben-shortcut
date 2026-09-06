@@ -1245,10 +1245,11 @@ function answerCase(button) {
     if (option.dataset.answer === item.answer) option.classList.add("is-right");
   });
 
-  if (!isRight) button.classList.add("is-wrong");
-
-  card.querySelector(".case-answer").innerHTML = `
-    <strong>${isRight ? "Correct" : "Better answer"}: ${strategyLabel(item.answer)}</strong>
+  const answerPanel = card.querySelector(".case-answer");
+  answerPanel.classList.remove("is-correct", "is-better");
+  answerPanel.classList.add(isRight ? "is-correct" : "is-better");
+  answerPanel.innerHTML = `
+    <strong>${isRight ? "Correct" : "Better Answer"}: ${strategyLabel(item.answer)}</strong>
     <span>${item.reason}</span>
   `;
 }

@@ -1046,26 +1046,50 @@ summary {
 }
 
 .case-option.is-right {
-  border-color: rgba(31, 122, 104, 0.55);
+  border-color: rgba(105, 208, 181, 0.5);
   background: var(--success-bg);
+  color: var(--teal);
 }
 
 .case-option.is-wrong {
-  border-color: rgba(163, 59, 53, 0.45);
-  background: var(--danger-bg);
+  border-color: var(--line-strong);
+  background: var(--panel-soft);
+  color: var(--muted);
 }
 
 .case-answer {
   min-width: 220px;
-  padding-left: 20px;
-  border-left: 1px solid var(--line);
+  padding: 14px 16px;
+  border: 1px solid transparent;
+  border-left-color: var(--line);
+  border-radius: 8px;
   color: var(--muted);
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
 }
 
 .case-answer strong {
   display: block;
   color: var(--ink);
   margin-bottom: 6px;
+}
+
+.case-answer.is-correct,
+.case-answer.is-better {
+  border-color: rgba(105, 208, 181, 0.34);
+  background: var(--success-bg);
+  color: var(--ink);
+}
+
+.case-answer.is-better {
+  background: rgba(105, 208, 181, 0.08);
+}
+
+.case-answer.is-correct strong,
+.case-answer.is-better strong {
+  color: var(--teal);
 }
 
 @media (max-width: 880px) {
@@ -1126,10 +1150,15 @@ summary {
 
   .case-answer {
     min-width: 0;
-    padding-left: 0;
-    padding-top: 16px;
+    padding: 16px 0 0;
     border-top: 1px solid var(--line);
     border-left: 0;
+  }
+
+  .case-answer.is-correct,
+  .case-answer.is-better {
+    padding: 14px 16px;
+    border: 1px solid rgba(105, 208, 181, 0.34);
   }
 }
 
