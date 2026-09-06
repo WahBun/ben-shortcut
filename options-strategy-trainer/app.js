@@ -361,13 +361,6 @@ const termSections = [
         use: "把它当背景变量看：它解释市场弹性，不适合单独当买卖信号。"
       },
       {
-        name: "Gamma Regime",
-        tone: "alert",
-        english: "Amplifier, not predictor / 放大或抑制机制",
-        meaning: "Gamma regime 不是方向预测器。-Gamma 不代表一定涨，也可能加速跌；+Gamma 不代表一定横盘，只是更容易压制波动。",
-        use: "新闻、流动性、0DTE flow、OI（Open Interest）分布变化，都可能迅速改变效果；要和 Context、IV、关键 strike 一起看。"
-      },
-      {
         name: "Positive Dealer Gamma",
         english: "Long gamma dealer book / 正 Gamma 库存",
         meaning: "当 Dealer 偏 Long Gamma，价格上涨时他们往往卖出对冲，价格下跌时往往买入对冲。",
@@ -378,6 +371,13 @@ const termSections = [
         english: "Forced hedging loop / 被动对冲放大",
         meaning: "如果 Dealer 偏 Short Gamma，价格快速冲向大量 Call 行权价时，他们可能被迫买入标的对冲。",
         use: "上涨带来更多买入对冲，买入又推高价格，形成短线加速；但一旦价格停住或到期结构变化，挤压也会退潮。"
+      },
+      {
+        name: "Gamma Regime",
+        tone: "alert",
+        english: "Amplifier, not predictor / 放大或抑制机制",
+        meaning: "Gamma regime 不是方向预测器。-Gamma 不代表一定涨，也可能加速跌；+Gamma 不代表一定横盘，只是更容易压制波动。",
+        use: "新闻、流动性、0DTE flow、OI（Open Interest）分布变化，都可能迅速改变效果；要和 Context、IV、关键 strike 一起看。"
       }
     ]
   },
