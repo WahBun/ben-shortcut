@@ -54,8 +54,7 @@ const strategies = {
     avoid: "IV 已经很高、只小幅看涨，或时间不站在你这边时，不适合裸买 Call。",
     greeks: { Delta: "+", Gamma: "+", Theta: "-", Vega: "+" },
     risk: "Defined risk",
-    notes: ["最大亏损是权利金。", "需要方向和时间都配合。", "低 IV 环境更友好。"],
-    payoff: "M18 62 L56 62 L92 24"
+    notes: ["最大亏损是权利金。", "需要方向和时间都配合。", "低 IV 环境更友好。"]
   },
   bullCallSpread: {
     name: "牛市看涨价差",
@@ -72,8 +71,7 @@ const strategies = {
     avoid: "如果你预期会大幅突破上方行权价，价差会限制最大收益。",
     greeks: { Delta: "+", Gamma: "+/0", Theta: "-/0", Vega: "+/0" },
     risk: "Defined risk",
-    notes: ["上涨空间被封顶。", "比单买 Call 更抗 IV 回落。", "适合有明确目标价。"],
-    payoff: "M18 62 L44 62 L76 30 L96 30"
+    notes: ["上涨空间被封顶。", "比单买 Call 更抗 IV 回落。", "适合有明确目标价。"]
   },
   bullPutSpread: {
     name: "牛市认沽信用价差",
@@ -90,8 +88,7 @@ const strategies = {
     avoid: "如果你认为标的可能快速跌破卖出 Put，信用价差会很难管理。",
     greeks: { Delta: "+", Gamma: "-", Theta: "+", Vega: "-" },
     risk: "Defined risk",
-    notes: ["最大亏损由价差宽度减去权利金决定。", "更像是在卖一个不会跌破的观点。", "高 IV 时权利金更充足。"],
-    payoff: "M18 28 L42 58 L96 58"
+    notes: ["最大亏损由价差宽度减去权利金决定。", "更像是在卖一个不会跌破的观点。", "高 IV 时权利金更充足。"]
   },
   cashSecuredPut: {
     name: "现金担保卖出认沽",
@@ -108,8 +105,7 @@ const strategies = {
     avoid: "如果你不愿意接货，或标的基本面可能快速恶化，不该用这个结构。",
     greeks: { Delta: "+", Gamma: "-", Theta: "+", Vega: "-" },
     risk: "Assignment risk",
-    notes: ["需要预留足够现金。", "下跌时可能以行权价买入股票。", "更适合你本来就想拥有的标的。"],
-    payoff: "M18 25 L48 58 L96 58"
+    notes: ["需要预留足够现金。", "下跌时可能以行权价买入股票。", "更适合你本来就想拥有的标的。"]
   },
   longPut: {
     name: "买入看跌期权",
@@ -126,8 +122,7 @@ const strategies = {
     avoid: "IV 高或只是温和看跌时，权利金成本可能吞掉判断优势。",
     greeks: { Delta: "-", Gamma: "+", Theta: "-", Vega: "+" },
     risk: "Defined risk",
-    notes: ["最大亏损是权利金。", "方向、速度和时间都重要。", "也可作为短期保护。"],
-    payoff: "M18 24 L54 62 L94 62"
+    notes: ["最大亏损是权利金。", "方向、速度和时间都重要。", "也可作为短期保护。"]
   },
   bearPutSpread: {
     name: "熊市看跌价差",
@@ -144,8 +139,7 @@ const strategies = {
     avoid: "如果你预期会暴跌，价差会限制下方收益。",
     greeks: { Delta: "-", Gamma: "+/0", Theta: "-/0", Vega: "+/0" },
     risk: "Defined risk",
-    notes: ["收益和亏损都被限定。", "适合有明确下跌目标。", "比单买 Put 更抗高 IV。"],
-    payoff: "M18 30 L46 30 L78 62 L96 62"
+    notes: ["收益和亏损都被限定。", "适合有明确下跌目标。", "比单买 Put 更抗高 IV。"]
   },
   bearCallSpread: {
     name: "熊市看涨信用价差",
@@ -162,8 +156,7 @@ const strategies = {
     avoid: "如果标的可能快速突破卖出 Call，亏损会放大到价差上限。",
     greeks: { Delta: "-", Gamma: "-", Theta: "+", Vega: "-" },
     risk: "Defined risk",
-    notes: ["最大亏损由价差宽度减去权利金决定。", "更适合阻力位清晰的场景。", "需要提前设置止损或调整规则。"],
-    payoff: "M18 58 L70 58 L96 28"
+    notes: ["最大亏损由价差宽度减去权利金决定。", "更适合阻力位清晰的场景。", "需要提前设置止损或调整规则。"]
   },
   protectivePut: {
     name: "保护性认沽",
@@ -180,8 +173,7 @@ const strategies = {
     avoid: "如果 IV 很高且只是轻微担心，保险费可能过贵。",
     greeks: { Delta: "+/0", Gamma: "+", Theta: "-", Vega: "+" },
     risk: "Premium risk",
-    notes: ["保护越近，成本越高。", "不改变你持有正股的上行空间。", "适合事件前或趋势破位前。"],
-    payoff: "M18 58 L38 58 L92 24"
+    notes: ["保护越近，成本越高。", "不改变你持有正股的上行空间。", "适合事件前或趋势破位前。"]
   },
   collar: {
     name: "领口策略",
@@ -198,8 +190,7 @@ const strategies = {
     avoid: "如果你不愿意牺牲大涨空间，就不适合卖出上方 Call。",
     greeks: { Delta: "+/0", Gamma: "0", Theta: "+/0", Vega: "-/0" },
     risk: "Capped range",
-    notes: ["下方有保护，上方收益被封顶。", "常用于保护已有利润。", "Call 收入可抵消 Put 成本。"],
-    payoff: "M18 56 L40 56 L78 30 L96 30"
+    notes: ["下方有保护，上方收益被封顶。", "常用于保护已有利润。", "Call 收入可抵消 Put 成本。"]
   },
   coveredCall: {
     name: "备兑看涨",
@@ -216,8 +207,7 @@ const strategies = {
     avoid: "如果你不愿意在行权价卖出股票，或预期会急涨，不适合备兑。",
     greeks: { Delta: "+", Gamma: "-", Theta: "+", Vega: "-" },
     risk: "Capped upside",
-    notes: ["需要持有正股。", "收取权利金但牺牲部分上行。", "IV 高时收入更好。"],
-    payoff: "M18 62 L72 30 L96 30"
+    notes: ["需要持有正股。", "收取权利金但牺牲部分上行。", "IV 高时收入更好。"]
   },
   ironCondor: {
     name: "铁鹰",
@@ -234,8 +224,7 @@ const strategies = {
     avoid: "如果你预期会出现单边大波动，铁鹰容易被突破。",
     greeks: { Delta: "0", Gamma: "-", Theta: "+", Vega: "-" },
     risk: "Defined risk",
-    notes: ["核心是判断价格会留在区间内。", "风险有限但需要管理突破。", "高 IV 收入更有吸引力。"],
-    payoff: "M18 28 L36 58 L76 58 L94 28"
+    notes: ["核心是判断价格会留在区间内。", "风险有限但需要管理突破。", "高 IV 收入更有吸引力。"]
   },
   calendar: {
     name: "日历价差",
@@ -252,8 +241,7 @@ const strategies = {
     avoid: "如果价格可能迅速远离中心行权价，日历价差会失去优势。",
     greeks: { Delta: "0/+", Gamma: "-", Theta: "+", Vega: "+" },
     risk: "Defined risk",
-    notes: ["更依赖价格停留在附近。", "受期限结构影响明显。", "需要关注近月到期后的处理。"],
-    payoff: "M18 62 C38 28 72 28 94 62"
+    notes: ["更依赖价格停留在附近。", "受期限结构影响明显。", "需要关注近月到期后的处理。"]
   },
   longStraddle: {
     name: "买入跨式",
@@ -270,8 +258,137 @@ const strategies = {
     avoid: "如果 IV 已经很高或预期只是小幅震荡，时间损耗会很重。",
     greeks: { Delta: "0", Gamma: "+", Theta: "-", Vega: "+" },
     risk: "Defined risk",
-    notes: ["需要足够大的波动来覆盖权利金。", "方向不重要，幅度很重要。", "事件后 IV 回落是主要风险。"],
-    payoff: "M18 24 L56 62 L94 24"
+    notes: ["需要足够大的波动来覆盖权利金。", "方向不重要，幅度很重要。", "事件后 IV 回落是主要风险。"]
+  }
+};
+
+const payoffDiagrams = {
+  longCall: {
+    title: "Long Call 到期盈亏",
+    path: "M48 162 L132 162 L276 52",
+    markers: [
+      { type: "loss", x: 74, y: 162, label: "最大亏损 = 支付的权利金", tx: 92, ty: 178, anchor: "start" },
+      { type: "strike", x: 132, y: 162, label: "Call 行权价", tx: 132, ty: 198, guide: true },
+      { type: "be", x: 190, y: 118, label: "Breakeven = 行权价 + 权利金", tx: 248, ty: 104, anchor: "end" },
+      { type: "profit", x: 246, y: 75, label: "价格再往上才是利润", tx: 270, ty: 62, anchor: "end" }
+    ]
+  },
+  bullCallSpread: {
+    title: "Bull Call Debit Spread 到期盈亏",
+    path: "M48 162 L116 162 L202 72 L282 72",
+    markers: [
+      { type: "loss", x: 72, y: 162, label: "最大亏损 = 净支出的权利金", tx: 84, ty: 178, anchor: "start" },
+      { type: "strike", x: 116, y: 162, label: "买入较低 Call", tx: 116, ty: 198, guide: true },
+      { type: "be", x: 158, y: 118, label: "Breakeven", tx: 158, ty: 104 },
+      { type: "profit", x: 202, y: 72, label: ["卖出较高 Call", "最大盈利 = Spread - 净支出"], tx: 292, ty: 48, anchor: "end", guide: true }
+    ]
+  },
+  bullPutSpread: {
+    title: "Bull Put Credit Spread 到期盈亏",
+    path: "M48 162 L116 162 L202 72 L282 72",
+    markers: [
+      { type: "loss", x: 74, y: 162, label: "最大亏损 = Spread - 净权利金", tx: 62, ty: 144, anchor: "start" },
+      { type: "guard", x: 116, y: 162, label: "买入更低 Put", tx: 116, ty: 198, guide: true },
+      { type: "be", x: 158, y: 118, label: "Breakeven", tx: 158, ty: 104 },
+      { type: "profit", x: 202, y: 72, label: ["卖出较高 Put", "最大盈利 = 净权利金"], tx: 292, ty: 48, anchor: "end", guide: true }
+    ]
+  },
+  cashSecuredPut: {
+    title: "Cash-Secured Put 到期盈亏",
+    path: "M48 174 L202 72 L282 72",
+    markers: [
+      { type: "loss", x: 78, y: 154, label: "被指派后继续下跌仍亏", tx: 64, ty: 178, anchor: "start" },
+      { type: "be", x: 132, y: 118, label: "Breakeven = 行权价 - 权利金", tx: 238, ty: 104, anchor: "end" },
+      { type: "profit", x: 202, y: 72, label: ["卖出 Put", "保留权利金"], tx: 214, ty: 50, anchor: "start", guide: true }
+    ]
+  },
+  longPut: {
+    title: "Long Put 到期盈亏",
+    path: "M48 52 L202 162 L282 162",
+    markers: [
+      { type: "profit", x: 72, y: 70, label: "价格再往下才是利润", tx: 62, ty: 50, anchor: "start" },
+      { type: "be", x: 132, y: 118, label: "Breakeven = 行权价 - 权利金", tx: 72, ty: 104, anchor: "start" },
+      { type: "strike", x: 202, y: 162, label: "Put 行权价", tx: 202, ty: 198, guide: true },
+      { type: "loss", x: 248, y: 162, label: "最大亏损 = 支付的权利金", tx: 258, ty: 178, anchor: "end" }
+    ]
+  },
+  bearPutSpread: {
+    title: "Bear Put Debit Spread 到期盈亏",
+    path: "M48 72 L116 72 L202 162 L282 162",
+    markers: [
+      { type: "profit", x: 74, y: 72, label: "最大盈利 = Spread - 净支出", tx: 62, ty: 50, anchor: "start" },
+      { type: "guard", x: 116, y: 72, label: "卖出较低 Put", tx: 116, ty: 42, guide: true },
+      { type: "be", x: 158, y: 118, label: "Breakeven", tx: 158, ty: 104 },
+      { type: "strike", x: 202, y: 162, label: ["买入较高 Put", "最大亏损 = 净支出的权利金"], tx: 292, ty: 184, anchor: "end", guide: true }
+    ]
+  },
+  bearCallSpread: {
+    title: "Bear Call Credit Spread 到期盈亏",
+    path: "M48 72 L116 72 L202 162 L282 162",
+    markers: [
+      { type: "profit", x: 74, y: 72, label: "最大盈利 = 净权利金", tx: 62, ty: 50, anchor: "start" },
+      { type: "profit", x: 116, y: 72, label: "卖出较低 Call", tx: 116, ty: 42, guide: true },
+      { type: "be", x: 158, y: 118, label: "Breakeven", tx: 158, ty: 104 },
+      { type: "guard", x: 202, y: 162, label: ["买入更高 Call", "最大亏损 = Spread - 净权利金"], tx: 292, ty: 184, anchor: "end", guide: true }
+    ]
+  },
+  protectivePut: {
+    title: "Protective Put 到期盈亏",
+    path: "M48 162 L116 162 L282 52",
+    markers: [
+      { type: "guard", x: 116, y: 162, label: ["买入 Put", "提供下方保护"], tx: 116, ty: 188, guide: true },
+      { type: "be", x: 184, y: 118, label: "Breakeven", tx: 184, ty: 104 },
+      { type: "profit", x: 246, y: 76, label: "正股继续参与上涨", tx: 270, ty: 62, anchor: "end" }
+    ]
+  },
+  collar: {
+    title: "Collar 到期盈亏",
+    path: "M48 162 L116 162 L202 72 L282 72",
+    markers: [
+      { type: "guard", x: 116, y: 162, label: ["买入 OTM Put", "下方保护"], tx: 116, ty: 198, guide: true },
+      { type: "be", x: 158, y: 118, label: "Breakeven", tx: 158, ty: 104 },
+      { type: "profit", x: 202, y: 72, label: ["卖出 OTM Call", "上方收益被封顶"], tx: 292, ty: 50, anchor: "end", guide: true }
+    ]
+  },
+  coveredCall: {
+    title: "Covered Call 到期盈亏",
+    path: "M48 174 L202 72 L282 72",
+    markers: [
+      { type: "loss", x: 78, y: 154, label: "最大风险仍来自正股下跌", tx: 64, ty: 178, anchor: "start" },
+      { type: "be", x: 132, y: 118, label: "Breakeven", tx: 132, ty: 104 },
+      { type: "profit", x: 202, y: 72, label: ["卖出 OTM Call", "上方收益被封顶"], tx: 292, ty: 50, anchor: "end", guide: true }
+    ]
+  },
+  ironCondor: {
+    title: "Iron Condor 到期盈亏",
+    path: "M48 162 L78 162 L126 72 L204 72 L252 162 L282 162",
+    markers: [
+      { type: "loss", x: 78, y: 162, label: "跌破左侧价差", tx: 60, ty: 182, anchor: "start", guide: true },
+      { type: "profit", x: 164, y: 72, label: "区间内最大盈利", tx: 164, ty: 52 },
+      { type: "be", x: 104, y: 118, label: "BE", tx: 104, ty: 104 },
+      { type: "be", x: 226, y: 118, label: "BE", tx: 226, ty: 104 },
+      { type: "loss", x: 252, y: 162, label: "涨破右侧价差", tx: 260, ty: 182, anchor: "end", guide: true }
+    ]
+  },
+  calendar: {
+    title: "Calendar Spread 近月到期形状",
+    path: "M48 154 L104 118 L160 68 L216 118 L272 154",
+    markers: [
+      { type: "be", x: 104, y: 118, label: "BE", tx: 104, ty: 104 },
+      { type: "profit", x: 160, y: 68, label: ["价格靠近执行价", "近月衰减最快"], tx: 160, ty: 42, guide: true },
+      { type: "be", x: 216, y: 118, label: "BE", tx: 216, ty: 104 },
+      { type: "loss", x: 258, y: 150, label: "价格离开中心太远", tx: 264, ty: 172, anchor: "end" }
+    ]
+  },
+  longStraddle: {
+    title: "Long Straddle 到期盈亏",
+    path: "M48 54 L160 162 L272 54",
+    markers: [
+      { type: "be", x: 104, y: 118, label: "BE", tx: 104, ty: 104 },
+      { type: "strike", x: 160, y: 162, label: ["ATM 中心", "最大亏损 = 双边权利金"], tx: 160, ty: 190, guide: true },
+      { type: "be", x: 216, y: 118, label: "BE", tx: 216, ty: 104 },
+      { type: "profit", x: 248, y: 78, label: "大波动覆盖权利金后盈利", tx: 266, ty: 62, anchor: "end" }
+    ]
   }
 };
 
@@ -1101,7 +1218,7 @@ function strategyCard(key, options = {}) {
       <details>
         <summary>展开细节</summary>
         <div class="detail-grid">
-          ${payoffSvg(strategy)}
+          ${payoffSvg(key, strategy)}
           <ul class="notes">
             ${strategy.notes.map((note) => `<li>${note}</li>`).join("")}
           </ul>
@@ -1117,12 +1234,44 @@ function greekTags(greeks) {
     .join("");
 }
 
-function payoffSvg(strategy) {
+function payoffSvg(key, strategy) {
+  const diagram = payoffDiagrams[key];
+  const zeroY = 118;
+  const labels = diagram.markers
+    .map((marker) => {
+      const lines = Array.isArray(marker.label) ? marker.label : [marker.label];
+      return `
+        <text class="payoff-label payoff-label-${marker.type}" x="${marker.tx}" y="${marker.ty}" text-anchor="${marker.anchor || "middle"}">
+          ${lines.map((line, index) => `<tspan x="${marker.tx}" dy="${index ? 12 : 0}">${line}</tspan>`).join("")}
+        </text>
+      `;
+    })
+    .join("");
+  const guides = diagram.markers
+    .filter((marker) => marker.guide)
+    .map(
+      (marker) => `
+        <line class="marker-guide" x1="${marker.x}" y1="${Math.min(marker.y, zeroY)}" x2="${marker.x}" y2="${Math.max(marker.y, zeroY)}" />
+      `
+    )
+    .join("");
+  const markers = diagram.markers
+    .map((marker) => `<circle class="payoff-marker marker-${marker.type}" cx="${marker.x}" cy="${marker.y}" r="5" />`)
+    .join("");
+
   return `
-    <svg class="payoff" viewBox="0 0 112 86" aria-label="${strategy.name} 到期损益示意">
-      <line class="axis" x1="14" y1="62" x2="100" y2="62" />
-      <line class="axis" x1="18" y1="16" x2="18" y2="72" />
-      <path class="curve" d="${strategy.payoff}" />
+    <svg class="payoff" viewBox="0 0 320 210" aria-label="${strategy.name} 到期损益示意">
+      <text class="chart-title" x="160" y="22" text-anchor="middle">${diagram.title}</text>
+      <line class="axis" x1="44" y1="${zeroY}" x2="288" y2="${zeroY}" />
+      <path class="axis axis-arrow" d="M288 ${zeroY} l-8 -5 M288 ${zeroY} l-8 5" />
+      <line class="axis" x1="48" y1="34" x2="48" y2="176" />
+      <text class="axis-label" x="18" y="43">+ 盈利</text>
+      <text class="axis-label" x="18" y="178">- 亏损</text>
+      <text class="axis-label price-label" x="224" y="136">标的价格 &gt;</text>
+      ${guides}
+      <path class="curve" d="${diagram.path}" />
+      ${markers}
+      ${labels}
     </svg>
   `;
 }
