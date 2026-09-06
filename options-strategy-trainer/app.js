@@ -1440,6 +1440,7 @@ function answerCase(button) {
   card.querySelectorAll(".case-option").forEach((option) => {
     option.classList.remove("is-right", "is-wrong");
     if (option.dataset.answer === item.answer) option.classList.add("is-right");
+    if (!isRight && option === button) option.classList.add("is-wrong");
   });
 
   const answerPanel = card.querySelector(".case-answer");

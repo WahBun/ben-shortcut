@@ -1064,9 +1064,9 @@ summary {
 }
 
 .case-option.is-wrong {
-  border-color: var(--line-strong);
-  background: var(--panel-soft);
-  color: var(--muted);
+  border-color: rgba(255, 142, 142, 0.55);
+  background: rgba(255, 142, 142, 0.12);
+  color: var(--bear);
 }
 
 .case-answer {
