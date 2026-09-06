@@ -531,7 +531,7 @@ h3 {
 
 .result-empty {
   display: grid;
-  min-height: 320px;
+  min-height: 260px;
   align-content: center;
 }
 
@@ -1130,6 +1130,42 @@ summary {
     padding-top: 16px;
     border-top: 1px solid var(--line);
     border-left: 0;
+  }
+}
+
+@media (min-width: 881px) {
+  #guide .context-panel,
+  #guide .workspace {
+    max-width: 990px;
+  }
+
+  #guide .context-heading {
+    display: grid;
+    justify-content: start;
+  }
+
+  #guide .context-heading p:last-child {
+    max-width: 620px;
+  }
+
+  #guide .pa-context-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #guide .pa-context-group:nth-child(3) {
+    grid-column: 1 / -1;
+  }
+
+  #guide .pa-context-group:nth-child(3) .pa-context-group-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  #guide .workspace {
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 388px);
+  }
+
+  #guide .result-shell {
+    min-height: 300px;
   }
 }
 
