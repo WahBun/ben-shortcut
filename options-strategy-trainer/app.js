@@ -687,7 +687,7 @@ const paContextGroups = [
   {
     title: "TR",
     subtitle: "Trading Range",
-    contextIds: ["tr-low", "tr-high", "tr-calendar"]
+    contextIds: ["tr-high", "tr-calendar", "tr-low"]
   }
 ];
 
