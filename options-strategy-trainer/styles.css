@@ -787,6 +787,10 @@ summary {
   stroke-width: 3.5px;
 }
 
+.payoff .payoff-label-line {
+  font-size: inherit;
+}
+
 .payoff .payoff-label-profit {
   fill: var(--teal);
 }
@@ -797,11 +801,18 @@ summary {
 
 .payoff .payoff-label-be {
   fill: var(--amber);
+  font-size: 10.8px;
 }
 
 .payoff .payoff-label-strike,
 .payoff .payoff-label-guard {
   fill: var(--ink);
+}
+
+.payoff .payoff-label-action {
+  fill: var(--ink);
+  font-size: 9.3px;
+  font-weight: 840;
 }
 
 .payoff .payoff-marker {

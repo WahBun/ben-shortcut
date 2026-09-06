@@ -268,7 +268,7 @@ const payoffDiagrams = {
     path: "M48 162 L132 162 L276 52",
     markers: [
       { type: "loss", x: 74, y: 162, label: "最大亏损 = 支付的权利金", tx: 62, ty: 146, anchor: "start" },
-      { type: "strike", x: 132, y: 162, label: "Call 行权价", tx: 132, ty: 198, guide: true },
+      { type: "strike", x: 132, y: 162, label: "Call 行权价", tx: 132, ty: 190, guide: true },
       { type: "be", x: 190, y: 118, label: "BE", tx: 190, ty: 106 },
       { type: "profit", x: 246, y: 75, label: "价格再往上才是利润", tx: 286, ty: 58, anchor: "end" }
     ]
@@ -277,20 +277,20 @@ const payoffDiagrams = {
     title: "Bull Call Debit Spread 到期盈亏",
     path: "M48 162 L116 162 L202 72 L282 72",
     markers: [
-      { type: "loss", x: 72, y: 162, label: "最大亏损 = 净支出", tx: 62, ty: 146, anchor: "start" },
-      { type: "strike", x: 116, y: 162, label: "买入较低 Call", tx: 116, ty: 198, guide: true },
+      { type: "loss", x: 72, y: 162, label: ["最大亏损", "净支出"], tx: 62, ty: 136, anchor: "start" },
+      { type: "strike", x: 116, y: 162, label: "买入较低 Call", tx: 116, ty: 190, guide: true },
       { type: "be", x: 158, y: 118, label: "BE", tx: 158, ty: 106 },
-      { type: "profit", x: 202, y: 72, label: ["卖出较高 Call", "最大盈利 = Spread - 净支出"], tx: 282, ty: 88, anchor: "end", guide: true }
+      { type: "profit", x: 202, y: 72, label: ["卖出较高 Call", "最大盈利", "Spread - 净支出"], tx: 282, ty: 84, anchor: "end", guide: true }
     ]
   },
   bullPutSpread: {
     title: "Bull Put Credit Spread 到期盈亏",
     path: "M48 162 L116 162 L202 72 L282 72",
     markers: [
-      { type: "loss", x: 74, y: 162, label: "最大亏损 = Spread - 净权利金", tx: 62, ty: 144, anchor: "start" },
-      { type: "guard", x: 116, y: 162, label: "买入更低 Put", tx: 116, ty: 198, guide: true },
+      { type: "loss", x: 74, y: 162, label: ["最大亏损", "Spread - 净权利金"], tx: 62, ty: 136, anchor: "start" },
+      { type: "guard", x: 116, y: 162, label: "买入更低 Put", tx: 116, ty: 190, guide: true },
       { type: "be", x: 158, y: 118, label: "BE", tx: 158, ty: 106 },
-      { type: "profit", x: 202, y: 72, label: ["卖出较高 Put", "最大盈利 = 净权利金"], tx: 282, ty: 88, anchor: "end", guide: true }
+      { type: "profit", x: 202, y: 72, label: ["卖出较高 Put", "最大盈利", "净权利金"], tx: 282, ty: 84, anchor: "end", guide: true }
     ]
   },
   cashSecuredPut: {
@@ -308,7 +308,7 @@ const payoffDiagrams = {
     markers: [
       { type: "profit", x: 72, y: 70, label: "价格再往下才是利润", tx: 62, ty: 86, anchor: "start" },
       { type: "be", x: 132, y: 118, label: "BE", tx: 132, ty: 106 },
-      { type: "strike", x: 202, y: 162, label: "Put 行权价", tx: 202, ty: 198, guide: true },
+      { type: "strike", x: 202, y: 162, label: "Put 行权价", tx: 202, ty: 190, guide: true },
       { type: "loss", x: 248, y: 162, label: "最大亏损 = 支付的权利金", tx: 282, ty: 146, anchor: "end" }
     ]
   },
@@ -316,27 +316,27 @@ const payoffDiagrams = {
     title: "Bear Put Debit Spread 到期盈亏",
     path: "M48 72 L116 72 L202 162 L282 162",
     markers: [
-      { type: "profit", x: 74, y: 72, label: "最大盈利 = Spread - 净支出", tx: 62, ty: 96, anchor: "start" },
+      { type: "profit", x: 74, y: 72, label: ["最大盈利", "Spread - 净支出"], tx: 62, ty: 90, anchor: "start" },
       { type: "guard", x: 116, y: 72, label: "卖出较低 Put", tx: 116, ty: 48, guide: true },
       { type: "be", x: 158, y: 118, label: "BE", tx: 158, ty: 106 },
-      { type: "strike", x: 202, y: 162, label: ["买入较高 Put", "最大亏损 = 净支出"], tx: 282, ty: 142, anchor: "end", guide: true }
+      { type: "strike", x: 202, y: 162, label: ["买入较高 Put", "最大亏损", "净支出"], tx: 282, ty: 128, anchor: "end", guide: true }
     ]
   },
   bearCallSpread: {
     title: "Bear Call Credit Spread 到期盈亏",
     path: "M48 72 L116 72 L202 162 L282 162",
     markers: [
-      { type: "profit", x: 74, y: 72, label: "最大盈利 = 净权利金", tx: 62, ty: 96, anchor: "start" },
+      { type: "profit", x: 74, y: 72, label: ["最大盈利", "净权利金"], tx: 62, ty: 90, anchor: "start" },
       { type: "profit", x: 116, y: 72, label: "卖出较低 Call", tx: 116, ty: 48, guide: true },
       { type: "be", x: 158, y: 118, label: "BE", tx: 158, ty: 106 },
-      { type: "guard", x: 202, y: 162, label: ["买入更高 Call", "最大亏损 = Spread - 净权利金"], tx: 282, ty: 142, anchor: "end", guide: true }
+      { type: "guard", x: 202, y: 162, label: ["买入更高 Call", "最大亏损", "Spread - 净权利金"], tx: 282, ty: 128, anchor: "end", guide: true }
     ]
   },
   protectivePut: {
     title: "Protective Put 到期盈亏",
     path: "M48 162 L116 162 L282 52",
     markers: [
-      { type: "guard", x: 116, y: 162, label: ["买入 Put", "提供下方保护"], tx: 116, ty: 188, guide: true },
+      { type: "guard", x: 116, y: 162, label: ["买入 Put", "提供下方保护"], tx: 116, ty: 180, guide: true },
       { type: "be", x: 184, y: 118, label: "BE", tx: 184, ty: 106 },
       { type: "profit", x: 246, y: 76, label: "正股继续参与上涨", tx: 286, ty: 58, anchor: "end" }
     ]
@@ -345,7 +345,7 @@ const payoffDiagrams = {
     title: "Collar 到期盈亏",
     path: "M48 162 L116 162 L202 72 L282 72",
     markers: [
-      { type: "guard", x: 116, y: 162, label: ["买入 OTM Put", "下方保护"], tx: 116, ty: 198, guide: true },
+      { type: "guard", x: 116, y: 162, label: ["买入 OTM Put", "下方保护"], tx: 116, ty: 180, guide: true },
       { type: "be", x: 158, y: 118, label: "BE", tx: 158, ty: 106 },
       { type: "profit", x: 202, y: 72, label: ["卖出 OTM Call", "上方收益被封顶"], tx: 282, ty: 88, anchor: "end", guide: true }
     ]
@@ -385,7 +385,7 @@ const payoffDiagrams = {
     path: "M48 54 L160 162 L272 54",
     markers: [
       { type: "be", x: 104, y: 118, label: "BE", tx: 104, ty: 106 },
-      { type: "strike", x: 160, y: 162, label: ["ATM 中心", "最大亏损 = 双边权利金"], tx: 160, ty: 190, guide: true },
+      { type: "strike", x: 160, y: 162, label: ["ATM 中心", "最大亏损 = 双边权利金"], tx: 160, ty: 180, guide: true },
       { type: "be", x: 216, y: 118, label: "BE", tx: 216, ty: 106 },
       { type: "profit", x: 248, y: 78, label: "大波动覆盖权利金后盈利", tx: 286, ty: 58, anchor: "end" }
     ]
@@ -1234,15 +1234,33 @@ function greekTags(greeks) {
     .join("");
 }
 
+function payoffLabelTone(line, fallbackTone, previousTone = "") {
+  if (line === "BE") return "be";
+  if (/^(净支出|净权利金|Spread - .+)$/.test(line) && ["loss", "profit"].includes(previousTone)) {
+    return previousTone;
+  }
+  if (/最大亏损|亏损|跌破|涨破|离开/.test(line)) return "loss";
+  if (/最大盈利|利润|保留权利金|继续参与上涨|收益被封顶|近月衰减|覆盖权利金/.test(line)) return "profit";
+  if (/买入|卖出|行权价|ATM/.test(line)) return "action";
+  return fallbackTone;
+}
+
 function payoffSvg(key, strategy) {
   const diagram = payoffDiagrams[key];
   const zeroY = 118;
   const labels = diagram.markers
     .map((marker) => {
       const lines = Array.isArray(marker.label) ? marker.label : [marker.label];
+      let previousTone = "";
       return `
         <text class="payoff-label payoff-label-${marker.type}" x="${marker.tx}" y="${marker.ty}" text-anchor="${marker.anchor || "middle"}">
-          ${lines.map((line, index) => `<tspan x="${marker.tx}" dy="${index ? 12 : 0}">${line}</tspan>`).join("")}
+          ${lines
+            .map((line, index) => {
+              const tone = payoffLabelTone(line, marker.type, previousTone);
+              previousTone = tone;
+              return `<tspan class="payoff-label-line payoff-label-${tone}" x="${marker.tx}" dy="${index ? 12 : 0}">${line}</tspan>`;
+            })
+            .join("")}
         </text>
       `;
     })
@@ -1264,9 +1282,9 @@ function payoffSvg(key, strategy) {
       <text class="chart-title" x="160" y="22" text-anchor="middle">${diagram.title}</text>
       <line class="axis" x1="44" y1="${zeroY}" x2="288" y2="${zeroY}" />
       <line class="axis" x1="48" y1="34" x2="48" y2="176" />
-      <text class="axis-label" x="18" y="43">+ 盈利</text>
-      <text class="axis-label" x="18" y="178">- 亏损</text>
-      <text class="axis-label price-label" x="286" y="128" text-anchor="end">标的价格</text>
+      <text class="axis-label" x="39" y="43" text-anchor="end">+ 盈利</text>
+      <text class="axis-label" x="39" y="178" text-anchor="end">- 亏损</text>
+      <text class="axis-label price-label" x="286" y="110" text-anchor="end">标的价格</text>
       ${guides}
       <path class="curve" d="${diagram.path}" />
       ${markers}
