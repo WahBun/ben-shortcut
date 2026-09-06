@@ -988,8 +988,9 @@ summary {
   scroll-margin-top: 24px;
 }
 
-.case-heading-actions {
+.case-reset-actions {
   display: flex;
+  justify-content: center;
   margin-top: 18px;
 }
 
