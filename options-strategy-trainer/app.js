@@ -402,12 +402,6 @@ const termSections = [
         english: "Volatility crush / 波动率塌缩",
         meaning: "事件落地后，IV 快速下降，期权突然变便宜。",
         use: "财报后常见；方向看对但 IV 掉太多，买方也可能不赚钱。"
-      },
-      {
-        name: "DTE",
-        english: "Days to Expiration / 到期天数",
-        meaning: "距离到期还有多少天。",
-        use: "DTE 越短，Theta 和 Gamma 的体感越强，容错通常越低。"
       }
     ]
   },
@@ -468,6 +462,18 @@ const termSections = [
         english: "Spread / 价差",
         meaning: "同时买一条腿、卖一条腿，把收益和风险都框起来。",
         use: "Spread 宽度就是两个行权价的距离，是很多价差策略的盈亏上限基础。"
+      }
+    ]
+  },
+  {
+    title: "Trade Management",
+    intro: "管理不是拖延，而是重新评估。",
+    terms: [
+      {
+        name: "DTE",
+        english: "Days to Expiration / 到期天数",
+        meaning: "距离到期还有多少天；越靠近到期，Theta、Gamma 和跳空风险的体感越强。",
+        use: "DTE 越短，越不能只盯着剩余 Premium，要重新比较剩余收益和继续持仓的风险。"
       },
       {
         name: "Breakeven",
@@ -480,6 +486,18 @@ const termSections = [
         english: "Assignment / 被指派",
         meaning: "你卖出的期权被买方行权，可能被要求买入或卖出正股。",
         use: "卖 Put 前先问自己愿不愿意接货；卖 Call 前先问自己愿不愿意卖股。"
+      },
+      {
+        name: "Credit Spread",
+        english: "Remaining premium vs risk / 剩余收益与风险再比较",
+        meaning: "信用价差如果已经赚到大部分 Premium，就要重新比较：剩余收益，值不值得继续承担 Gamma / Gap Risk？",
+        use: "如果剩余利润很小，但到期、事件或突破风险变大，平仓不是胆小，是重新定价风险。"
+      },
+      {
+        name: "Roll",
+        english: "Close and reopen / 平旧仓并建新仓",
+        meaning: "Roll = 平掉旧仓 + 建立新仓。核心不是“救仓”，而是重新问：如果现在没有这笔仓位，我还会不会开新的这一笔？",
+        use: "只有新仓仍符合当前 Context、IV、目标和风险边界，Roll 才是管理；否则只是拖延。"
       }
     ]
   }
