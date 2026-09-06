@@ -25,7 +25,7 @@
     </script>
     <link rel="icon" href="./app-icon.svg" />
     <link rel="apple-touch-icon" href="./app-icon.svg" />
-    <link rel="stylesheet" href="./styles.css?v=hub-v2" />
+    <link rel="stylesheet" href="./styles.css?v=hub-v3" />
   </head>
   <body>
     <main class="shell">
@@ -52,7 +52,6 @@
               <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a7.8 7.8 0 1 0 10.5 10.5Z" />
             </svg>
           </span>
-          <span id="theme-toggle-label">黑夜</span>
         </button>
       </header>
 
@@ -84,12 +83,10 @@
       const root = document.documentElement;
       const themeColor = document.getElementById("theme-color");
       const toggle = document.getElementById("theme-toggle");
-      const toggleLabel = document.getElementById("theme-toggle-label");
 
       function applyTheme(theme) {
         root.dataset.theme = theme;
         themeColor.setAttribute("content", theme === "light" ? "#f5f7f5" : "#0f1514");
-        toggleLabel.textContent = theme === "light" ? "白天" : "黑夜";
         toggle.setAttribute(
           "aria-label",
           theme === "light" ? "当前为白天模式，点击切换到黑夜模式" : "当前为黑夜模式，点击切换到白天模式",

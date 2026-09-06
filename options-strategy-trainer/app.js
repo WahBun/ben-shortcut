@@ -21,7 +21,6 @@ function applyTheme(theme) {
   const nextTheme = theme === "light" ? "light" : "dark";
   const isDark = nextTheme === "dark";
   const toggle = document.querySelector("#theme-toggle");
-  const label = document.querySelector("#theme-toggle-label");
   const themeColor = document.querySelector("#theme-color");
 
   document.documentElement.dataset.theme = nextTheme;
@@ -29,7 +28,6 @@ function applyTheme(theme) {
     toggle.setAttribute("aria-label", isDark ? "当前为黑夜模式，点击切换到白天模式" : "当前为白天模式，点击切换到黑夜模式");
     toggle.setAttribute("aria-pressed", String(isDark));
   }
-  if (label) label.textContent = isDark ? "黑夜" : "白天";
   if (themeColor) themeColor.setAttribute("content", isDark ? "#10171b" : "#f5f7f8");
 }
 
