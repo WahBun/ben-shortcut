@@ -19,7 +19,7 @@
         }
       })();
     </script>
-    <link rel="stylesheet" href="styles.css?v=ost-v34" />
+    <link rel="stylesheet" href="styles.css?v=ost-v35" />
   </head>
   <body>
     <div class="shell">
@@ -177,14 +177,17 @@
           <div class="page-heading">
             <p class="kicker">Case Trainer</p>
             <h1 id="cases-title">Case Trainer</h1>
-            <p>每个场景只练一个判断：方向、IV、目标是否匹配。</p>
+            <p>每轮从 15 个场景里抽 8 个，只练一个判断：背景、IV、目标是否匹配。</p>
+            <div class="case-heading-actions">
+              <button class="reset-button case-reset-button" id="case-reset-button" type="button">Reset Cases</button>
+            </div>
           </div>
           <div class="case-list" id="case-list"></div>
         </section>
       </main>
     </div>
 
-    <script src="app.js?v=ost-v34" defer></script>
+    <script src="app.js?v=ost-v35" defer></script>
     <script>
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {

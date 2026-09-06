@@ -266,7 +266,7 @@ h3 {
 }
 
 .intro p:last-child,
-.page-heading p:last-child,
+.page-heading > p:last-of-type,
 .result-empty p:last-child {
   margin-bottom: 0;
   color: var(--muted);
@@ -982,6 +982,19 @@ summary {
 .case-list {
   display: grid;
   gap: 14px;
+}
+
+#cases {
+  scroll-margin-top: 24px;
+}
+
+.case-heading-actions {
+  display: flex;
+  margin-top: 18px;
+}
+
+.case-reset-button {
+  color: var(--ink);
 }
 
 .case-card {

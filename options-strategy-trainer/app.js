@@ -456,11 +456,25 @@ const libraryOrder = [
 
 const cases = [
   {
-    title: "看涨，但 IV Rank 已经 72",
-    prompt: "你认为未来一个月小涨到目标价附近，不需要大涨。",
+    title: "Strong Bull Trend，IV 不贵",
+    prompt: "连续 HH/HL，突破后接受良好，你想直接表达上涨速度。",
+    answer: "longCall",
+    options: ["longCall", "bullPutSpread", "ironCondor"],
+    reason: "强趋势 + 低 IV 时，Long Call 能最直接吃到方向、速度和 Gamma。"
+  },
+  {
+    title: "强看涨，但 IV Rank 已经 72",
+    prompt: "你认为未来一个月会涨到目标价附近，但不需要暴涨。",
     answer: "bullCallSpread",
     options: ["longCall", "bullCallSpread", "cashSecuredPut"],
     reason: "高 IV 下单买 Call 成本高；价差能保留方向，同时卖出一部分贵的波动率。"
+  },
+  {
+    title: "Weak Bull Trend，靠近支撑",
+    prompt: "趋势还偏多，但推进变慢，你认为支撑大概率守得住。",
+    answer: "bullPutSpread",
+    options: ["bullPutSpread", "longCall", "longStraddle"],
+    reason: "弱多不一定要追涨；Bull Put Credit Spread 更像卖一个“别跌破支撑”的观点。"
   },
   {
     title: "愿意更低价格买入正股",
@@ -470,6 +484,34 @@ const cases = [
     reason: "目标不是追涨，而是用卖 Put 把接货价和权利金放在一起考虑。"
   },
   {
+    title: "已有正股，愿意上方卖出",
+    prompt: "你不急着走，但如果涨到目标价，被行权卖掉也能接受。",
+    answer: "coveredCall",
+    options: ["coveredCall", "protectivePut", "longStraddle"],
+    reason: "Covered Call 适合已有正股、温和看涨或横盘，用卖 Call 增加收入。"
+  },
+  {
+    title: "已有正股，想保护利润",
+    prompt: "你想给下方买保险，但也愿意卖掉一部分上方空间来降低成本。",
+    answer: "collar",
+    options: ["protectivePut", "collar", "bearCallSpread"],
+    reason: "Collar = 持有正股 + 买 Put 保护 + 卖 Call 降低保险成本，上下都被框住。"
+  },
+  {
+    title: "已有正股，担心财报下跌",
+    prompt: "你想保住仓位，但短期事件风险很高，也不想卖掉上方空间。",
+    answer: "protectivePut",
+    options: ["coveredCall", "protectivePut", "bullPutSpread"],
+    reason: "Protective Put 是直接买保险；如果愿意牺牲上方空间，再考虑 Collar。"
+  },
+  {
+    title: "Strong Bear Trend，IV 不贵",
+    prompt: "连续 LH/LL，反抽很弱，你想直接表达下跌速度。",
+    answer: "longPut",
+    options: ["longPut", "ironCondor", "cashSecuredPut"],
+    reason: "强空 + 低 IV 时，Long Put 能直接吃到下跌方向和速度。"
+  },
+  {
     title: "看跌但不想支付太贵保护费",
     prompt: "IV 偏高，观点是跌到某个支撑位附近，不是崩盘。",
     answer: "bearPutSpread",
@@ -477,27 +519,51 @@ const cases = [
     reason: "熊市 Put 价差限制收益，但能显著降低高 IV 下的成本。"
   },
   {
-    title: "横盘，高 IV，想收时间价值",
+    title: "Weak Bear Trend，压力清晰",
+    prompt: "下跌变慢，但价格仍在压力位下方，你更想交易“别突破”。",
+    answer: "bearCallSpread",
+    options: ["bearCallSpread", "longCall", "cashSecuredPut"],
+    reason: "Bear Call Credit Spread 更适合温和看跌或不看涨，赚的是上方压力守住。"
+  },
+  {
+    title: "TR，高 IV，想收时间价值",
     prompt: "你认为价格大概率留在一个清晰区间里。",
     answer: "ironCondor",
     options: ["ironCondor", "longStraddle", "protectivePut"],
     reason: "中性 + 高 IV 更适合短波动结构；关键风险是区间被突破。"
   },
   {
-    title: "已有正股，担心财报下跌",
-    prompt: "你想保住仓位，但短期事件风险很高。",
-    answer: "protectivePut",
-    options: ["coveredCall", "protectivePut", "bullPutSpread"],
-    reason: "保护性 Put 是直接买保险；如果愿意牺牲上方空间，再考虑 Collar。"
-  },
-  {
-    title: "低 IV，中性，但预计会大波动",
-    prompt: "方向不确定，核心判断是波动可能被低估。",
+    title: "TR，低 IV，等离开区间",
+    prompt: "价格在区间里压得很紧，方向不确定，但你觉得波动快放大。",
     answer: "longStraddle",
     options: ["longStraddle", "ironCondor", "calendar"],
     reason: "低 IV + 大波动预期是 Long Vol 的场景，买入跨式更贴近这个观点。"
+  },
+  {
+    title: "TR，中部磨，但远月可能动",
+    prompt: "短期大概率还在中心附近消耗，但后面可能有新的方向或事件。",
+    answer: "calendar",
+    options: ["calendar", "longCall", "bearCallSpread"],
+    reason: "Calendar 交易的是现在的时间 vs 未来的时间，核心不只是方向。"
+  },
+  {
+    title: "不看跌，但不想接货",
+    prompt: "你认为价格不太可能跌破支撑，但如果真跌破，你不想买入正股。",
+    answer: "bullPutSpread",
+    options: ["cashSecuredPut", "bullPutSpread", "coveredCall"],
+    reason: "不愿意接货时，Defined Risk 的 Bull Put Spread 比 CSP 更合适。"
+  },
+  {
+    title: "高 IV，但预期只是轻微下跌",
+    prompt: "你不认为会崩盘，只觉得价格短期很难突破上方压力。",
+    answer: "bearCallSpread",
+    options: ["longPut", "bearCallSpread", "longStraddle"],
+    reason: "轻微看跌 + 高 IV 更适合卖上方 Call 价差，而不是花大钱追 Put。"
   }
 ];
+
+const CASE_PRACTICE_SIZE = 8;
+let activeCases = [];
 
 const paContexts = [
   {
@@ -995,6 +1061,18 @@ function scrollRecommendationIntoView() {
   });
 }
 
+function scrollCasesIntoView() {
+  const casesView = document.querySelector("#cases");
+  if (!casesView) return;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  requestAnimationFrame(() => {
+    casesView.scrollIntoView({
+      behavior: reduceMotion ? "auto" : "smooth",
+      block: "start"
+    });
+  });
+}
+
 function applyPaContext(id) {
   const context = findPaContext(id);
   if (!context) return;
@@ -1095,7 +1173,8 @@ function renderLibrary() {
 }
 
 function renderCases() {
-  document.querySelector("#case-list").innerHTML = cases
+  if (!activeCases.length) drawPracticeCases();
+  document.querySelector("#case-list").innerHTML = activeCases
     .map(
       (item, index) => `
         <article class="case-card" data-case="${index}">
@@ -1124,9 +1203,24 @@ function renderCases() {
     .join("");
 }
 
+function drawPracticeCases() {
+  const shuffled = [...cases];
+  for (let index = shuffled.length - 1; index > 0; index -= 1) {
+    const target = Math.floor(Math.random() * (index + 1));
+    [shuffled[index], shuffled[target]] = [shuffled[target], shuffled[index]];
+  }
+  activeCases = shuffled.slice(0, CASE_PRACTICE_SIZE);
+}
+
+function resetCases() {
+  drawPracticeCases();
+  renderCases();
+  scrollCasesIntoView();
+}
+
 function answerCase(button) {
   const card = button.closest(".case-card");
-  const item = cases[Number(card.dataset.case)];
+  const item = activeCases[Number(card.dataset.case)];
   const selected = button.dataset.answer;
   const isRight = selected === item.answer;
 
@@ -1164,6 +1258,9 @@ document.addEventListener("click", (event) => {
 
   const caseOption = event.target.closest(".case-option");
   if (caseOption) answerCase(caseOption);
+
+  const caseReset = event.target.closest("#case-reset-button");
+  if (caseReset) resetCases();
 });
 
 applyTheme(safeGetTheme());
@@ -1171,6 +1268,7 @@ applyTheme(safeGetTheme());
 document.querySelector("#reset-button").addEventListener("click", resetGuide);
 
 renderLibrary();
+drawPracticeCases();
 renderCases();
 renderPaContexts();
 
