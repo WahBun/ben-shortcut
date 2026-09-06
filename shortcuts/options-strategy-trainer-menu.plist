@@ -42,6 +42,8 @@
       <string>is.workflow.actions.url</string>
       <key>WFWorkflowActionParameters</key>
       <dict>
+        <key>CustomOutputName</key>
+        <string>打开基础术语</string>
         <key>UUID</key>
         <string>1EC4B820-5CCB-4D29-8F32-79D3B93FB76E</string>
         <key>WFURLActionURL</key>
@@ -52,7 +54,24 @@
       <key>WFWorkflowActionIdentifier</key>
       <string>is.workflow.actions.openurl</string>
       <key>WFWorkflowActionParameters</key>
-      <dict/>
+      <dict>
+        <key>UUID</key>
+        <string>729341F5-4C2C-437E-8740-27E79C93F6B0</string>
+        <key>WFInput</key>
+        <dict>
+          <key>Value</key>
+          <dict>
+            <key>OutputName</key>
+            <string>打开基础术语</string>
+            <key>OutputUUID</key>
+            <string>1EC4B820-5CCB-4D29-8F32-79D3B93FB76E</string>
+            <key>Type</key>
+            <string>ActionOutput</string>
+          </dict>
+          <key>WFSerializationType</key>
+          <string>WFTextTokenAttachment</string>
+        </dict>
+      </dict>
     </dict>
     <dict>
       <key>WFWorkflowActionIdentifier</key>
@@ -72,6 +91,8 @@
       <string>is.workflow.actions.url</string>
       <key>WFWorkflowActionParameters</key>
       <dict>
+        <key>CustomOutputName</key>
+        <string>打开决策向导</string>
         <key>UUID</key>
         <string>F47CF275-8B96-4B7D-A3D1-38407C96F07C</string>
         <key>WFURLActionURL</key>
@@ -82,7 +103,24 @@
       <key>WFWorkflowActionIdentifier</key>
       <string>is.workflow.actions.openurl</string>
       <key>WFWorkflowActionParameters</key>
-      <dict/>
+      <dict>
+        <key>UUID</key>
+        <string>7D2F84D3-6063-43A3-8B25-6E14BA4F640D</string>
+        <key>WFInput</key>
+        <dict>
+          <key>Value</key>
+          <dict>
+            <key>OutputName</key>
+            <string>打开决策向导</string>
+            <key>OutputUUID</key>
+            <string>F47CF275-8B96-4B7D-A3D1-38407C96F07C</string>
+            <key>Type</key>
+            <string>ActionOutput</string>
+          </dict>
+          <key>WFSerializationType</key>
+          <string>WFTextTokenAttachment</string>
+        </dict>
+      </dict>
     </dict>
     <dict>
       <key>WFWorkflowActionIdentifier</key>
@@ -102,6 +140,8 @@
       <string>is.workflow.actions.url</string>
       <key>WFWorkflowActionParameters</key>
       <dict>
+        <key>CustomOutputName</key>
+        <string>打开策略库</string>
         <key>UUID</key>
         <string>0FCBC56B-9820-471F-846F-789EA99636BA</string>
         <key>WFURLActionURL</key>
@@ -112,7 +152,24 @@
       <key>WFWorkflowActionIdentifier</key>
       <string>is.workflow.actions.openurl</string>
       <key>WFWorkflowActionParameters</key>
-      <dict/>
+      <dict>
+        <key>UUID</key>
+        <string>4C67C8EB-A52C-4483-9033-91F7B9558FE0</string>
+        <key>WFInput</key>
+        <dict>
+          <key>Value</key>
+          <dict>
+            <key>OutputName</key>
+            <string>打开策略库</string>
+            <key>OutputUUID</key>
+            <string>0FCBC56B-9820-471F-846F-789EA99636BA</string>
+            <key>Type</key>
+            <string>ActionOutput</string>
+          </dict>
+          <key>WFSerializationType</key>
+          <string>WFTextTokenAttachment</string>
+        </dict>
+      </dict>
     </dict>
     <dict>
       <key>WFWorkflowActionIdentifier</key>
@@ -132,6 +189,8 @@
       <string>is.workflow.actions.url</string>
       <key>WFWorkflowActionParameters</key>
       <dict>
+        <key>CustomOutputName</key>
+        <string>打开实战演练</string>
         <key>UUID</key>
         <string>41D72B32-0D1F-4D96-B22D-549126FB11F4</string>
         <key>WFURLActionURL</key>
@@ -142,7 +201,24 @@
       <key>WFWorkflowActionIdentifier</key>
       <string>is.workflow.actions.openurl</string>
       <key>WFWorkflowActionParameters</key>
-      <dict/>
+      <dict>
+        <key>UUID</key>
+        <string>5C6169E9-9CB5-4B2D-8397-7D1805032E1C</string>
+        <key>WFInput</key>
+        <dict>
+          <key>Value</key>
+          <dict>
+            <key>OutputName</key>
+            <string>打开实战演练</string>
+            <key>OutputUUID</key>
+            <string>41D72B32-0D1F-4D96-B22D-549126FB11F4</string>
+            <key>Type</key>
+            <string>ActionOutput</string>
+          </dict>
+          <key>WFSerializationType</key>
+          <string>WFTextTokenAttachment</string>
+        </dict>
+      </dict>
     </dict>
     <dict>
       <key>WFWorkflowActionIdentifier</key>
