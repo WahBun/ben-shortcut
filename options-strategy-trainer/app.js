@@ -267,20 +267,20 @@ const payoffDiagrams = {
     title: "Long Call 到期盈亏",
     path: "M48 162 L132 162 L276 52",
     markers: [
-      { type: "loss", x: 74, y: 162, label: "最大亏损 = 支付的权利金", tx: 92, ty: 178, anchor: "start" },
+      { type: "loss", x: 74, y: 162, label: "最大亏损 = 支付的权利金", tx: 62, ty: 146, anchor: "start" },
       { type: "strike", x: 132, y: 162, label: "Call 行权价", tx: 132, ty: 198, guide: true },
-      { type: "be", x: 190, y: 118, label: "Breakeven = 行权价 + 权利金", tx: 248, ty: 104, anchor: "end" },
-      { type: "profit", x: 246, y: 75, label: "价格再往上才是利润", tx: 270, ty: 62, anchor: "end" }
+      { type: "be", x: 190, y: 118, label: "BE", tx: 190, ty: 106 },
+      { type: "profit", x: 246, y: 75, label: "价格再往上才是利润", tx: 286, ty: 58, anchor: "end" }
     ]
   },
   bullCallSpread: {
     title: "Bull Call Debit Spread 到期盈亏",
     path: "M48 162 L116 162 L202 72 L282 72",
     markers: [
-      { type: "loss", x: 72, y: 162, label: "最大亏损 = 净支出的权利金", tx: 84, ty: 178, anchor: "start" },
+      { type: "loss", x: 72, y: 162, label: "最大亏损 = 净支出", tx: 62, ty: 146, anchor: "start" },
       { type: "strike", x: 116, y: 162, label: "买入较低 Call", tx: 116, ty: 198, guide: true },
-      { type: "be", x: 158, y: 118, label: "Breakeven", tx: 158, ty: 104 },
-      { type: "profit", x: 202, y: 72, label: ["卖出较高 Call", "最大盈利 = Spread - 净支出"], tx: 292, ty: 48, anchor: "end", guide: true }
+      { type: "be", x: 158, y: 118, label: "BE", tx: 158, ty: 106 },
+      { type: "profit", x: 202, y: 72, label: ["卖出较高 Call", "最大盈利 = Spread - 净支出"], tx: 282, ty: 88, anchor: "end", guide: true }
     ]
   },
   bullPutSpread: {
@@ -289,47 +289,47 @@ const payoffDiagrams = {
     markers: [
       { type: "loss", x: 74, y: 162, label: "最大亏损 = Spread - 净权利金", tx: 62, ty: 144, anchor: "start" },
       { type: "guard", x: 116, y: 162, label: "买入更低 Put", tx: 116, ty: 198, guide: true },
-      { type: "be", x: 158, y: 118, label: "Breakeven", tx: 158, ty: 104 },
-      { type: "profit", x: 202, y: 72, label: ["卖出较高 Put", "最大盈利 = 净权利金"], tx: 292, ty: 48, anchor: "end", guide: true }
+      { type: "be", x: 158, y: 118, label: "BE", tx: 158, ty: 106 },
+      { type: "profit", x: 202, y: 72, label: ["卖出较高 Put", "最大盈利 = 净权利金"], tx: 282, ty: 88, anchor: "end", guide: true }
     ]
   },
   cashSecuredPut: {
     title: "Cash-Secured Put 到期盈亏",
     path: "M48 174 L202 72 L282 72",
     markers: [
-      { type: "loss", x: 78, y: 154, label: "被指派后继续下跌仍亏", tx: 64, ty: 178, anchor: "start" },
-      { type: "be", x: 132, y: 118, label: "Breakeven = 行权价 - 权利金", tx: 238, ty: 104, anchor: "end" },
-      { type: "profit", x: 202, y: 72, label: ["卖出 Put", "保留权利金"], tx: 214, ty: 50, anchor: "start", guide: true }
+      { type: "loss", x: 78, y: 154, label: "被指派后继续下跌仍亏", tx: 62, ty: 146, anchor: "start" },
+      { type: "be", x: 132, y: 118, label: "BE", tx: 132, ty: 106 },
+      { type: "profit", x: 202, y: 72, label: ["卖出 Put", "保留权利金"], tx: 282, ty: 88, anchor: "end", guide: true }
     ]
   },
   longPut: {
     title: "Long Put 到期盈亏",
     path: "M48 52 L202 162 L282 162",
     markers: [
-      { type: "profit", x: 72, y: 70, label: "价格再往下才是利润", tx: 62, ty: 50, anchor: "start" },
-      { type: "be", x: 132, y: 118, label: "Breakeven = 行权价 - 权利金", tx: 72, ty: 104, anchor: "start" },
+      { type: "profit", x: 72, y: 70, label: "价格再往下才是利润", tx: 62, ty: 86, anchor: "start" },
+      { type: "be", x: 132, y: 118, label: "BE", tx: 132, ty: 106 },
       { type: "strike", x: 202, y: 162, label: "Put 行权价", tx: 202, ty: 198, guide: true },
-      { type: "loss", x: 248, y: 162, label: "最大亏损 = 支付的权利金", tx: 258, ty: 178, anchor: "end" }
+      { type: "loss", x: 248, y: 162, label: "最大亏损 = 支付的权利金", tx: 282, ty: 146, anchor: "end" }
     ]
   },
   bearPutSpread: {
     title: "Bear Put Debit Spread 到期盈亏",
     path: "M48 72 L116 72 L202 162 L282 162",
     markers: [
-      { type: "profit", x: 74, y: 72, label: "最大盈利 = Spread - 净支出", tx: 62, ty: 50, anchor: "start" },
-      { type: "guard", x: 116, y: 72, label: "卖出较低 Put", tx: 116, ty: 42, guide: true },
-      { type: "be", x: 158, y: 118, label: "Breakeven", tx: 158, ty: 104 },
-      { type: "strike", x: 202, y: 162, label: ["买入较高 Put", "最大亏损 = 净支出的权利金"], tx: 292, ty: 184, anchor: "end", guide: true }
+      { type: "profit", x: 74, y: 72, label: "最大盈利 = Spread - 净支出", tx: 62, ty: 96, anchor: "start" },
+      { type: "guard", x: 116, y: 72, label: "卖出较低 Put", tx: 116, ty: 48, guide: true },
+      { type: "be", x: 158, y: 118, label: "BE", tx: 158, ty: 106 },
+      { type: "strike", x: 202, y: 162, label: ["买入较高 Put", "最大亏损 = 净支出"], tx: 282, ty: 142, anchor: "end", guide: true }
     ]
   },
   bearCallSpread: {
     title: "Bear Call Credit Spread 到期盈亏",
     path: "M48 72 L116 72 L202 162 L282 162",
     markers: [
-      { type: "profit", x: 74, y: 72, label: "最大盈利 = 净权利金", tx: 62, ty: 50, anchor: "start" },
-      { type: "profit", x: 116, y: 72, label: "卖出较低 Call", tx: 116, ty: 42, guide: true },
-      { type: "be", x: 158, y: 118, label: "Breakeven", tx: 158, ty: 104 },
-      { type: "guard", x: 202, y: 162, label: ["买入更高 Call", "最大亏损 = Spread - 净权利金"], tx: 292, ty: 184, anchor: "end", guide: true }
+      { type: "profit", x: 74, y: 72, label: "最大盈利 = 净权利金", tx: 62, ty: 96, anchor: "start" },
+      { type: "profit", x: 116, y: 72, label: "卖出较低 Call", tx: 116, ty: 48, guide: true },
+      { type: "be", x: 158, y: 118, label: "BE", tx: 158, ty: 106 },
+      { type: "guard", x: 202, y: 162, label: ["买入更高 Call", "最大亏损 = Spread - 净权利金"], tx: 282, ty: 142, anchor: "end", guide: true }
     ]
   },
   protectivePut: {
@@ -337,8 +337,8 @@ const payoffDiagrams = {
     path: "M48 162 L116 162 L282 52",
     markers: [
       { type: "guard", x: 116, y: 162, label: ["买入 Put", "提供下方保护"], tx: 116, ty: 188, guide: true },
-      { type: "be", x: 184, y: 118, label: "Breakeven", tx: 184, ty: 104 },
-      { type: "profit", x: 246, y: 76, label: "正股继续参与上涨", tx: 270, ty: 62, anchor: "end" }
+      { type: "be", x: 184, y: 118, label: "BE", tx: 184, ty: 106 },
+      { type: "profit", x: 246, y: 76, label: "正股继续参与上涨", tx: 286, ty: 58, anchor: "end" }
     ]
   },
   collar: {
@@ -346,48 +346,48 @@ const payoffDiagrams = {
     path: "M48 162 L116 162 L202 72 L282 72",
     markers: [
       { type: "guard", x: 116, y: 162, label: ["买入 OTM Put", "下方保护"], tx: 116, ty: 198, guide: true },
-      { type: "be", x: 158, y: 118, label: "Breakeven", tx: 158, ty: 104 },
-      { type: "profit", x: 202, y: 72, label: ["卖出 OTM Call", "上方收益被封顶"], tx: 292, ty: 50, anchor: "end", guide: true }
+      { type: "be", x: 158, y: 118, label: "BE", tx: 158, ty: 106 },
+      { type: "profit", x: 202, y: 72, label: ["卖出 OTM Call", "上方收益被封顶"], tx: 282, ty: 88, anchor: "end", guide: true }
     ]
   },
   coveredCall: {
     title: "Covered Call 到期盈亏",
     path: "M48 174 L202 72 L282 72",
     markers: [
-      { type: "loss", x: 78, y: 154, label: "最大风险仍来自正股下跌", tx: 64, ty: 178, anchor: "start" },
-      { type: "be", x: 132, y: 118, label: "Breakeven", tx: 132, ty: 104 },
-      { type: "profit", x: 202, y: 72, label: ["卖出 OTM Call", "上方收益被封顶"], tx: 292, ty: 50, anchor: "end", guide: true }
+      { type: "loss", x: 78, y: 154, label: "最大风险仍来自正股下跌", tx: 62, ty: 146, anchor: "start" },
+      { type: "be", x: 132, y: 118, label: "BE", tx: 132, ty: 106 },
+      { type: "profit", x: 202, y: 72, label: ["卖出 OTM Call", "上方收益被封顶"], tx: 282, ty: 88, anchor: "end", guide: true }
     ]
   },
   ironCondor: {
     title: "Iron Condor 到期盈亏",
     path: "M48 162 L78 162 L126 72 L204 72 L252 162 L282 162",
     markers: [
-      { type: "loss", x: 78, y: 162, label: "跌破左侧价差", tx: 60, ty: 182, anchor: "start", guide: true },
-      { type: "profit", x: 164, y: 72, label: "区间内最大盈利", tx: 164, ty: 52 },
-      { type: "be", x: 104, y: 118, label: "BE", tx: 104, ty: 104 },
-      { type: "be", x: 226, y: 118, label: "BE", tx: 226, ty: 104 },
-      { type: "loss", x: 252, y: 162, label: "涨破右侧价差", tx: 260, ty: 182, anchor: "end", guide: true }
+      { type: "loss", x: 78, y: 162, label: "跌破左侧价差", tx: 62, ty: 146, anchor: "start", guide: true },
+      { type: "profit", x: 164, y: 72, label: "区间内最大盈利", tx: 164, ty: 96 },
+      { type: "be", x: 104, y: 118, label: "BE", tx: 104, ty: 106 },
+      { type: "be", x: 226, y: 118, label: "BE", tx: 226, ty: 106 },
+      { type: "loss", x: 252, y: 162, label: "涨破右侧价差", tx: 282, ty: 146, anchor: "end", guide: true }
     ]
   },
   calendar: {
     title: "Calendar Spread 近月到期形状",
     path: "M48 154 L104 118 L160 68 L216 118 L272 154",
     markers: [
-      { type: "be", x: 104, y: 118, label: "BE", tx: 104, ty: 104 },
+      { type: "be", x: 104, y: 118, label: "BE", tx: 104, ty: 106 },
       { type: "profit", x: 160, y: 68, label: ["价格靠近执行价", "近月衰减最快"], tx: 160, ty: 42, guide: true },
-      { type: "be", x: 216, y: 118, label: "BE", tx: 216, ty: 104 },
-      { type: "loss", x: 258, y: 150, label: "价格离开中心太远", tx: 264, ty: 172, anchor: "end" }
+      { type: "be", x: 216, y: 118, label: "BE", tx: 216, ty: 106 },
+      { type: "loss", x: 258, y: 150, label: "价格离开中心太远", tx: 282, ty: 146, anchor: "end" }
     ]
   },
   longStraddle: {
     title: "Long Straddle 到期盈亏",
     path: "M48 54 L160 162 L272 54",
     markers: [
-      { type: "be", x: 104, y: 118, label: "BE", tx: 104, ty: 104 },
+      { type: "be", x: 104, y: 118, label: "BE", tx: 104, ty: 106 },
       { type: "strike", x: 160, y: 162, label: ["ATM 中心", "最大亏损 = 双边权利金"], tx: 160, ty: 190, guide: true },
-      { type: "be", x: 216, y: 118, label: "BE", tx: 216, ty: 104 },
-      { type: "profit", x: 248, y: 78, label: "大波动覆盖权利金后盈利", tx: 266, ty: 62, anchor: "end" }
+      { type: "be", x: 216, y: 118, label: "BE", tx: 216, ty: 106 },
+      { type: "profit", x: 248, y: 78, label: "大波动覆盖权利金后盈利", tx: 286, ty: 58, anchor: "end" }
     ]
   }
 };
@@ -1263,11 +1263,10 @@ function payoffSvg(key, strategy) {
     <svg class="payoff" viewBox="0 0 320 210" aria-label="${strategy.name} 到期损益示意">
       <text class="chart-title" x="160" y="22" text-anchor="middle">${diagram.title}</text>
       <line class="axis" x1="44" y1="${zeroY}" x2="288" y2="${zeroY}" />
-      <path class="axis axis-arrow" d="M288 ${zeroY} l-8 -5 M288 ${zeroY} l-8 5" />
       <line class="axis" x1="48" y1="34" x2="48" y2="176" />
       <text class="axis-label" x="18" y="43">+ 盈利</text>
       <text class="axis-label" x="18" y="178">- 亏损</text>
-      <text class="axis-label price-label" x="224" y="136">标的价格 &gt;</text>
+      <text class="axis-label price-label" x="286" y="128" text-anchor="end">标的价格</text>
       ${guides}
       <path class="curve" d="${diagram.path}" />
       ${markers}

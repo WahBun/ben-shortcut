@@ -769,22 +769,34 @@ summary {
 }
 
 .payoff .price-label {
-  fill: var(--ink);
+  fill: var(--muted);
+  font-size: 10px;
+  paint-order: stroke;
+  stroke: var(--payoff-bg);
+  stroke-linejoin: round;
+  stroke-width: 4px;
 }
 
 .payoff .payoff-label {
   font-size: 10.5px;
   font-weight: 780;
   line-height: 1.2;
+  paint-order: stroke;
+  stroke: var(--payoff-bg);
+  stroke-linejoin: round;
+  stroke-width: 3.5px;
 }
 
 .payoff .payoff-label-profit {
   fill: var(--teal);
 }
 
-.payoff .payoff-label-loss,
-.payoff .payoff-label-be {
+.payoff .payoff-label-loss {
   fill: var(--red);
+}
+
+.payoff .payoff-label-be {
+  fill: var(--amber);
 }
 
 .payoff .payoff-label-strike,
@@ -801,9 +813,12 @@ summary {
   fill: var(--teal);
 }
 
-.payoff .marker-loss,
-.payoff .marker-be {
+.payoff .marker-loss {
   fill: var(--red);
+}
+
+.payoff .marker-be {
+  fill: var(--amber);
 }
 
 .payoff .marker-strike {
