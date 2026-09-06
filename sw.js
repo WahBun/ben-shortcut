@@ -1,12 +1,23 @@
-const CACHE_NAME = "pulse-rc-github-pages-v37";
+const CACHE_NAME = "pulse-rc-github-pages-v38";
+const HUB_VERSION = "hub-v1";
+const PULSE_VERSION = "pulse-v1";
+const PROP_FIRM_VERSION = "pf-v1";
 const OPTION_TRAINER_VERSION = "ost-v37";
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./styles.css",
-  "./app.js",
-  "./manifest.webmanifest",
+  `./styles.css?v=${HUB_VERSION}`,
   "./app-icon.svg",
+  "./pulse-rc-tracker/",
+  "./pulse-rc-tracker/index.html",
+  "./pulse-rc-tracker/manifest.webmanifest",
+  "./pulse-rc-tracker/app-icon.svg",
+  `./pulse-rc-tracker/styles.css?v=${PULSE_VERSION}`,
+  `./pulse-rc-tracker/app.js?v=${PULSE_VERSION}`,
+  "./prop-firm/",
+  "./prop-firm/index.html",
+  `./prop-firm/styles.css?v=${PROP_FIRM_VERSION}`,
+  `./prop-firm/app.js?v=${PROP_FIRM_VERSION}`,
   "./options-strategy-trainer/",
   "./options-strategy-trainer/index.html",
   `./options-strategy-trainer/styles.css?v=${OPTION_TRAINER_VERSION}`,

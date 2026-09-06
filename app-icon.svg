@@ -1,9 +1,7 @@
 <svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="512" height="512" rx="96" fill="#D71920"/>
-  <path d="M256 64L448 256L256 448L64 256L256 64Z" fill="#FFFFFF"/>
-  <path d="M256 64L448 256H256V64Z" fill="#E7E0D5"/>
-  <path d="M256 448L64 256H256V448Z" fill="#F6F3EC"/>
-  <path d="M174 229H338V283H174V229Z" fill="#D71920"/>
-  <path d="M229 174H283V338H229V174Z" fill="#D71920"/>
-  <text x="256" y="410" text-anchor="middle" font-family="Arial, sans-serif" font-size="54" font-weight="800" fill="#161616">RC</text>
+  <rect width="512" height="512" rx="96" fill="#0F1514"/>
+  <path d="M108 352H404" stroke="#61C79F" stroke-width="32" stroke-linecap="round"/>
+  <path d="M124 256H388" stroke="#E4BC70" stroke-width="32" stroke-linecap="round"/>
+  <path d="M156 160H356" stroke="#EB8076" stroke-width="32" stroke-linecap="round"/>
+  <text x="256" y="288" text-anchor="middle" font-family="Arial, sans-serif" font-size="108" font-weight="900" fill="#F2F7F3">BS</text>
 </svg>
