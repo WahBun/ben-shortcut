@@ -268,7 +268,7 @@ const payoffDiagrams = {
     path: "M48 162 L132 162 L276 52",
     markers: [
       { type: "loss", x: 74, y: 162, label: "最大亏损 = 支付的权利金", tx: 62, ty: 146, anchor: "start" },
-      { type: "strike", x: 132, y: 162, label: "Call 行权价", tx: 132, ty: 190, guide: true },
+      { type: "strike", x: 132, y: 162, label: ["Buy Δ≈0.50", "ATM Call"], tx: 132, ty: 190, guide: true },
       { type: "be", x: 190, y: 118, label: "BE", tx: 190, ty: 106 },
       { type: "profit", x: 246, y: 75, label: "价格再往上才是利润", tx: 286, ty: 58, anchor: "end" }
     ]
@@ -279,10 +279,10 @@ const payoffDiagrams = {
     priceLabel: { y: 134 },
     markers: [
       { type: "loss", x: 72, y: 162, label: ["最大亏损 =", "净支出"], tx: 62, ty: 136, anchor: "start" },
-      { type: "strike", x: 116, y: 162, label: "买入较低 Call", tx: 116, ty: 190, guide: true },
+      { type: "strike", x: 116, y: 162, label: ["Buy Δ≈0.50", "ATM Call"], tx: 116, ty: 190, guide: true },
       { type: "be", x: 158, y: 118, label: "BE", tx: 158, ty: 106 },
       { type: "profit", x: 202, y: 72, label: ["最大盈利 =", "Spread - 净支出"], tx: 282, ty: 90, anchor: "end", guide: true },
-      { type: "action", x: 202, y: 72, label: "卖出较高 Call", tx: 202, ty: 58, dot: false }
+      { type: "action", x: 202, y: 72, label: ["Sell Δ≈0.20~0.30", "OTM Call"], tx: 202, ty: 50, dot: false }
     ]
   },
   bullPutSpread: {
@@ -291,10 +291,10 @@ const payoffDiagrams = {
     priceLabel: { y: 134 },
     markers: [
       { type: "loss", x: 74, y: 162, label: ["最大亏损 =", "Spread - 净权利金"], tx: 62, ty: 136, anchor: "start" },
-      { type: "guard", x: 116, y: 162, label: "买入更低 Put", tx: 116, ty: 190, guide: true },
+      { type: "guard", x: 116, y: 162, label: ["Buy Δ≈0.10~0.15", "Far OTM Put"], tx: 116, ty: 190, guide: true },
       { type: "be", x: 158, y: 118, label: "BE", tx: 158, ty: 106 },
       { type: "profit", x: 202, y: 72, label: ["最大盈利 =", "净权利金"], tx: 282, ty: 90, anchor: "end", guide: true },
-      { type: "action", x: 202, y: 72, label: "卖出较高 Put", tx: 202, ty: 58, dot: false }
+      { type: "action", x: 202, y: 72, label: ["Sell Δ≈0.20~0.30", "OTM Put"], tx: 202, ty: 50, dot: false }
     ]
   },
   cashSecuredPut: {
@@ -305,7 +305,7 @@ const payoffDiagrams = {
       { type: "loss", x: 78, y: 154, label: "被指派后继续下跌仍亏", tx: 62, ty: 146, anchor: "start" },
       { type: "be", x: 132, y: 118, label: "BE", tx: 132, ty: 106 },
       { type: "profit", x: 202, y: 72, label: "保留权利金", tx: 282, ty: 96, anchor: "end", guide: true },
-      { type: "action", x: 202, y: 72, label: "卖出 Put", tx: 202, ty: 58, dot: false }
+      { type: "action", x: 202, y: 72, label: ["Sell Δ≈0.20~0.30", "OTM Put"], tx: 202, ty: 50, dot: false }
     ]
   },
   longPut: {
@@ -314,7 +314,7 @@ const payoffDiagrams = {
     markers: [
       { type: "profit", x: 72, y: 70, label: "价格再往下才是利润", tx: 62, ty: 86, anchor: "start" },
       { type: "be", x: 132, y: 118, label: "BE", tx: 132, ty: 106 },
-      { type: "strike", x: 202, y: 162, label: "Put 行权价", tx: 202, ty: 190, guide: true },
+      { type: "strike", x: 202, y: 162, label: ["Buy Δ≈0.50", "ATM Put"], tx: 202, ty: 190, guide: true },
       { type: "loss", x: 248, y: 162, label: "最大亏损 = 支付的权利金", tx: 282, ty: 146, anchor: "end" }
     ]
   },
@@ -323,10 +323,10 @@ const payoffDiagrams = {
     path: "M48 72 L116 72 L202 162 L282 162",
     markers: [
       { type: "profit", x: 74, y: 72, label: ["最大盈利 =", "Spread - 净支出"], tx: 62, ty: 90, anchor: "start" },
-      { type: "guard", x: 116, y: 72, label: "卖出较低 Put", tx: 116, ty: 48, guide: true },
+      { type: "guard", x: 116, y: 72, label: ["Sell Δ≈0.20~0.30", "OTM Put"], tx: 116, ty: 48, guide: true },
       { type: "be", x: 158, y: 118, label: "BE", tx: 158, ty: 106 },
       { type: "strike", x: 202, y: 162, label: ["最大亏损 =", "净支出"], tx: 282, ty: 136, anchor: "end", guide: true },
-      { type: "action", x: 202, y: 162, label: "买入较高 Put", tx: 202, ty: 190, dot: false }
+      { type: "action", x: 202, y: 162, label: ["Buy Δ≈0.50", "ATM Put"], tx: 202, ty: 190, dot: false }
     ]
   },
   bearCallSpread: {
@@ -334,17 +334,17 @@ const payoffDiagrams = {
     path: "M48 72 L116 72 L202 162 L282 162",
     markers: [
       { type: "profit", x: 74, y: 72, label: ["最大盈利 =", "净权利金"], tx: 62, ty: 90, anchor: "start" },
-      { type: "profit", x: 116, y: 72, label: "卖出较低 Call", tx: 116, ty: 48, guide: true },
+      { type: "profit", x: 116, y: 72, label: ["Sell Δ≈0.20~0.30", "OTM Call"], tx: 116, ty: 48, guide: true },
       { type: "be", x: 158, y: 118, label: "BE", tx: 158, ty: 106 },
       { type: "guard", x: 202, y: 162, label: ["最大亏损 =", "Spread - 净权利金"], tx: 282, ty: 136, anchor: "end", guide: true },
-      { type: "action", x: 202, y: 162, label: "买入更高 Call", tx: 202, ty: 190, dot: false }
+      { type: "action", x: 202, y: 162, label: ["Buy Δ≈0.10~0.15", "Far OTM Call"], tx: 202, ty: 190, dot: false }
     ]
   },
   protectivePut: {
     title: "Protective Put 到期盈亏",
     path: "M48 162 L116 162 L282 52",
     markers: [
-      { type: "guard", x: 116, y: 162, label: ["买入 Put", "提供下方保护"], tx: 116, ty: 180, guide: true },
+      { type: "guard", x: 116, y: 162, label: ["Buy Δ≈0.20~0.30", "OTM Put"], tx: 116, ty: 184, guide: true },
       { type: "be", x: 184, y: 118, label: "BE", tx: 184, ty: 106 },
       { type: "profit", x: 246, y: 76, label: "正股继续参与上涨", tx: 286, ty: 58, anchor: "end" }
     ]
@@ -354,10 +354,10 @@ const payoffDiagrams = {
     path: "M48 162 L116 162 L202 72 L282 72",
     priceLabel: { y: 134 },
     markers: [
-      { type: "guard", x: 116, y: 162, label: ["买入 OTM Put", "下方保护"], tx: 116, ty: 180, guide: true },
+      { type: "guard", x: 116, y: 162, label: ["Buy Δ≈0.20~0.30", "OTM Put"], tx: 116, ty: 184, guide: true },
       { type: "be", x: 158, y: 118, label: "BE", tx: 158, ty: 106 },
       { type: "profit", x: 202, y: 72, label: "上方收益被封顶", tx: 282, ty: 96, anchor: "end", guide: true },
-      { type: "action", x: 202, y: 72, label: "卖出 OTM Call", tx: 202, ty: 58, dot: false }
+      { type: "action", x: 202, y: 72, label: ["Sell Δ≈0.20~0.30", "OTM Call"], tx: 202, ty: 50, dot: false }
     ]
   },
   coveredCall: {
@@ -368,7 +368,7 @@ const payoffDiagrams = {
       { type: "loss", x: 78, y: 154, label: "最大风险仍来自正股下跌", tx: 62, ty: 146, anchor: "start" },
       { type: "be", x: 132, y: 118, label: "BE", tx: 132, ty: 106 },
       { type: "profit", x: 202, y: 72, label: "上方收益被封顶", tx: 282, ty: 96, anchor: "end", guide: true },
-      { type: "action", x: 202, y: 72, label: "卖出 OTM Call", tx: 202, ty: 58, dot: false }
+      { type: "action", x: 202, y: 72, label: ["Sell Δ≈0.20~0.30", "OTM Call"], tx: 202, ty: 50, dot: false }
     ]
   },
   ironCondor: {
@@ -376,10 +376,13 @@ const payoffDiagrams = {
     path: "M48 162 L78 162 L126 72 L204 72 L252 162 L282 162",
     markers: [
       { type: "loss", x: 78, y: 162, label: "跌破左侧价差", tx: 62, ty: 146, anchor: "start", guide: true },
+      { type: "action", x: 78, y: 162, label: ["Buy Δ≈0.10~0.15", "Far OTM Put"], tx: 78, ty: 190, dot: false },
+      { type: "action", x: 164, y: 72, label: ["Sell Δ≈0.20~0.30", "OTM Put + Call"], tx: 164, ty: 48, dot: false },
       { type: "profit", x: 164, y: 72, label: ["区间内", "最大盈利 = 净权利金"], tx: 164, ty: 90 },
       { type: "be", x: 104, y: 118, label: "BE", tx: 104, ty: 106 },
       { type: "be", x: 226, y: 118, label: "BE", tx: 226, ty: 106 },
-      { type: "loss", x: 252, y: 162, label: "涨破右侧价差", tx: 282, ty: 146, anchor: "end", guide: true }
+      { type: "loss", x: 252, y: 162, label: "涨破右侧价差", tx: 282, ty: 146, anchor: "end", guide: true },
+      { type: "action", x: 252, y: 162, label: ["Buy Δ≈0.10~0.15", "Far OTM Call"], tx: 252, ty: 190, dot: false }
     ]
   },
   calendar: {
@@ -387,7 +390,7 @@ const payoffDiagrams = {
     path: "M48 154 L104 118 L160 68 L216 118 L272 154",
     markers: [
       { type: "be", x: 104, y: 118, label: "BE", tx: 104, ty: 106 },
-      { type: "profit", x: 160, y: 68, label: ["价格靠近执行价", "近月衰减最快"], tx: 160, ty: 42, guide: true },
+      { type: "profit", x: 160, y: 68, label: ["Sell near DTE", "Buy far DTE"], tx: 160, ty: 42, guide: true },
       { type: "be", x: 216, y: 118, label: "BE", tx: 216, ty: 106 },
       { type: "loss", x: 258, y: 150, label: "价格离开中心太远", tx: 282, ty: 146, anchor: "end" }
     ]
@@ -397,7 +400,7 @@ const payoffDiagrams = {
     path: "M48 54 L160 162 L272 54",
     markers: [
       { type: "be", x: 104, y: 118, label: "BE", tx: 104, ty: 106 },
-      { type: "strike", x: 160, y: 162, label: ["ATM 中心", "最大亏损 = 双边权利金"], tx: 160, ty: 180, guide: true },
+      { type: "strike", x: 160, y: 162, label: ["Buy Δ≈0.50", "ATM Call + Put", "最大亏损 = 双边权利金"], tx: 160, ty: 178, guide: true },
       { type: "be", x: 216, y: 118, label: "BE", tx: 216, ty: 106 },
       { type: "profit", x: 248, y: 78, label: "大波动覆盖权利金后盈利", tx: 286, ty: 58, anchor: "end" }
     ]
@@ -1263,7 +1266,7 @@ function payoffLabelTone(line, fallbackTone, previousTone = "") {
   }
   if (/最大亏损|亏损|跌破|涨破|离开/.test(line)) return "loss";
   if (/最大盈利|利润|保留权利金|继续参与上涨|收益被封顶|近月衰减|覆盖权利金/.test(line)) return "profit";
-  if (/买入|卖出|行权价|ATM/.test(line)) return "action";
+  if (/买入|卖出|Buy|Sell|Delta|Δ|行权价|ATM|OTM|Far/.test(line)) return "action";
   return fallbackTone;
 }
 
