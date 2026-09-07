@@ -432,6 +432,15 @@ h3 {
   font-size: 0.78rem;
 }
 
+#guide .pa-context-group:not(:nth-child(3)) .context-badges {
+  flex-wrap: nowrap;
+  gap: 5px;
+}
+
+#guide .pa-context-group:not(:nth-child(3)) .context-badges span {
+  white-space: nowrap;
+}
+
 .wizard,
 .result-shell {
   border: 1px solid var(--line);
@@ -1317,15 +1326,9 @@ summary {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  #guide .pa-context-group:not(:nth-child(3)) .context-badges {
-    flex-wrap: nowrap;
-    gap: 5px;
-  }
-
   #guide .pa-context-group:not(:nth-child(3)) .context-badges span {
     padding-inline: 7px;
     font-size: 0.76rem;
-    white-space: nowrap;
   }
 
   #guide .pa-context-group:nth-child(3) {
@@ -1384,5 +1387,14 @@ summary {
 
   .detail-grid {
     grid-template-columns: 1fr;
+  }
+
+  #guide .pa-context-group:not(:nth-child(3)) .context-badges {
+    gap: 4px;
+  }
+
+  #guide .pa-context-group:not(:nth-child(3)) .context-badges span {
+    padding-inline: 6px;
+    font-size: 0.72rem;
   }
 }
