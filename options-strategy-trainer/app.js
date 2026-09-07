@@ -67,7 +67,7 @@ const strategies = {
       "到期价 ≥ 卖出 Call 行权价：最大盈利 = Spread 宽度 - 净支出的权利金。",
       "中间区间：价格越靠近卖出 Call，利润越接近上限。"
     ],
-    why: "适合看涨但不想为高 IV 付太多权利金；也适合 TR 下沿 FBO + Low IV 时，用更便宜的 debit 押价格回到区间内。",
+    why: "适合看涨但目标价明确、想控制净支出；TR 下沿 FBO + Low IV 时，也可以用便宜的 debit 押价格回到区间内。",
     avoid: "如果你预期会大幅突破上方行权价，价差会限制最大收益。",
     greeks: { Delta: "+", Gamma: "+/0", Theta: "-/0", Vega: "+/0" },
     risk: "Defined risk",
@@ -84,11 +84,11 @@ const strategies = {
       "到期价 ≤ 买入 Put 行权价：最大亏损 = Spread 宽度 - 净权利金。",
       "中间区间：盈亏 = 净权利金 - 卖出 Put 的内在价值。"
     ],
-    why: "适合温和看涨或不看跌；TR 下沿 FBO + High IV 时，也可以卖下方 Put spread，用丰厚权利金押支撑守住。",
+    why: "适合温和看涨或不看跌；初始仓位优先在 High IV / premium 丰厚时使用。TR 下沿 FBO + High IV 时，也可以卖下方 Put spread，用权利金押支撑守住。低 IV 下也能作为进阶加仓/调整，但这不是本工具的第一层分类。",
     avoid: "如果你认为标的可能快速跌破卖出 Put，信用价差会很难管理。",
     greeks: { Delta: "+", Gamma: "-", Theta: "+", Vega: "-" },
     risk: "Defined risk",
-    notes: ["最大亏损由价差宽度减去权利金决定。", "更像是在卖一个不会跌破的观点。", "高 IV 时权利金更充足。"]
+    notes: ["最大亏损由价差宽度减去权利金决定。", "初始仓位更看重 premium 是否足够厚。", "低 IV credit spread 更偏进阶加仓/调整。"]
   },
   cashSecuredPut: {
     name: "现金担保卖出认沽",
@@ -135,7 +135,7 @@ const strategies = {
       "到期价 ≤ 卖出 Put 行权价：最大盈利 = Spread 宽度 - 净支出的权利金。",
       "中间区间：价格越靠近卖出 Put，利润越接近上限。"
     ],
-    why: "适合看跌但希望控制成本；也适合 TR 上沿 FBO + Low IV 时，用更便宜的 debit 押价格回到区间内。",
+    why: "适合看跌但目标价明确、想控制净支出；TR 上沿 FBO + Low IV 时，也可以用便宜的 debit 押价格回到区间内。",
     avoid: "如果你预期会暴跌，价差会限制下方收益。",
     greeks: { Delta: "-", Gamma: "+/0", Theta: "-/0", Vega: "+/0" },
     risk: "Defined risk",
@@ -152,11 +152,11 @@ const strategies = {
       "到期价 ≥ 买入 Call 行权价：最大亏损 = Spread 宽度 - 净权利金。",
       "中间区间：盈亏 = 净权利金 - 卖出 Call 的内在价值。"
     ],
-    why: "适合温和看跌或不看涨；TR 上沿 FBO + High IV 时，也可以卖上方 Call spread，用丰厚权利金押压力守住。",
+    why: "适合温和看跌或不看涨；初始仓位优先在 High IV / premium 丰厚时使用。TR 上沿 FBO + High IV 时，也可以卖上方 Call spread，用权利金押压力守住。低 IV 下也能作为进阶加仓/调整，但这不是本工具的第一层分类。",
     avoid: "如果标的可能快速突破卖出 Call，亏损会放大到价差上限。",
     greeks: { Delta: "-", Gamma: "-", Theta: "+", Vega: "-" },
     risk: "Defined risk",
-    notes: ["最大亏损由价差宽度减去权利金决定。", "更适合阻力位清晰的场景。", "需要提前设置止损或调整规则。"]
+    notes: ["最大亏损由价差宽度减去权利金决定。", "初始仓位更看重 premium 是否足够厚。", "低 IV credit spread 更偏进阶加仓/调整。"]
   },
   protectivePut: {
     name: "保护性认沽",
@@ -665,10 +665,10 @@ const cases = [
   },
   {
     title: "趋势偏多，但每次推进都变慢",
-    prompt: "价格还在支撑上方，可是追涨的感觉不好；你更愿意押支撑别破。",
+    prompt: "价格还在支撑上方，可是追涨的感觉不好；IV 也不便宜，你更愿意押支撑别破。",
     answer: "bullPutSpread",
     options: ["bullPutSpread", "longCall", "longStraddle"],
-    reason: "这里不是赌大涨，而是赌下方守住。Bull Put Credit Spread 赚的是时间和支撑。"
+    reason: "这里不是赌大涨，而是赌下方守住。High IV 让 Bull Put Credit Spread 的收入更值得考虑。"
   },
   {
     title: "想买，但不想按现价追",
@@ -714,10 +714,10 @@ const cases = [
   },
   {
     title: "上方压力清楚，但没到崩盘程度",
-    prompt: "你偏空，可价格更像慢慢被压住，而不是马上瀑布。",
+    prompt: "你偏空，可价格更像慢慢被压住，而不是马上瀑布；Call 权利金也不薄。",
     answer: "bearCallSpread",
     options: ["bearCallSpread", "longCall", "cashSecuredPut"],
-    reason: "这种题重点是“别站回压力上方”。Bear Call Credit Spread 比追空更稳一点。"
+    reason: "这种题重点是“别站回压力上方”。High IV 下，Bear Call Credit Spread 比追空更贴近卖压力。"
   },
   {
     title: "区间很清楚，IV 给得很肥",
@@ -858,13 +858,17 @@ const paContexts = [
     tone: "bull",
     english: "Strong Bull Trend",
     title: "强上涨趋势",
-    read: "连续 HH/HL，回调浅，突破后接受良好，重点是跟随主方向。",
+    readLines: [
+      "连续 HH/HL，回调浅，突破后接受良好，重点是跟随主方向。",
+      "主力是 Long Call；目标有限时再用 Bull Call Debit Spread。"
+    ],
+    badges: ["Bullish", "Low IV", "Long Call / Bull Call Debit Spread"],
     direction: "bullish",
     iv: "low",
     objective: "directional",
     main: "longCall",
-    alternatives: ["bullCallSpread", "bullPutSpread"],
-    note: "强趋势赚方向和速度；IV 偏高时，用价差控制权利金。"
+    alternatives: ["bullCallSpread"],
+    note: "强趋势赚方向和速度；IV 不贵时 Long Call 最直接，目标有限时再用 Bull Call Debit Spread 控制成本。"
   },
   {
     id: "trend-strong-down",
@@ -873,13 +877,17 @@ const paContexts = [
     tone: "bear",
     english: "Strong Bear Trend",
     title: "强下跌趋势",
-    read: "连续 LH/LL，反抽弱，跌破后接受良好，重点是顺势看下方。",
+    readLines: [
+      "连续 LH/LL，反抽弱，跌破后接受良好，重点是顺势看下方。",
+      "主力是 Long Put；目标有限时再用 Bear Put Debit Spread。"
+    ],
+    badges: ["Bearish", "Low IV", "Long Put / Bear Put Debit Spread"],
     direction: "bearish",
     iv: "low",
     objective: "directional",
     main: "longPut",
-    alternatives: ["bearPutSpread", "bearCallSpread"],
-    note: "IV 不贵时，买方结构能更直接表达下跌速度。"
+    alternatives: ["bearPutSpread"],
+    note: "强趋势赚方向和速度；IV 不贵时 Long Put 最直接，目标有限时再用 Bear Put Debit Spread 控制成本。"
   },
   {
     id: "trend-weak-up",
@@ -1036,7 +1044,9 @@ function recommend({ direction, iv, objective }) {
     if (objective === "income") {
       return iv === "low"
         ? pick("coveredCall", ["bullCallSpread", "cashSecuredPut"])
-        : pick("bullPutSpread", ["cashSecuredPut", "coveredCall"]);
+        : iv === "high"
+          ? pick("bullPutSpread", ["cashSecuredPut", "coveredCall"])
+          : pick("coveredCall", ["cashSecuredPut", "bullCallSpread"]);
     }
     if (iv === "low") return pick("longCall", ["bullCallSpread", "cashSecuredPut"]);
     if (iv === "normal") return pick("bullCallSpread", ["longCall", "bullPutSpread"]);
@@ -1047,7 +1057,7 @@ function recommend({ direction, iv, objective }) {
     if (objective === "income") {
       return iv === "high"
         ? pick("bearCallSpread", ["bearPutSpread", "ironCondor"])
-        : pick("bearCallSpread", ["bearPutSpread", "longPut"]);
+        : pick("bearPutSpread", ["longPut", "protectivePut"]);
     }
     if (iv === "low") return pick("longPut", ["bearPutSpread", "bearCallSpread"]);
     if (iv === "normal") return pick("bearPutSpread", ["longPut", "bearCallSpread"]);
@@ -1122,20 +1132,20 @@ function compactLibraryContexts(contexts) {
 
 const libraryContextOverrides = {
   bullCallSpread: [
-    { label: "Strong/Weak Bull Trend", tone: "bull" },
-    { label: "TR Low IV / Lower-edge FBO", tone: "range" }
+    { label: "Strong Bull / Low IV", tone: "bull" },
+    { label: "TR Lower-edge FBO / Low IV", tone: "range" }
   ],
   bearPutSpread: [
-    { label: "Strong/Weak Bear Trend", tone: "bear" },
-    { label: "TR Low IV / Upper-edge FBO", tone: "range" }
+    { label: "Strong Bear / Low IV", tone: "bear" },
+    { label: "TR Upper-edge FBO / Low IV", tone: "range" }
   ],
   bullPutSpread: [
-    { label: "Strong/Weak Bull Trend", tone: "bull" },
-    { label: "TR High IV / Lower-edge FBO", tone: "range" }
+    { label: "Weak Bull / High IV", tone: "bull" },
+    { label: "TR Lower-edge FBO / High IV", tone: "range" }
   ],
   bearCallSpread: [
-    { label: "Strong/Weak Bear Trend", tone: "bear" },
-    { label: "TR High IV / Upper-edge FBO", tone: "range" }
+    { label: "Weak Bear / High IV", tone: "bear" },
+    { label: "TR Upper-edge FBO / High IV", tone: "range" }
   ]
 };
 
