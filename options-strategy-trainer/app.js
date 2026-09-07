@@ -654,199 +654,283 @@ const libraryOrder = [
 const cases = [
   {
     title: "早盘一路抬高，不给深回调",
-    prompt: "你看见买盘一直愿意在更高的位置接，回踩很浅，IV 还没明显升温。",
+    prompt: "现价 102，开盘后从 99.5 推到 102，连续 HH/HL；回踩不破 VWAP，IVR 21（偏低），DTE 21。",
     answer: "longCall",
     options: ["longCall", "bullPutSpread", "ironCondor"],
     reason: "这题核心是速度。IV 还不贵时，Long Call 比卖 Put 更能吃到向上的加速。"
   },
   {
     title: "已经涨了一段，但目标还没到",
-    prompt: "你仍然看涨，但 Call 已经不便宜；你的目标是到前高附近，不是押无限拉升。",
+    prompt: "现价 118，前高 124，Call premium 已经偏贵；IVR 48，DTE 30，你目标只看到 123-125。",
     answer: "bullCallSpread",
     options: ["longCall", "bullCallSpread", "cashSecuredPut"],
     reason: "目标价明确时，用上方 Call 换回一部分成本，会比裸买 Call 更贴近这个判断。"
   },
   {
     title: "趋势偏多，但每次推进都变慢",
-    prompt: "价格还在支撑上方，可是追涨的感觉不好；IV 也不便宜，你更愿意押支撑别破。",
+    prompt: "现价 67，支撑 64，连续抬高但每次推进变慢；IVR 68（偏高），DTE 24，你更愿意押 64 不破。",
     answer: "bullPutSpread",
     options: ["bullPutSpread", "longCall", "longStraddle"],
     reason: "这里不是赌大涨，而是赌下方守住。High IV 让 Bull Put Credit Spread 的收入更值得考虑。"
   },
   {
     title: "想买，但不想按现价追",
-    prompt: "你愿意持有这家公司，只是觉得现在的位置不够舒服。",
+    prompt: "现价 42，你愿意拥有正股，但理想接货区在 38-39；IVR 55，DTE 30，现金够接货。",
     answer: "cashSecuredPut",
     options: ["cashSecuredPut", "longCall", "ironCondor"],
     reason: "CSP 的重点是接货计划：没跌到就收权利金，跌到就按你愿意的位置买。"
   },
   {
     title: "手里有股，上方有满意卖点",
-    prompt: "你不急着卖，但如果价格冲到目标区，被拿走仓位也可以接受。",
+    prompt: "持有正股成本 73，现价 81，上方目标 86；IVR 60，DTE 21，如果到 86 被拿走也接受。",
     answer: "coveredCall",
     options: ["coveredCall", "protectivePut", "longStraddle"],
     reason: "Covered Call 适合把上方一段空间换成现金流，前提是你真的接受被行权卖出。"
   },
   {
     title: "浮盈不错，怕一个消息砸下来",
-    prompt: "你想继续拿着正股，但短期有事件风险，不想用卖 Call 封住上方。",
+    prompt: "持有正股从 96 涨到 112，8 天后有事件；你怕跌破 106，但不想卖 Call 锁死上方。",
     answer: "protectivePut",
     options: ["coveredCall", "protectivePut", "bullPutSpread"],
     reason: "Protective Put 是最直接的保险。贵不贵是另一个问题，但保护逻辑最干净。"
   },
   {
     title: "想保护利润，但保险费刺眼",
-    prompt: "正股还想留，Put 太贵；你愿意牺牲一部分上方空间来换便宜保险。",
+    prompt: "持有正股现价 88，想保护 82 下方；Put premium 偏贵，IVR 74，你愿意把 96 以上收益换出去。",
     answer: "collar",
     options: ["protectivePut", "collar", "coveredCall"],
     reason: "Collar 是把保护和让利打包：下方有保险，上方也被封顶。"
   },
   {
     title: "反弹越来越弱，卖盘主动",
-    prompt: "价格不断被压回去，反抽没力，IV 仍然正常偏低。",
+    prompt: "现价 204，反抽被 208 压回，低点连续下移；IVR 24，DTE 21，目标看 195。",
     answer: "longPut",
     options: ["longPut", "ironCondor", "cashSecuredPut"],
     reason: "当下跌速度本身就是观点时，低 IV 的 Long Put 最直接。"
   },
   {
     title: "看回前低，但不想买太贵 Put",
-    prompt: "你判断还有一段下行，但目标大概就是前低附近，IV 已经不便宜。",
+    prompt: "现价 72，跌破 75 后想看 68 前低；Put premium 不算便宜，DTE 28，你不想为更深暴跌多付。",
     answer: "bearPutSpread",
     options: ["longPut", "bearPutSpread", "bearCallSpread"],
     reason: "有限目标配有限收益结构。Bear Put Spread 用卖低行权价 Put 把入场成本压低。"
   },
   {
     title: "上方压力清楚，但没到崩盘程度",
-    prompt: "你偏空，可价格更像慢慢被压住，而不是马上瀑布；Call 权利金也不薄。",
+    prompt: "现价 153，压力 158，多次上冲失败；IVR 70，DTE 25，你不需要它崩，只判断站不上 158。",
     answer: "bearCallSpread",
     options: ["bearCallSpread", "longCall", "cashSecuredPut"],
     reason: "这种题重点是“别站回压力上方”。High IV 下，Bear Call Credit Spread 比追空更贴近卖压力。"
   },
   {
     title: "区间很清楚，IV 给得很肥",
-    prompt: "价格在上下沿之间来回磨，市场却给了很高的波动率定价。",
+    prompt: "现价 50，区间 48-52 磨了两周；IVR 78，DTE 20，暂无事件，市场却给了很高波动定价。",
     answer: "ironCondor",
     options: ["ironCondor", "longStraddle", "protectivePut"],
     reason: "如果你判断边界暂时都守得住，高 IV 下卖两边比买波动更合理。"
   },
   {
     title: "盘了很久，期权却很便宜",
-    prompt: "价格越收越窄，你不知道往哪边走，但感觉快要选择方向了。",
+    prompt: "现价 100，5 天都在 98.5-101.5 压缩；IVR 16，DTE 14，你觉得快要选择方向。",
     answer: "longStraddle",
     options: ["longStraddle", "ironCondor", "calendar"],
     reason: "你买的不是方向，而是后面可能放大的波动。Low IV 让这个押注没那么贵。"
   },
   {
     title: "这周可能磨，下个月可能有戏",
-    prompt: "短线看不出方向，近月时间价值掉得快，但远月还可能等到新催化。",
+    prompt: "现价 120，未来一周大概率磨在 118-122；近月 DTE 6 衰减快，远月 DTE 34 还等下月催化。",
     answer: "calendar",
     options: ["calendar", "longCall", "bearCallSpread"],
     reason: "Calendar 更像交易不同到期日之间的时间和 IV 差，不是简单看涨或看跌。"
   },
   {
     title: "跌破下沿后马上收回",
-    prompt: "你看到一次下破失败，价格重新站回区间，Call 的价格还没被抢贵。",
+    prompt: "TR 是 90-102，现价 93，假跌破 90 后重新站回；IVR 23，DTE 28，目标先看 98。",
     answer: "bullCallSpread",
     options: ["bullCallSpread", "bullPutSpread", "longStraddle"],
     reason: "低 IV 时可以用 debit 思路押回区间；上方卖 Call 是为了让这笔试错更轻。"
   },
   {
     title: "下沿收回，但你本来就想买股",
-    prompt: "这次假跌破让你更想在下方挂接货计划，IV 也给了不错权利金。",
+    prompt: "现价 55，TR 下沿 52 刚收回；你本来想在 50-52 接货，IVR 57，DTE 30。",
     answer: "cashSecuredPut",
     options: ["cashSecuredPut", "bullCallSpread", "longStraddle"],
     reason: "如果接货本来就在计划内，CSP 比硬追更符合你的目标。"
   },
   {
     title: "下沿收回，但不想真的接货",
-    prompt: "你觉得下方大概率守住，也想收高 IV 的权利金，但账户不想扛正股。",
+    prompt: "现价 99，支撑 96 刚被收回，IVR 73，DTE 24；你想收 premium，但不想真的被指派接股。",
     answer: "bullPutSpread",
     options: ["cashSecuredPut", "bullPutSpread", "longCall"],
     reason: "Bull Put Spread 把卖 Put 的想法变成 Defined Risk，适合“不跌破就好”的判断。"
   },
   {
     title: "冲上沿失败，Put 还便宜",
-    prompt: "价格假突破后跌回区间，你想押回落到中部，但不想裸买太多 premium。",
+    prompt: "TR 是 145-160，现价 156，假突破 160 后回落；IVR 28，DTE 30，目标看 150-152。",
     answer: "bearPutSpread",
     options: ["bearPutSpread", "bearCallSpread", "ironCondor"],
     reason: "低 IV 下的 Bear Put Spread 可以押下行，同时用更低行权价 Put 抵掉部分成本。"
   },
   {
     title: "冲上沿失败，Call 权利金很厚",
-    prompt: "上方压力刚被验证，IV 偏贵；你不需要它大跌，只需要别重新突破。",
+    prompt: "现价 156，压力 160 刚确认失败；IVR 76，DTE 25，你只需要它别重新站上 160。",
     answer: "bearCallSpread",
     options: ["bearPutSpread", "bearCallSpread", "longStraddle"],
     reason: "这更像卖上方压力。Bear Call Spread 赚的是价格留在卖出 Call 下方。"
   },
   {
     title: "关键位附近像被钉住",
-    prompt: "几次突破和跌破都很快被拉回，盘口像是在压波动，IV 也不低。",
+    prompt: "现价 401，400 附近大 OI，盘中多次离开又回到 400；IVR 58，DTE 3，波动被压住。",
     answer: "ironCondor",
     options: ["ironCondor", "longStraddle", "longCall"],
     reason: "Positive Dealer Gamma 常见的是波动被压住；如果你也认同区间，卖区间更顺。"
   },
   {
     title: "突破后突然越涨越急",
-    prompt: "价格穿过关键位后开始加速，回调给得很少，追涨资金明显变多。",
+    prompt: "现价 61，刚穿过 60 大量 Call OI 区；IVR 31，DTE 10，回踩很浅，成交持续放大。",
     answer: "longCall",
     options: ["longCall", "coveredCall", "ironCondor"],
     reason: "这种题怕的是低估 Gamma。Long Call 能更直接参与向上加速。"
   },
   {
     title: "支撑破了之后越跌越快",
-    prompt: "原本横盘很久，一跌破关键位就连续触发止损，反抽也很弱。",
+    prompt: "现价 138，横盘支撑 140 失守，止损连续触发；IVR 25，DTE 14，反抽都被 140 压住。",
     answer: "longPut",
     options: ["longPut", "cashSecuredPut", "ironCondor"],
     reason: "当市场进入加速段时，不要把它当普通区间处理；Long Put 更贴近速度风险。"
   },
   {
     title: "高 IV，但只是轻微偏空",
-    prompt: "你不想赌大跌，只觉得价格短期很难重新站上压力。",
+    prompt: "现价 78，压力 80，IVR 75，DTE 24；你不想赌大跌，只判断短期很难站上 80。",
     answer: "bearCallSpread",
     options: ["longPut", "bearCallSpread", "longStraddle"],
     reason: "轻微偏空时，卖上方 Call 价差比买 Put 更符合“别涨上去”的观点。"
   },
   {
     title: "涨太快后想继续拿股",
-    prompt: "你有正股，短线涨幅已经很大；你想收点权利金，但还能接受上方卖飞。",
+    prompt: "持有正股现价 134，短线从 118 涨上来；IVR 64，DTE 21，你愿意在 140 附近卖掉。",
     answer: "coveredCall",
     options: ["coveredCall", "longCall", "bearPutSpread"],
     reason: "这不是新开多头，而是管理已有仓位。Covered Call 用上方空间换现金流。"
   },
   {
     title: "想赌事件后大动，但 IV 没涨起来",
-    prompt: "公司快有关键消息，市场定价却还很平，你也判断方向很难提前猜。",
+    prompt: "现价 210，明天有关键消息；IVR 19，DTE 9，市场预期波动不大，但你觉得可能超预期。",
     answer: "longStraddle",
     options: ["longStraddle", "ironCondor", "coveredCall"],
     reason: "当事件可能带来大幅波动，而 IV 还没反映出来，Long Vol 才有学习价值。"
   },
   {
     title: "近月 IV 很高，远月没那么夸张",
-    prompt: "短期消息快落地，你觉得近月会被 IV crush，但远月还保留后续想象。",
+    prompt: "现价 250，近月 DTE 5、IVR 85，远月 DTE 35 IV 没那么夸张；短期消息快落地。",
     answer: "calendar",
     options: ["calendar", "longPut", "bullPutSpread"],
     reason: "Calendar 的核心是近月和远月的差异，不是单纯押涨跌。"
   },
   {
     title: "支撑附近 IV 很高，但你仓位太小",
-    prompt: "你想收 Put 权利金，可一旦被指派，买入正股会占用太多资金。",
+    prompt: "现价 63，支撑 60，IVR 72，DTE 27；你想收 Put premium，但账户不想承担接货资金占用。",
     answer: "bullPutSpread",
     options: ["cashSecuredPut", "bullPutSpread", "coveredCall"],
     reason: "资金和风险承受力不够时，把 CSP 改成 Defined Risk 的 put spread 更合理。"
   },
   {
     title: "上沿失败，但目标只看到区间中部",
-    prompt: "你偏空，不过只是看回中轴；Put 不算贵，但你不想为崩盘付费。",
+    prompt: "TR 是 46-54，现价 52，假突破失败后回落；IVR 32，DTE 28，你只看回 50 中轴。",
     answer: "bearPutSpread",
     options: ["longPut", "bearPutSpread", "bearCallSpread"],
     reason: "有限下跌目标更适合价差。它牺牲远端暴利，换来更低成本。"
   },
   {
     title: "方向没把握，但你想先学观察",
-    prompt: "价格在区间中部，IV 正常，没有明显边界优势，也没有强催化。",
+    prompt: "现价 100，价格在 98-102 中部，IVR 42，DTE 30，没有明显边界优势，也没有强催化。",
     answer: "calendar",
     options: ["calendar", "longCall", "cashSecuredPut"],
     reason: "这种题不适合硬押方向。Calendar 至少提醒你观察时间结构，而不是只盯涨跌。"
+  },
+  {
+    title: "突破后回踩不深，IV 还低",
+    prompt: "现价 102，早盘突破 100 后回踩只到 101；IVR 18（偏低），DTE 28，目标看 108。",
+    answer: "longCall",
+    options: ["longCall", "bullPutSpread", "ironCondor"],
+    reason: "背景是强上涨，IV 还低，目标又需要速度。Long Call 比卖 credit spread 更直接。"
+  },
+  {
+    title: "看涨到压力位，不想为远端付费",
+    prompt: "现价 94，刚站回 92 支撑；IVR 26（偏低），DTE 35，目标只看到 100 附近。",
+    answer: "bullCallSpread",
+    options: ["longCall", "bullCallSpread", "coveredCall"],
+    reason: "方向偏多但目标有限，Bull Call Debit Spread 用卖出上方 Call 降低净支出。"
+  },
+  {
+    title: "下沿 FBO 后，Put 权利金很厚",
+    prompt: "TR 是 96-108，现价 99，刚假跌破 96 又收回；IVR 72（偏高），DTE 24，你只想押 96 守住。",
+    answer: "bullPutSpread",
+    options: ["bullCallSpread", "bullPutSpread", "longStraddle"],
+    reason: "这是 TR 下沿 FBO + High IV。初始仓位用 Bull Put Credit Spread 更贴近 premium 最大化。"
+  },
+  {
+    title: "愿意接货，但想低一点",
+    prompt: "现价 51，你本来就想买这只票；理想成本 47 附近，IVR 58，DTE 30，现金够接 100 股。",
+    answer: "cashSecuredPut",
+    options: ["cashSecuredPut", "longCall", "bearCallSpread"],
+    reason: "目标是用更低价格接货，不是单纯押方向。CSP 把买股计划和收 premium 结合起来。"
+  },
+  {
+    title: "手里有股，目标卖点很明确",
+    prompt: "持有正股成本 82，现价 91；上方压力 96，IVR 62，DTE 21，如果 96 被拿走也接受。",
+    answer: "coveredCall",
+    options: ["coveredCall", "protectivePut", "longCall"],
+    reason: "这是管理已有正股。Covered Call 用你愿意让出的上方空间换取现金流。"
+  },
+  {
+    title: "财报前想保留上方空间",
+    prompt: "持有正股，现价 118；10 天后财报，支撑 112，IVR 44，你怕 gap down，但不想卖 Call 封顶。",
+    answer: "protectivePut",
+    options: ["protectivePut", "coveredCall", "bullPutSpread"],
+    reason: "目标是保护已有仓位，同时保留上涨空间。Protective Put 是最干净的保险结构。"
+  },
+  {
+    title: "保险太贵，但可以让出一段上涨",
+    prompt: "持有正股从 72 涨到 88；你想保护 82 下方，IVR 70，DTE 32，也能接受 95 以上被封顶。",
+    answer: "collar",
+    options: ["protectivePut", "collar", "cashSecuredPut"],
+    reason: "Put 保险贵时，用卖出上方 Call 补贴保护成本，Collar 比单买保险更贴近这个目标。"
+  },
+  {
+    title: "关键位跌破后反抽很弱",
+    prompt: "现价 197，刚跌破 200 整数位；反抽只能到 199，IVR 22（偏低），DTE 18，目标看 190。",
+    answer: "longPut",
+    options: ["longPut", "bearCallSpread", "ironCondor"],
+    reason: "背景是强下跌，IV 又不贵。Long Put 更直接表达下跌速度，而不是慢慢卖时间。"
+  },
+  {
+    title: "上沿 FBO，但目标只是回到中轴",
+    prompt: "TR 是 145-160，现价 156，假突破 160 后跌回区间；IVR 29，DTE 30，目标看 150。",
+    answer: "bearPutSpread",
+    options: ["longPut", "bearPutSpread", "bearCallSpread"],
+    reason: "目标有限，不是赌崩盘。Bear Put Debit Spread 用更低成本押回落到目标区。"
+  },
+  {
+    title: "压力位很清楚，Call premium 够肥",
+    prompt: "现价 316，连续三次冲 320 都失败；IVR 76（偏高），DTE 25，你判断短期站不上 320。",
+    answer: "bearCallSpread",
+    options: ["bearCallSpread", "longPut", "longStraddle"],
+    reason: "这是 High IV 下卖压力。Bear Call Credit Spread 赚的是价格留在卖出 Call 下方。"
+  },
+  {
+    title: "上下沿都清楚，市场却定价很贵",
+    prompt: "现价 50，近两周都在 48-52 内来回；IVR 80，DTE 19，没有已知事件，你判断区间还会磨。",
+    answer: "ironCondor",
+    options: ["ironCondor", "longStraddle", "bullCallSpread"],
+    reason: "中性背景 + High IV，更适合卖区间。Iron Condor 把上下两侧 premium 都收进来。"
+  },
+  {
+    title: "波动被压得很低，但今晚有催化",
+    prompt: "现价 100，过去 5 天实际波动很小；IVR 14（偏低），DTE 12，今晚有事件，方向你完全不想猜。",
+    answer: "longStraddle",
+    options: ["longStraddle", "ironCondor", "coveredCall"],
+    reason: "你要买的是波动，不是方向。Low IV + 明确催化，更适合 Long Straddle。"
   }
 ];
 
